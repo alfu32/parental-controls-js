@@ -1,0 +1,9 @@
+[Unit]
+Description=Parental Controls
+
+[Service]
+ExecStart=/home/devlin/Development/000-parental-controls/script.sh
+
+[Install]
+WantedBy=multi-user.target
+

@@ -1,0 +1,43 @@
+{
+  "dailyLimits":{
+    "Mo":[10,18],
+    "Tu":[10,18],
+    "We":[10,18],
+    "Th":[10,18],
+    "Fr":[10,18],
+    "Sa":[10,18],
+    "Su":[10,18]
+  },
+  "applications": [
+    {
+      "appid": "total",
+      "processregex": "java.+mojang",
+      "allowedMinutes": 120,
+      "usedMinutes": 0
+    },
+    {
+      "appid": "libreoffice-write",
+      "processregex": "soffice.bin",
+      "allowedMinutes": 120,
+      "usedMinutes": 1
+    },
+    {
+      "appid": "libreoffice-calc",
+      "processregex": "libreoffice-calc",
+      "allowedMinutes": 120,
+      "usedMinutes": 2
+    },
+    {
+      "appid": "vscode",
+      "processregex": "code",
+      "allowedMinutes": 120,
+      "usedMinutes": 3
+    },
+    {
+      "appid": "total",
+      "processregex": "",
+      "allowedMinutes": 120,
+      "usedMinutes": 4
+    }
+  ]
+}

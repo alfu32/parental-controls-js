@@ -1,0 +1,10 @@
+{
+  "name": "000-parental-controls",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "ALFERARU Ioan-Cristian(OIB) <ioan-cristian.alferaru@ec.europa.eu>",
+  "license": "MIT",
+  "dependencies": {
+    "moment": "^2.29.4"
+  }
+}
