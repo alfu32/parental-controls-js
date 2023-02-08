@@ -1,20 +1,63 @@
 {
-  "dailyLimits":{
-    "Mo":[10,18],
-    "Tu":[10,18],
-    "We":[10,18],
-    "Th":[10,18],
-    "Fr":[10,18],
-    "Sa":[10,18],
-    "Su":[10,18]
-  },
-  "applications": [
+  "dailyLimits": [
     {
-      "appid": "total",
-      "processregex": "java.+mojang",
-      "allowedMinutes": 120,
-      "usedMinutes": 0
+      "date": null,
+      "dayNumber": null,
+      "startHourMinute": "1000",
+      "endHourMinute": "1800",
+      "totalAllowed": 120,
+      "total": 0
     },
+    {
+      "date": null,
+      "dayNumber": null,
+      "startHourMinute": "1000",
+      "endHourMinute": "1800",
+      "totalAllowed": 120,
+      "total": 0
+    },
+    {
+      "date": null,
+      "dayNumber": null,
+      "startHourMinute": "1000",
+      "endHourMinute": "1800",
+      "totalAllowed": 120,
+      "total": 0
+    },
+    {
+      "date": null,
+      "dayNumber": null,
+      "startHourMinute": "1000",
+      "endHourMinute": "1800",
+      "totalAllowed": 120,
+      "total": 0
+    },
+    {
+      "date": null,
+      "dayNumber": null,
+      "startHourMinute": "1000",
+      "endHourMinute": "1800",
+      "totalAllowed": 120,
+      "total": 0
+    },
+    {
+      "date": null,
+      "dayNumber": null,
+      "startHourMinute": "1000",
+      "endHourMinute": "1800",
+      "totalAllowed": 120,
+      "total": 0
+    },
+    {
+      "date": null,
+      "dayNumber": null,
+      "startHourMinute": "1000",
+      "endHourMinute": "1800",
+      "totalAllowed": 120,
+      "total": 0
+    }
+  ],
+  "applications": [
     {
       "appid": "libreoffice-write",
       "processregex": "soffice.bin",
@@ -32,12 +75,6 @@
       "processregex": "code",
       "allowedMinutes": 120,
       "usedMinutes": 3
-    },
-    {
-      "appid": "total",
-      "processregex": "",
-      "allowedMinutes": 120,
-      "usedMinutes": 4
     }
   ]
 }
