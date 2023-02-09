@@ -161,22 +161,24 @@ async function serveHttp(conn: Deno.Conn) {
       router.handle(req);
     }
   }
-  function getTimestamps():{dfolder:string,dprefix:string,d:Date}{
+  function getTimestamps():{dfolder:string,dprefix:string,hourMinute:string,d:Date}{
     const d = new Date();
+    const hourMinute = `${d.getHours().toString(10).padStart(2, '0')}/${d.getMinutes().toString(10).padStart(2, '0')}`
     const dfolder = `${d.getFullYear()}/${(d.getMonth() + 1).toString(10).padStart(2, '0')}`; // md.format("YYYY/MM")
     const dprefix = `${dfolder}/${d.getDate().toString(10).padStart(2, '0')}`; //md.format("YYYY/MM/DD")
-    return {dfolder,dprefix,d};
+    return {dfolder,dprefix,hourMinute,d};
   }
   function getTransientConfig():{
         dfolder:string,
         dprefix:string,
+        hourMinute:string,
         d:Date,
         logs:string,
         countersDir:string,
         logfile:string,
         countfile:string,
     } {
-    const {dfolder,dprefix,d}=getTimestamps();
+    const {dfolder,dprefix,hourMinute,d}=getTimestamps();
     const logs = `logs/${dfolder}`;
     const countersDir = `counters/${dfolder}`;
     const logfile = `logs/${dprefix}.log`;
@@ -184,6 +186,7 @@ async function serveHttp(conn: Deno.Conn) {
     return {
         dfolder,
         dprefix,
+        hourMinute,
         d,
         logs,
         countersDir,
@@ -197,6 +200,7 @@ async function backend_worker_synchro_iteration():Promise<Counters> {
   const {
         dfolder,
         dprefix,
+        hourMinute,
         d,
         logs,
         countersDir,
@@ -226,14 +230,18 @@ async function backend_worker_synchro_iteration():Promise<Counters> {
       }
     }
   );
+  const dayLimitConfig = config.getCurrentDayLimitConfig(counters.dayLimit.date);
   console.log("addToTotal",addToTotal)
   if(addToTotal) {
-    let dayLimitConfig = config.getCurrentDayLimitConfig(counters.dayLimit.date);
     counters.dayLimit.total += 1 / frequencyPerTimeUnit;
-    if(counters.dayLimit.total > dayLimitConfig.totalAllowed) {
-        messagesToUser.push(`"you have used all the ${dayLimitConfig.totalAllowed} allowed minutes this system, shutdown in 59 seconds."`);
+    if(counters.dayLimit.total > counters.dayLimit.totalAllowed) {
+        messagesToUser.push(`"you have used ${counters.dayLimit.total} out of the ${dayLimitConfig.totalAllowed} allowed minutes this system, shutdown in 59 seconds."`);
     }
     addToTotal = false;
+  }
+  const [current,min,max]=[Number.parseInt( hourMinute,10),Number.parseInt( counters.dayLimit.startHourMinute,10),Number.parseInt( counters.dayLimit.endHourMinute,10)]
+  if(current<min || current > max ) {
+    messagesToUser.push(`"you are not allowed to use the computer outside the working hours ${counters.dayLimit.startHourMinute} to ${counters.dayLimit.endHourMinute}"`);
   }
   messagesToUser.forEach( async message => await spawnProcess('zenity',[`--warning`,`--text`,message]))
   console.log(counters)
