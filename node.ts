@@ -1,7 +1,8 @@
-#!/home/alfu64/.deno/bin/env deno
+#!/home/alfu64/.deno/bin/deno-run-all
+import moment from 'npm:moment';
 import { exec, execSync } from 'node:child_process';
 import  fs from "node:fs";
-import moment from 'npm:moment';
+import { exit } from 'node:process';
 
 let io={
     sig:true
