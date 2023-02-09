@@ -1,0 +1,95 @@
+{
+	"info": {
+		"_postman_id": "e6f684d5-f605-47a9-9379-e165723ee45d",
+		"name": "parental-controls-deno",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get-config",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/config",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"config"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "set-config",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"dailyLimits\": [\n    {\n      \"startHourMinute\": \"1000\",\n      \"endHourMinute\": \"1800\",\n      \"totalAllowed\": 120,\n      \"total\": 0\n    },\n    {\n      \"startHourMinute\": \"1000\",\n      \"endHourMinute\": \"1800\",\n      \"totalAllowed\": 120,\n      \"total\": 0\n    },\n    {\n      \"startHourMinute\": \"1000\",\n      \"endHourMinute\": \"1800\",\n      \"totalAllowed\": 120,\n      \"total\": 0\n    },\n    {\n      \"startHourMinute\": \"1000\",\n      \"endHourMinute\": \"1800\",\n      \"totalAllowed\": 120,\n      \"total\": 0\n    },\n    {\n      \"startHourMinute\": \"1000\",\n      \"endHourMinute\": \"1800\",\n      \"totalAllowed\": 120,\n      \"total\": 0\n    },\n    {\n      \"startHourMinute\": \"1000\",\n      \"endHourMinute\": \"1800\",\n      \"totalAllowed\": 120,\n      \"total\": 0\n    },\n    {\n      \"startHourMinute\": \"1000\",\n      \"endHourMinute\": \"1800\",\n      \"totalAllowed\": 120,\n      \"total\": 0\n    }\n  ],\n  \"applications\": [\n    {\n      \"appid\": \"majong\",\n      \"processregex\": \"majong\",\n      \"allowedMinutes\": 120,\n      \"usedMinutes\": 1\n    },\n    {\n      \"appid\": \"libreoffice-write\",\n      \"processregex\": \"soffice.bin\",\n      \"allowedMinutes\": 120,\n      \"usedMinutes\": 1\n    },\n    {\n      \"appid\": \"libreoffice-calc\",\n      \"processregex\": \"libreoffice-calc\",\n      \"allowedMinutes\": 120,\n      \"usedMinutes\": 2\n    },\n    {\n      \"appid\": \"vscode\",\n      \"processregex\": \"code/code\",\n      \"allowedMinutes\": 120,\n      \"usedMinutes\": 3\n    },\n    {\n      \"appid\": \"chrome\",\n      \"processregex\": \"chrome\",\n      \"allowedMinutes\": 120,\n      \"usedMinutes\": 3\n    },\n    {\n      \"appid\": \"npmjs.com\",\n      \"processregex\": \"npmjs\",\n      \"allowedMinutes\": 120,\n      \"usedMinutes\": 3\n    },\n    {\n      \"appid\": \"vmware\",\n      \"processregex\": \"vmware/bin/mksSandbox\",\n      \"allowedMinutes\": 120,\n      \"usedMinutes\": 3\n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/config",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"config"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "shutdown",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/shutdown",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"shutdown"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "shutdown-abort",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/shutdown/abort",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"shutdown",
+						"abort"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
