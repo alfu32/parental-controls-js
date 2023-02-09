@@ -9,8 +9,8 @@ import { Config, Counters, mkdirp, sleep } from "./classes.ts";
 let io={
     sig:true
 }
-
-const timeUnit=1;
+const pollTiming=3000
+const frequencyPerTimeUnit=60000/pollTiming;
 async function main(){
     if(!fs.existsSync('config.json')){
         fs.writeFileSync('config.json',JSON.stringify(new Config(),null,"  "))
@@ -48,7 +48,7 @@ async function main(){
                 const count = output.length
                 console.log(counter,count)
                 if(count>2){
-                    counter.usedMinutes+=timeUnit;
+                    counter.usedMinutes+=1/frequencyPerTimeUnit;
                     addToTotal=true;
                 }
                 if(counter.usedMinutes > configItem.allowedMinutes) {
@@ -58,7 +58,7 @@ async function main(){
         )
         if(addToTotal){
             let dayLimitConfig=config.getCurrentDayLimitConfig(counters.dayLimit.date)
-            counters.dayLimit.total+=timeUnit;
+            counters.dayLimit.total+=1/frequencyPerTimeUnit;
             if(counters.dayLimit.total > dayLimitConfig.totalAllowed) {
                 execSync(`zenity --info --text "you have used all the ${dayLimitConfig.totalAllowed} allowed minutes this system, shutdown in 59 seconds."`)
             }
@@ -66,7 +66,7 @@ async function main(){
         }
         fs.writeFileSync(countfile,JSON.stringify(counters,null,"  "))
         fs.writeFileSync('config.json',JSON.stringify(config,null,"  "))
-        await sleep(20000*timeUnit)
+        await sleep(pollTiming)
     }
 
 }
