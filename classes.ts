@@ -1,29 +1,23 @@
-#!/home/alfu64/.deno/bin/deno-run-all
-import moment from 'npm:moment';
-import { exec, execSync } from 'node:child_process';
-import  fs from "node:fs";
-import { exit } from 'node:process';
 
-let io={
-    sig:true
-}
-function sleep(ms:number): Promise<any>{
+import  fs from "node:fs";
+
+export function sleep(ms:number): Promise<any>{
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-function mkdirp(dir:string){
+export function mkdirp(dir:string){
     try{
         fs.mkdirSync(dir,{recursive: true})
     }catch(err){
         if (err.code !== 'EEXIST') throw err;
     }
 }
-interface IConfigurationRecord{
+export interface IConfigurationRecord{
     appid:string;
     processregex:string;
     allowedMinutes:number;
     usedMinutes:number;
 }
-class ConfigurationRecord implements IConfigurationRecord{
+export class ConfigurationRecord implements IConfigurationRecord{
     appid="";
     processregex="";
     allowedMinutes=120;
@@ -40,13 +34,13 @@ class ConfigurationRecord implements IConfigurationRecord{
         return ConfigurationRecord.from(this)
     }
 }
-interface IDailyLimitConfig{
+export interface IDailyLimitConfig{
     startHourMinute:string;
     endHourMinute:string;
     totalAllowed:number;
     total:number;
 }
-class DailyLimitConfig implements IDailyLimitConfig{
+export class DailyLimitConfig implements IDailyLimitConfig{
     static fromJson(json:IDailyLimitConfig):DailyLimitConfig{
         const r = new DailyLimitConfig()
         r.startHourMinute=json.startHourMinute
@@ -59,8 +53,8 @@ class DailyLimitConfig implements IDailyLimitConfig{
     totalAllowed=120
     total=0
 }
-declare type DayNumber = number; //  & (0|1|2|3|4|5|6);
-interface IDailyLimit{
+export declare type DayNumber = number; //  & (0|1|2|3|4|5|6);
+export interface IDailyLimit{
     startHourMinute:string;
     endHourMinute:string;
     totalAllowed:number;
@@ -68,7 +62,7 @@ interface IDailyLimit{
     date:Date;
     dayNumber:DayNumber;
 }
-class DailyLimit implements IDailyLimit{
+export class DailyLimit implements IDailyLimit{
     static fromJson(json:IDailyLimit):DailyLimit{
         const r = new DailyLimit()
         r.startHourMinute=json.startHourMinute
@@ -96,11 +90,11 @@ class DailyLimit implements IDailyLimit{
     totalAllowed=120
     total=0;
 }
-interface IConfig{
+export interface IConfig{
     dailyLimits:DailyLimitConfig[];
     applications:ConfigurationRecord[];
 }
-class Config {
+export class Config {
     static fromJson(json:IConfig):Config{
         const r = new Config()
         r.dailyLimits=json.dailyLimits;
@@ -142,11 +136,11 @@ class Config {
         return dayLimit;
       }
 }
-interface ICounters{
+export interface ICounters{
     dayLimit:DailyLimit;
     applications:ConfigurationRecord[]
 }
-class Counters {
+export class Counters {
     static fromJson(json:ICounters):Counters{
         const r = new Counters()
         r.dayLimit=DailyLimit.fromJson(json.dayLimit);
@@ -162,69 +156,3 @@ class Counters {
     dayLimit:DailyLimit=new DailyLimit()
     applications:ConfigurationRecord[]=[];
 }
-
-const timeUnit=1;
-async function main(){
-    if(!fs.existsSync('config.json')){
-        fs.writeFileSync('config.json',JSON.stringify(new Config(),null,"  "))
-    }
-    while(io.sig){
-        const config=Config.fromJson(JSON.parse(fs.readFileSync("config.json").toString("utf-8")))
-        const d=Date.now();
-        const md=moment(d);
-        const dfolder=md.format("YYYY/MM")
-        const dprefix=md.format("YYYY/MM/DD")
-        const logs=`logs/${dfolder}`
-        const countersDir=`counters/${dfolder}`
-        mkdirp(logs)
-        mkdirp(countersDir)
-        const logfile=`logs/${dprefix}.log`
-        const countfile=`counters/${dprefix}.json`
-        let counters:Counters;
-        if(fs.existsSync(countfile)){
-            counters=Counters.fromJson(JSON.parse(fs.readFileSync(countfile).toString("utf-8")))
-        }else{
-            counters=Counters.fromConfig(config)
-        }
-        let addToTotal:boolean=false;
-        console.log(config);
-        console.log(counters);
-        config.applications.forEach(
-            configItem => {
-                let counter=counters.applications.find(cntItem => cntItem.appid === configItem.appid)
-                if(!counter){
-                    counter=configItem.copy()
-                    counters.applications.push(counter);
-                }
-                const count = execSync(`ps -aux | grep "${configItem.processregex}"`).toString("utf8").split("\n").length
-                console.log(count)
-                if(count>2){
-                    counter.usedMinutes+=timeUnit;
-                    addToTotal=true;
-                }
-                if(counter.usedMinutes > configItem.allowedMinutes) {
-                    execSync(`zenity --info --text "you have used all the ${configItem.allowedMinutes} allowed minutes for ${configItem.appid}"`)
-                }
-            }
-        )
-        if(addToTotal){
-            let dayLimitConfig=config.getCurrentDayLimitConfig(counters.dayLimit.date)
-            counters.dayLimit.total+=timeUnit;
-            if(counters.dayLimit.total > dayLimitConfig.totalAllowed) {
-                execSync(`zenity --info --text "you have used all the ${dayLimitConfig.totalAllowed} allowed minutes this system, shutdown in 59 seconds."`)
-            }
-            addToTotal=false;
-        }
-        fs.writeFileSync(countfile,JSON.stringify(counters,null,"  "))
-        fs.writeFileSync('config.json',JSON.stringify(config,null,"  "))
-        await sleep(60000*timeUnit)
-    }
-
-}
-
-main()
-.then(()=>{})
-.catch(err => console.error(err));
-
-
-

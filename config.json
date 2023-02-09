@@ -47,26 +47,44 @@
     {
       "appid": "majong",
       "processregex": "majong",
-      "allowedMinutes": 30,
-      "usedMinutes": 0
+      "allowedMinutes": 120,
+      "usedMinutes": 1
     },
     {
       "appid": "libreoffice-write",
       "processregex": "soffice.bin",
       "allowedMinutes": 120,
-      "usedMinutes": 0
+      "usedMinutes": 1
     },
     {
       "appid": "libreoffice-calc",
       "processregex": "libreoffice-calc",
       "allowedMinutes": 120,
-      "usedMinutes": 0
+      "usedMinutes": 2
     },
     {
       "appid": "vscode",
-      "processregex": "code",
+      "processregex": "code/code",
       "allowedMinutes": 120,
-      "usedMinutes": 0
+      "usedMinutes": 3
+    },
+    {
+      "appid": "chrome",
+      "processregex": "chrome",
+      "allowedMinutes": 120,
+      "usedMinutes": 3
+    },
+    {
+      "appid": "npmjs.com",
+      "processregex": "npmjs",
+      "allowedMinutes": 120,
+      "usedMinutes": 3
+    },
+    {
+      "appid": "vmware",
+      "processregex": "vmware/bin/mksSandbox",
+      "allowedMinutes": 120,
+      "usedMinutes": 3
     }
   ]
 }
