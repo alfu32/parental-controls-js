@@ -1,7 +1,7 @@
 export function add(a: number, b: number): number {
   return a + b;
 }
-import moment from 'npm:moment';
+// import moment from 'npm:moment';
 import { execSync } from 'node:child_process';
 import  fs from "node:fs";
 import { Config, Counters, mkdirp, sleep } from "./classes.ts";
@@ -17,10 +17,10 @@ async function main(){
     }
     while(io.sig){
         const config=Config.fromJson(JSON.parse(fs.readFileSync("config.json").toString("utf-8")))
-        const d=Date.now();
-        const md=moment(d);
-        const dfolder=md.format("YYYY/MM")
-        const dprefix=md.format("YYYY/MM/DD")
+        const d=new Date();
+        // const md=moment(d.getTime());
+        const dfolder=`${d.getFullYear()}/${(d.getMonth()+1).toString(10).padStart(2,'0')}`; // md.format("YYYY/MM")
+        const dprefix=`${dfolder}/${d.getDate().toString(10).padStart(2,'0')}`;//md.format("YYYY/MM/DD")
         const logs=`logs/${dfolder}`
         const countersDir=`counters/${dfolder}`
         mkdirp(logs)
