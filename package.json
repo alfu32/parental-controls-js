@@ -4,7 +4,14 @@
   "main": "index.js",
   "author": "ALFERARU Ioan-Cristian(OIB) <ioan-cristian.alferaru@ec.europa.eu>",
   "license": "MIT",
+  "scripts": {
+    "run": "deno run --allow-read --allow-write --allow-env --allow-run node.ts",
+    "build": ""
+  },
   "dependencies": {
     "moment": "^2.29.4"
+  },
+  "devDependencies": {
+    "@types/node": "^18.13.0"
   }
 }

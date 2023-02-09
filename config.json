@@ -1,56 +1,42 @@
 {
   "dailyLimits": [
     {
-      "date": null,
-      "dayNumber": null,
       "startHourMinute": "1000",
       "endHourMinute": "1800",
       "totalAllowed": 120,
       "total": 0
     },
     {
-      "date": null,
-      "dayNumber": null,
       "startHourMinute": "1000",
       "endHourMinute": "1800",
       "totalAllowed": 120,
       "total": 0
     },
     {
-      "date": null,
-      "dayNumber": null,
       "startHourMinute": "1000",
       "endHourMinute": "1800",
       "totalAllowed": 120,
       "total": 0
     },
     {
-      "date": null,
-      "dayNumber": null,
       "startHourMinute": "1000",
       "endHourMinute": "1800",
       "totalAllowed": 120,
       "total": 0
     },
     {
-      "date": null,
-      "dayNumber": null,
       "startHourMinute": "1000",
       "endHourMinute": "1800",
       "totalAllowed": 120,
       "total": 0
     },
     {
-      "date": null,
-      "dayNumber": null,
       "startHourMinute": "1000",
       "endHourMinute": "1800",
       "totalAllowed": 120,
       "total": 0
     },
     {
-      "date": null,
-      "dayNumber": null,
       "startHourMinute": "1000",
       "endHourMinute": "1800",
       "totalAllowed": 120,
@@ -59,22 +45,28 @@
   ],
   "applications": [
     {
+      "appid": "majong",
+      "processregex": "majong",
+      "allowedMinutes": 30,
+      "usedMinutes": 0
+    },
+    {
       "appid": "libreoffice-write",
       "processregex": "soffice.bin",
       "allowedMinutes": 120,
-      "usedMinutes": 1
+      "usedMinutes": 0
     },
     {
       "appid": "libreoffice-calc",
       "processregex": "libreoffice-calc",
       "allowedMinutes": 120,
-      "usedMinutes": 2
+      "usedMinutes": 0
     },
     {
       "appid": "vscode",
       "processregex": "code",
       "allowedMinutes": 120,
-      "usedMinutes": 3
+      "usedMinutes": 0
     }
   ]
 }
