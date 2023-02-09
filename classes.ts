@@ -68,6 +68,7 @@ export class DailyLimit implements IDailyLimit{
         r.startHourMinute=json.startHourMinute
         r.endHourMinute=json.endHourMinute
         r.totalAllowed=json.totalAllowed
+        r.total=json.total
         r.date=new Date(json.date)
         r.dayNumber=r.date.getDay()
         return r;
@@ -95,6 +96,10 @@ export interface IConfig{
     applications:ConfigurationRecord[];
 }
 export class Config {
+    static async fromFile(filename: string):Promise<Config> {
+        const content = await fs.promises.readFile(filename)
+        return Config.fromJson(JSON.parse(content.toString("utf-8")));
+    }
     static fromJson(json:IConfig):Config{
         const r = new Config()
         r.dailyLimits=json.dailyLimits;
@@ -131,9 +136,8 @@ export class Config {
         }
       ].map(ConfigurationRecord.from);
       getCurrentDayLimitConfig(d:Date):DailyLimitConfig{
-        console.log(d);
-        const dayLimit = this.dailyLimits[d.getDay()]
-        return dayLimit;
+        console.log("dailyLimitStatus",d);
+        return this.dailyLimits[d.getDay()];
       }
 }
 export interface ICounters{
@@ -141,6 +145,13 @@ export interface ICounters{
     applications:ConfigurationRecord[]
 }
 export class Counters {
+    static fromFile(countfile:string,config:Config):Counters{
+        if(fs.existsSync(countfile)) {
+            return Counters.fromJson(JSON.parse(fs.readFileSync(countfile).toString("utf-8")));
+        } else {
+            return Counters.fromConfig(config);
+        }
+    }
     static fromJson(json:ICounters):Counters{
         const r = new Counters()
         r.dayLimit=DailyLimit.fromJson(json.dayLimit);

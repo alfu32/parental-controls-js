@@ -1,13 +1,18 @@
 // Start listening on port 8080 of localhost.
+
+import { Router } from "./webserver.router.ts";
+
 const server = Deno.listen({ port: 8080 });
 console.log(`HTTP webserver running.  Access it at:  http://localhost:8080/`);
-
-// Connections to the server will be yielded up as an async iterable.
-for await (const conn of server) {
-  // In order to not be blocking, we need to handle each connection individually
-  // without awaiting the function
-  serveHttp(conn);
+export async function serve(server:Deno.Listener,router:Router){
+  // Connections to the server will be yielded up as an async iterable.
+  for await (const conn of server) {
+    // In order to not be blocking, we need to handle each connection individually
+    // without awaiting the function
+    serveHttp(conn);
+  }
 }
+
 
 async function serveHttp(conn: Deno.Conn) {
   // This "upgrades" a network connection into an HTTP connection.
