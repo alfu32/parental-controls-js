@@ -45,7 +45,8 @@ export class HttpRequest{
             {
                 status,
                 headers:{
-                    "content-type":"application/json"
+                    "content-type":"application/json",
+                    "Access-Control-Allow-Origin":this.event.request.headers.get("Origin")||"*"
                 }
             }
         )

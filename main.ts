@@ -19,6 +19,9 @@ const pollTiming=60000
 const frequencyPerTimeUnit=60000/pollTiming;
 
 const router:Router = new Router()
+router.middleware.push(async function(requestEvent:HttpRequest){
+    
+})
 router.add("GET","/config",async function(requestEvent:HttpRequest){
     // The native HTTP server uses the web standard `Request` and `Response`
     // objects.
@@ -163,7 +166,7 @@ async function serveHttp(conn: Deno.Conn) {
   }
   function getTimestamps():{dfolder:string,dprefix:string,hourMinute:string,d:Date}{
     const d = new Date();
-    const hourMinute = `${d.getHours().toString(10).padStart(2, '0')}/${d.getMinutes().toString(10).padStart(2, '0')}`
+    const hourMinute = `${d.getHours().toString(10).padStart(2, '0')}${d.getMinutes().toString(10).padStart(2, '0')}`
     const dfolder = `${d.getFullYear()}/${(d.getMonth() + 1).toString(10).padStart(2, '0')}`; // md.format("YYYY/MM")
     const dprefix = `${dfolder}/${d.getDate().toString(10).padStart(2, '0')}`; //md.format("YYYY/MM/DD")
     return {dfolder,dprefix,hourMinute,d};
@@ -241,7 +244,7 @@ async function backend_worker_synchro_iteration():Promise<Counters> {
   }
   const [current,min,max]=[Number.parseInt( hourMinute,10),Number.parseInt( counters.dayLimit.startHourMinute,10),Number.parseInt( counters.dayLimit.endHourMinute,10)]
   if(current<min || current > max ) {
-    messagesToUser.push(`"you are not allowed to use the computer outside the working hours ${counters.dayLimit.startHourMinute} to ${counters.dayLimit.endHourMinute}"`);
+    messagesToUser.push(`"It is ${hourMinute}. You are not allowed to use the computer outside the working hours ${counters.dayLimit.startHourMinute} to ${counters.dayLimit.endHourMinute}"`);
   }
   messagesToUser.forEach( async message => await spawnProcess('zenity',[`--warning`,`--text`,message]))
   console.log(counters)
