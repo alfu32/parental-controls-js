@@ -1,7 +1,15 @@
 #!/bin/bash
 rm -rf build
 mkdir build
-deno compile --allow-read --allow-write --allow-run --target x86_64-unknown-linux-gnu  -o build/parental-controls-x86_64-unknown-linux-gnu main.ts
-deno compile --allow-read --allow-write --allow-run --target x86_64-pc-windows-msvc  -o build/parental-controls-x86_64-pc-windows-msvc.exe main.ts
-deno compile --allow-read --allow-write --allow-run --target x86_64-apple-darwin  -o build/parental-controls-x86_64-apple-darwin main.ts
-deno compile --allow-read --allow-write --allow-run --target aarch64-apple-darwin  -o build/parental-controls-aarch64-apple-darwin main.ts
+
+for arch in x86_64-unknown-linux-gnu x86_64-pc-windows-msvc x86_64-apple-darwin aarch64-apple-darwin; do
+    echo "ARCHITECTURE [$arch]"
+    EXT=""
+    if [ "$arch" == "x86_64-pc-windows-msvc" ];then
+        OUT="build/parental-controls-$arch.exe"
+        else
+        OUT="build/parental-controls-$arch.bin"
+    fi
+    echo "ARCHITECTURE [$arch] [$OUT]"
+    deno compile --allow-read --allow-write --allow-run --target "$arch" -o "$OUT" main.ts
+done
