@@ -1,10 +1,183 @@
 {
 	"info": {
-		"_postman_id": "e6f684d5-f605-47a9-9379-e165723ee45d",
+		"_postman_id": "0c210dd2-bb73-45dc-b950-65452d869af5",
 		"name": "parental-controls-deno",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
+		{
+			"name": "set-counters",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"dayLimit\": {\n        \"date\": \"2023-02-09T09:35:37.850Z\",\n        \"dayNumber\": 4,\n        \"startHourMinute\": \"1000\",\n        \"endHourMinute\": \"1800\",\n        \"totalAllowed\": 120,\n        \"total\": 1\n    },\n    \"applications\": [\n        {\n            \"appid\": \"majong\",\n            \"processregex\": \"majong\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"libreoffice-write\",\n            \"processregex\": \"soffice.bin\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"libreoffice-calc\",\n            \"processregex\": \"libreoffice-calc\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"vscode\",\n            \"processregex\": \"code/code\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"chrome\",\n            \"processregex\": \"chrome\",\n            \"allowedMinutes\": 240,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"npmjs.com\",\n            \"processregex\": \"npmjs\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"vmware\",\n            \"processregex\": \"vmware/bin/mksSandbox\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/counters",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"counters"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "set-status",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dayLimit\": {\n        \"date\": \"2023-02-09T09:35:37.850Z\",\n        \"dayNumber\": 4,\n        \"startHourMinute\": \"1000\",\n        \"endHourMinute\": \"1800\",\n        \"totalAllowed\": 120,\n        \"total\": 1\n    },\n    \"applications\": [\n        {\n            \"appid\": \"majong\",\n            \"processregex\": \"majong\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"libreoffice-write\",\n            \"processregex\": \"soffice.bin\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"libreoffice-calc\",\n            \"processregex\": \"libreoffice-calc\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"vscode\",\n            \"processregex\": \"code/code\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"chrome\",\n            \"processregex\": \"chrome\",\n            \"allowedMinutes\": 240,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"npmjs.com\",\n            \"processregex\": \"npmjs\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"vmware\",\n            \"processregex\": \"vmware/bin/mksSandbox\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"status"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "content-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "content-length",
+							"value": "301"
+						},
+						{
+							"key": "date",
+							"value": "Thu, 09 Feb 2023 13:57:11 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"dayLimit\": {\n        \"date\": \"2023-02-09T09:35:37.850Z\",\n        \"dayNumber\": 4,\n        \"startHourMinute\": \"1000\",\n        \"endHourMinute\": \"1800\",\n        \"totalAllowed\": 120,\n        \"total\": 1\n    },\n    \"applications\": [\n        {\n            \"appid\": \"majong\",\n            \"processregex\": \"majong\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"libreoffice-write\",\n            \"processregex\": \"soffice.bin\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"libreoffice-calc\",\n            \"processregex\": \"libreoffice-calc\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"vscode\",\n            \"processregex\": \"code/code\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"chrome\",\n            \"processregex\": \"chrome\",\n            \"allowedMinutes\": 240,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"npmjs.com\",\n            \"processregex\": \"npmjs\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"vmware\",\n            \"processregex\": \"vmware/bin/mksSandbox\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "get-counters",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/counters",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"counters"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get-status",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"status"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "content-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "content-length",
+							"value": "317"
+						},
+						{
+							"key": "date",
+							"value": "Thu, 09 Feb 2023 13:56:37 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"dayLimit\": {\n        \"date\": \"2023-02-09T09:35:37.850Z\",\n        \"dayNumber\": 4,\n        \"startHourMinute\": \"1000\",\n        \"endHourMinute\": \"1800\",\n        \"totalAllowed\": 120,\n        \"total\": 2\n    },\n    \"applications\": [\n        {\n            \"appid\": \"majong\",\n            \"processregex\": \"majong\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"libreoffice-write\",\n            \"processregex\": \"soffice.bin\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"libreoffice-calc\",\n            \"processregex\": \"libreoffice-calc\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 2\n        },\n        {\n            \"appid\": \"vscode\",\n            \"processregex\": \"code/code\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 158.35\n        },\n        {\n            \"appid\": \"chrome\",\n            \"processregex\": \"chrome\",\n            \"allowedMinutes\": 240,\n            \"usedMinutes\": 158.35\n        },\n        {\n            \"appid\": \"npmjs.com\",\n            \"processregex\": \"npmjs\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 3\n        },\n        {\n            \"appid\": \"vmware\",\n            \"processregex\": \"vmware/bin/mksSandbox\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 3\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "get-status-of-app",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/counter?appid=vscode",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"counter"
+					],
+					"query": [
+						{
+							"key": "appid",
+							"value": "vscode"
+						}
+					]
+				}
+			},
+			"response": []
+		},
 		{
 			"name": "get-config",
 			"request": {
@@ -27,11 +200,11 @@
 		{
 			"name": "set-config",
 			"request": {
-				"method": "POST",
+				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"dailyLimits\": [\n    {\n      \"startHourMinute\": \"1000\",\n      \"endHourMinute\": \"1800\",\n      \"totalAllowed\": 120,\n      \"total\": 0\n    },\n    {\n      \"startHourMinute\": \"1000\",\n      \"endHourMinute\": \"1800\",\n      \"totalAllowed\": 120,\n      \"total\": 0\n    },\n    {\n      \"startHourMinute\": \"1000\",\n      \"endHourMinute\": \"1800\",\n      \"totalAllowed\": 120,\n      \"total\": 0\n    },\n    {\n      \"startHourMinute\": \"1000\",\n      \"endHourMinute\": \"1800\",\n      \"totalAllowed\": 120,\n      \"total\": 0\n    },\n    {\n      \"startHourMinute\": \"1000\",\n      \"endHourMinute\": \"1800\",\n      \"totalAllowed\": 120,\n      \"total\": 0\n    },\n    {\n      \"startHourMinute\": \"1000\",\n      \"endHourMinute\": \"1800\",\n      \"totalAllowed\": 120,\n      \"total\": 0\n    },\n    {\n      \"startHourMinute\": \"1000\",\n      \"endHourMinute\": \"1800\",\n      \"totalAllowed\": 120,\n      \"total\": 0\n    }\n  ],\n  \"applications\": [\n    {\n      \"appid\": \"majong\",\n      \"processregex\": \"majong\",\n      \"allowedMinutes\": 120,\n      \"usedMinutes\": 1\n    },\n    {\n      \"appid\": \"libreoffice-write\",\n      \"processregex\": \"soffice.bin\",\n      \"allowedMinutes\": 120,\n      \"usedMinutes\": 1\n    },\n    {\n      \"appid\": \"libreoffice-calc\",\n      \"processregex\": \"libreoffice-calc\",\n      \"allowedMinutes\": 120,\n      \"usedMinutes\": 2\n    },\n    {\n      \"appid\": \"vscode\",\n      \"processregex\": \"code/code\",\n      \"allowedMinutes\": 120,\n      \"usedMinutes\": 3\n    },\n    {\n      \"appid\": \"chrome\",\n      \"processregex\": \"chrome\",\n      \"allowedMinutes\": 120,\n      \"usedMinutes\": 3\n    },\n    {\n      \"appid\": \"npmjs.com\",\n      \"processregex\": \"npmjs\",\n      \"allowedMinutes\": 120,\n      \"usedMinutes\": 3\n    },\n    {\n      \"appid\": \"vmware\",\n      \"processregex\": \"vmware/bin/mksSandbox\",\n      \"allowedMinutes\": 120,\n      \"usedMinutes\": 3\n    }\n  ]\n}",
+					"raw": "{\n    \"dailyLimits\": [\n        {\n            \"startHourMinute\": \"1000\",\n            \"endHourMinute\": \"1800\",\n            \"totalAllowed\": 120,\n            \"total\": 0\n        },\n        {\n            \"startHourMinute\": \"1000\",\n            \"endHourMinute\": \"1800\",\n            \"totalAllowed\": 120,\n            \"total\": 0\n        },\n        {\n            \"startHourMinute\": \"1000\",\n            \"endHourMinute\": \"1800\",\n            \"totalAllowed\": 120,\n            \"total\": 0\n        },\n        {\n            \"startHourMinute\": \"1000\",\n            \"endHourMinute\": \"1800\",\n            \"totalAllowed\": 120,\n            \"total\": 0\n        },\n        {\n            \"startHourMinute\": \"1000\",\n            \"endHourMinute\": \"1800\",\n            \"totalAllowed\": 120,\n            \"total\": 0\n        },\n        {\n            \"startHourMinute\": \"1000\",\n            \"endHourMinute\": \"1800\",\n            \"totalAllowed\": 120,\n            \"total\": 0\n        },\n        {\n            \"startHourMinute\": \"1000\",\n            \"endHourMinute\": \"1800\",\n            \"totalAllowed\": 120,\n            \"total\": 0\n        }\n    ],\n    \"applications\": [\n        {\n            \"appid\": \"safari\",\n            \"processregex\": \"safari\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 60\n        },\n        {\n            \"appid\": \"majong\",\n            \"processregex\": \"majong\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"libreoffice-write\",\n            \"processregex\": \"soffice.bin\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"libreoffice-calc\",\n            \"processregex\": \"libreoffice-calc\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 2\n        },\n        {\n            \"appid\": \"vscode\",\n            \"processregex\": \"code/code\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 3\n        },\n        {\n            \"appid\": \"chrome\",\n            \"processregex\": \"chrome\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 3\n        },\n        {\n            \"appid\": \"npmjs.com\",\n            \"processregex\": \"npmjs\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 3\n        },\n        {\n            \"appid\": \"vmware\",\n            \"processregex\": \"vmware/bin/mksSandbox\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 3\n        }\n    ]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -66,6 +239,81 @@
 					"port": "8080",
 					"path": [
 						"shutdown"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "kill-app",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/kill?appid=vscode",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"kill"
+					],
+					"query": [
+						{
+							"key": "appid",
+							"value": "vscode"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "send-message",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/kill?appid=vscode",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"kill"
+					],
+					"query": [
+						{
+							"key": "appid",
+							"value": "vscode"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "send-message-get",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/kill?appid=vscode",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"kill"
+					],
+					"query": [
+						{
+							"key": "appid",
+							"value": "vscode"
+						}
 					]
 				}
 			},
