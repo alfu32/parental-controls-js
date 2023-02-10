@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"dayLimit\": {\n        \"date\": \"2023-02-09T09:35:37.850Z\",\n        \"dayNumber\": 4,\n        \"startHourMinute\": \"1000\",\n        \"endHourMinute\": \"1800\",\n        \"totalAllowed\": 125,\n        \"total\": 123\n    },\n    \"applications\": [\n        {\n            \"appid\": \"majong\",\n            \"processregex\": \"majong\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"libreoffice-write\",\n            \"processregex\": \"soffice.bin\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"libreoffice-calc\",\n            \"processregex\": \"libreoffice-calc\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"vscode\",\n            \"processregex\": \"code/code\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 23\n        },\n        {\n            \"appid\": \"chrome\",\n            \"processregex\": \"chrome\",\n            \"allowedMinutes\": 240,\n            \"usedMinutes\": 23\n        },\n        {\n            \"appid\": \"npmjs.com\",\n            \"processregex\": \"npmjs\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"vmware\",\n            \"processregex\": \"vmware/bin/mksSandbox\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        }\n    ]\n}",
+					"raw": "{\n    \"dayLimit\": {\n        \"date\": \"2023-02-09T09:35:37.850Z\",\n        \"dayNumber\": 4,\n        \"startHourMinute\": \"1100\",\n        \"endHourMinute\": \"2115\",\n        \"totalAllowed\": 600,\n        \"total\": 268\n    },\n    \"applications\": [\n        {\n            \"appid\": \"majong\",\n            \"processregex\": \"majong\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"libreoffice-write\",\n            \"processregex\": \"soffice.bin\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"libreoffice-calc\",\n            \"processregex\": \"libreoffice-calc\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"vscode\",\n            \"processregex\": \"code/code\",\n            \"allowedMinutes\": 240,\n            \"usedMinutes\": 168\n        },\n        {\n            \"appid\": \"chrome\",\n            \"processregex\": \"chrome\",\n            \"allowedMinutes\": 240,\n            \"usedMinutes\": 168\n        },\n        {\n            \"appid\": \"npmjs.com\",\n            \"processregex\": \"npmjs\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"vmware\",\n            \"processregex\": \"vmware/bin/mksSandbox\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        }\n    ]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -198,13 +198,57 @@
 			"response": []
 		},
 		{
+			"name": "get-processes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/processes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"processes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-process",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/process?pid=25803",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"process"
+					],
+					"query": [
+						{
+							"key": "pid",
+							"value": "25803"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "set-config",
 			"request": {
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"dailyLimits\": [\n        {\n            \"startHourMinute\": \"1000\",\n            \"endHourMinute\": \"1800\",\n            \"totalAllowed\": 120,\n            \"total\": 0\n        },\n        {\n            \"startHourMinute\": \"1000\",\n            \"endHourMinute\": \"1800\",\n            \"totalAllowed\": 120,\n            \"total\": 0\n        },\n        {\n            \"startHourMinute\": \"1000\",\n            \"endHourMinute\": \"1800\",\n            \"totalAllowed\": 120,\n            \"total\": 0\n        },\n        {\n            \"startHourMinute\": \"1000\",\n            \"endHourMinute\": \"1800\",\n            \"totalAllowed\": 120,\n            \"total\": 0\n        },\n        {\n            \"startHourMinute\": \"1000\",\n            \"endHourMinute\": \"1800\",\n            \"totalAllowed\": 120,\n            \"total\": 0\n        },\n        {\n            \"startHourMinute\": \"1000\",\n            \"endHourMinute\": \"1800\",\n            \"totalAllowed\": 120,\n            \"total\": 0\n        },\n        {\n            \"startHourMinute\": \"1000\",\n            \"endHourMinute\": \"1800\",\n            \"totalAllowed\": 120,\n            \"total\": 0\n        }\n    ],\n    \"applications\": [\n        {\n            \"appid\": \"majong\",\n            \"processregex\": \"majong\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"libreoffice-write\",\n            \"processregex\": \"soffice.bin\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"libreoffice-calc\",\n            \"processregex\": \"libreoffice-calc\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 2\n        },\n        {\n            \"appid\": \"vscode\",\n            \"processregex\": \"code/code\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 3\n        },\n        {\n            \"appid\": \"chrome\",\n            \"processregex\": \"chrome\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 3\n        },\n        {\n            \"appid\": \"npmjs.com\",\n            \"processregex\": \"npmjs\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 3\n        },\n        {\n            \"appid\": \"vmware\",\n            \"processregex\": \"vmware/bin/mksSandbox\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 3\n        }\n    ]\n}",
+					"raw": "{\n    \"dailyLimits\": [\n        {\n            \"startHourMinute\": \"1000\",\n            \"endHourMinute\": \"1800\",\n            \"totalAllowed\": 120,\n            \"total\": 0\n        },\n        {\n            \"startHourMinute\": \"1000\",\n            \"endHourMinute\": \"1800\",\n            \"totalAllowed\": 120,\n            \"total\": 0\n        },\n        {\n            \"startHourMinute\": \"1000\",\n            \"endHourMinute\": \"1800\",\n            \"totalAllowed\": 120,\n            \"total\": 0\n        },\n        {\n            \"startHourMinute\": \"1000\",\n            \"endHourMinute\": \"1800\",\n            \"totalAllowed\": 120,\n            \"total\": 0\n        },\n        {\n            \"startHourMinute\": \"0700\",\n            \"endHourMinute\": \"1800\",\n            \"totalAllowed\": 120,\n            \"total\": 0\n        },\n        {\n            \"startHourMinute\": \"1000\",\n            \"endHourMinute\": \"1800\",\n            \"totalAllowed\": 120,\n            \"total\": 0\n        },\n        {\n            \"startHourMinute\": \"1000\",\n            \"endHourMinute\": \"1800\",\n            \"totalAllowed\": 120,\n            \"total\": 0\n        }\n    ],\n    \"applications\": [\n        {\n            \"appid\": \"majong\",\n            \"processregex\": \"majong\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"libreoffice-write\",\n            \"processregex\": \"soffice.bin\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 1\n        },\n        {\n            \"appid\": \"libreoffice-calc\",\n            \"processregex\": \"libreoffice-calc\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 2\n        },\n        {\n            \"appid\": \"vscode\",\n            \"processregex\": \"code/code\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 3\n        },\n        {\n            \"appid\": \"chrome\",\n            \"processregex\": \"chrome\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 3\n        },\n        {\n            \"appid\": \"npmjs.com\",\n            \"processregex\": \"npmjs\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 3\n        },\n        {\n            \"appid\": \"vmware\",\n            \"processregex\": \"vmware/bin/mksSandbox\",\n            \"allowedMinutes\": 120,\n            \"usedMinutes\": 3\n        }\n    ]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
