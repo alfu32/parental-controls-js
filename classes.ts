@@ -170,3 +170,61 @@ export class Counters {
     dayLimit:DailyLimit=new DailyLimit()
     applications:ConfigurationRecord[]=[];
 }
+
+export interface IProcess{
+    USER:string;
+    PID:string;
+    CPU:string;
+    MEM:string;
+    VSZ:string;
+    RSS:string;
+    TTY:string;
+    STAT:string;
+    START:string;
+    TIME:string;
+    COMMAND:string;
+}
+export class Process implements IProcess {
+    USER="";
+    PID="";
+    CPU="";
+    MEM="";
+    VSZ="";
+    RSS="";
+    TTY="";
+    STAT="";
+    START="";
+    TIME="";
+    COMMAND="";
+    static fromFixedLengthText(text:string):Process{
+        const p=new Process();
+        const cols=text.substr(0,65).split(/\s+/gi)
+        p.USER = cols[0];
+        p.PID = cols[1];
+        p.CPU = cols[2];
+        p.MEM = cols[3];
+        p.VSZ = cols[4];
+        p.RSS = cols[5];
+        p.TTY = cols[6];
+        p.STAT = cols[7];
+        p.START = cols[8];
+        p.TIME = cols[9];
+        p.COMMAND = text.substring(66);
+        return p
+    }
+    static fromJson(json:IProcess):Process{
+        const p=new Process();
+        p.USER = json.USER;
+        p.PID = json.PID;
+        p.CPU = json.CPU;
+        p.MEM = json.MEM;
+        p.VSZ = json.VSZ;
+        p.RSS = json.RSS;
+        p.TTY = json.TTY;
+        p.STAT = json.STAT;
+        p.START = json.START;
+        p.TIME = json.TIME;
+        p.COMMAND = json.COMMAND;
+        return p
+    }
+}

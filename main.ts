@@ -5,7 +5,7 @@ export function add(a: number, b: number): number {
 import child_process,{ execSync,spawn } from 'node:child_process';
 import  fs from "node:fs";
 import process from 'node:process';
-import { Config, ConfigurationRecord, Counters, mkdirp, sleep } from "./classes.ts";
+import { Config, ConfigurationRecord, Counters, mkdirp, Process, sleep } from "./classes.ts";
 process.env
 let io={
     sig:true
@@ -56,13 +56,40 @@ router.add("PUT","/config",async function(requestEvent:HttpRequest){
 router.add("GET","/counters",async function(requestEvent:HttpRequest){
     // The native HTTP server uses the web standard `Request` and `Response`
     // objects.
-    const config = await Config.fromFile("config.json");
-    const countfile =getTransientConfig().countfile;
-    const counters=Counters.fromFile(countfile,config)
-    if(requestEvent.params?.appid){
-        return requestEvent.respondWithJson(counters);
+    let date:Date=new Date();
+    if(requestEvent.params.date) {
+        try{
+            date = new Date(requestEvent.params.date);
+        }catch(err){
+            date=new Date()
+        }
     }
-    return requestEvent.respondWithJson(counters);
+    if(date.toString() === 'Invalid Date') {
+        date=new Date();
+    }
+
+    const {
+        dfolder,
+        dprefix,
+        hourMinute,
+        d,
+        logs,
+        countersDir,
+        logfile,
+        countfile
+    }=getTransientConfig(date);
+    const config = await Config.fromFile("config.json");
+    const counters=Counters.fromFile(countfile,config)
+    return requestEvent.respondWithJson({...counters,
+            dfolder,
+            dprefix,
+            hourMinute,
+            d,
+            logs,
+            countersDir,
+            logfile,
+            countfile
+        });
 })
 router.add("GET","/counter",async function(requestEvent:HttpRequest){
     // The native HTTP server uses the web standard `Request` and `Response`
@@ -101,14 +128,19 @@ router.add("GET","/processes",async function(requestEvent:HttpRequest){
     // The native HTTP server uses the web standard `Request` and `Response`
     // objects.
     const {out,error} = await spawnProcess('ps',[`-aux`])
-    return requestEvent.respondWithJson({lines:out.split("\n"),error});
+    return requestEvent.respondWithJson({lines:out.split("\n").map(Process.fromFixedLengthText),error});
 })
 router.add("GET","/process",async function(requestEvent:HttpRequest){
     // The native HTTP server uses the web standard `Request` and `Response`
     // objects.
     const pid = requestEvent.params.pid;
     const {out,error} = await spawnProcess(`ps`,["-aux"])
-    return requestEvent.respondWithJson({lines:out.split("\n").filter((text,i) => i===0 || text.indexOf(pid)>-1 ),error});
+    return requestEvent.respondWithJson({
+        lines:out.split("\n")
+                .map(Process.fromFixedLengthText)
+                .filter((process,i) => i===0 || process.PID===pid ),
+        error,
+    });
 })
 router.add("POST","/kill",async function(requestEvent:HttpRequest){
     // The native HTTP server uses the web standard `Request` and `Response`
@@ -177,14 +209,13 @@ async function serveHttp(conn: Deno.Conn) {
       router.handle(req);
     }
   }
-  function getTimestamps():{dfolder:string,dprefix:string,hourMinute:string,d:Date}{
-    const d = new Date();
+  function getTimestamps(d:Date=new Date()):{dfolder:string,dprefix:string,hourMinute:string,d:Date}{
     const hourMinute = `${d.getHours().toString(10).padStart(2, '0')}${d.getMinutes().toString(10).padStart(2, '0')}`
     const dfolder = `${d.getFullYear()}/${(d.getMonth() + 1).toString(10).padStart(2, '0')}`; // md.format("YYYY/MM")
     const dprefix = `${dfolder}/${d.getDate().toString(10).padStart(2, '0')}`; //md.format("YYYY/MM/DD")
     return {dfolder,dprefix,hourMinute,d};
   }
-  function getTransientConfig():{
+  function getTransientConfig(refDate:Date=new Date()):{
         dfolder:string,
         dprefix:string,
         hourMinute:string,
@@ -194,7 +225,7 @@ async function serveHttp(conn: Deno.Conn) {
         logfile:string,
         countfile:string,
     } {
-    const {dfolder,dprefix,hourMinute,d}=getTimestamps();
+    const {dfolder,dprefix,hourMinute,d}=getTimestamps(refDate);
     const logs = `logs/${dfolder}`;
     const countersDir = `counters/${dfolder}`;
     const logfile = `logs/${dprefix}.log`;
