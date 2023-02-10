@@ -40,12 +40,18 @@ export class HttpRequest{
         }
     }
     respondWithJson(j:any,status=200): Response{
+        return this.respondWith(JSON.stringify(j),"application/json")
+    }
+    respondWithText(text:string,status=200): Response{
+        return this.respondWith(text,"text/plain")
+    }
+    respondWith(body:string,contentType:string,status=200): Response{
         return new Response(
-            JSON.stringify(j),
+            body,
             {
                 status,
                 headers:{
-                    "content-type":"application/json",
+                    "content-type":contentType,
                     "Access-Control-Allow-Origin":this.event.request.headers.get("Origin")||"*"
                 }
             }

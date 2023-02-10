@@ -97,6 +97,19 @@ router.add("GET","/shutdown/abort",async function(requestEvent:HttpRequest){
     const {out,error} = await spawnProcess('shutdown',['-c'])
     return requestEvent.respondWithJson({out,error});
 })
+router.add("GET","/processes",async function(requestEvent:HttpRequest){
+    // The native HTTP server uses the web standard `Request` and `Response`
+    // objects.
+    const {out,error} = await spawnProcess('ps',[`-aux`])
+    return requestEvent.respondWithJson({lines:out.split("\n"),error});
+})
+router.add("GET","/process",async function(requestEvent:HttpRequest){
+    // The native HTTP server uses the web standard `Request` and `Response`
+    // objects.
+    const pid = requestEvent.params.pid;
+    const {out,error} = await spawnProcess(`ps`,["-aux"])
+    return requestEvent.respondWithJson({lines:out.split("\n").filter((text,i) => i===0 || text.indexOf(pid)>-1 ),error});
+})
 router.add("POST","/kill",async function(requestEvent:HttpRequest){
     // The native HTTP server uses the web standard `Request` and `Response`
     // objects.
