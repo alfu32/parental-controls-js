@@ -1,44 +1,44 @@
 {
   "dailyLimits": [
     {
-      "startHourMinute": "1000",
-      "endHourMinute": "1800",
+      "startHourMinute": "0300",
+      "endHourMinute": "2300",
       "totalAllowed": 120,
       "total": 0
     },
     {
-      "startHourMinute": "1000",
-      "endHourMinute": "1800",
+      "startHourMinute": "0300",
+      "endHourMinute": "2300",
       "totalAllowed": 120,
       "total": 0
     },
     {
-      "startHourMinute": "1000",
-      "endHourMinute": "1800",
+      "startHourMinute": "0300",
+      "endHourMinute": "2300",
       "totalAllowed": 120,
       "total": 0
     },
     {
-      "startHourMinute": "1000",
-      "endHourMinute": "1800",
+      "startHourMinute": "0300",
+      "endHourMinute": "2300",
       "totalAllowed": 120,
       "total": 0
     },
     {
-      "startHourMinute": "1100",
-      "endHourMinute": "1800",
+      "startHourMinute": "0300",
+      "endHourMinute": "2300",
       "totalAllowed": 120,
       "total": 0
     },
     {
-      "startHourMinute": "1000",
-      "endHourMinute": "1800",
+      "startHourMinute": "0300",
+      "endHourMinute": "2300",
       "totalAllowed": 120,
       "total": 0
     },
     {
-      "startHourMinute": "1000",
-      "endHourMinute": "1800",
+      "startHourMinute": "0300",
+      "endHourMinute": "2300",
       "totalAllowed": 120,
       "total": 0
     }
@@ -48,43 +48,43 @@
       "appid": "majong",
       "processregex": "majong",
       "allowedMinutes": 120,
-      "usedMinutes": 1
+      "usedMinutes": 0
     },
     {
       "appid": "libreoffice-write",
       "processregex": "soffice.bin",
       "allowedMinutes": 120,
-      "usedMinutes": 1
+      "usedMinutes": 0
     },
     {
       "appid": "libreoffice-calc",
       "processregex": "libreoffice-calc",
       "allowedMinutes": 120,
-      "usedMinutes": 2
+      "usedMinutes": 0
     },
     {
       "appid": "vscode",
       "processregex": "code/code",
       "allowedMinutes": 120,
-      "usedMinutes": 3
+      "usedMinutes": 0
     },
     {
       "appid": "chrome",
       "processregex": "chrome",
       "allowedMinutes": 120,
-      "usedMinutes": 3
+      "usedMinutes": 0
     },
     {
       "appid": "npmjs.com",
       "processregex": "npmjs",
       "allowedMinutes": 120,
-      "usedMinutes": 3
+      "usedMinutes": 0
     },
     {
       "appid": "vmware",
       "processregex": "vmware/bin/mksSandbox",
       "allowedMinutes": 120,
-      "usedMinutes": 3
+      "usedMinutes": 0
     }
   ]
 }

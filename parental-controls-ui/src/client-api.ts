@@ -23,6 +23,15 @@ export async function getCounters():Promise<Result<Counters,Error>>{
     return Err<Counters,Error>(err)
   }
 }
+export async function saveCounters(counters:Counters):Promise<Result<Counters,Error>>{
+  try{
+    const response = await fetch("http://localhost:8080/counters", {method:'PUT',redirect:'follow',body:JSON.stringify(counters,null,"  ")});
+    const json = await response.json()
+    return Ok<Counters,Error>(Counters.fromJson(json))
+  }catch(err){
+    return Err<Counters,Error>(err)
+  }
+}
 export async function getConfig():Promise<Result<Config,Error>>{
   try{
     const response = await fetch("http://localhost:8080/config", {method:'GET',redirect:'follow'});

@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { Button,TextInput,Card } from '@svelteuidev/core';
     import type { Counters,DailyLimit } from '../../../classes';
     export let dailyLimit: DailyLimit;
     function shutdown(){
@@ -7,30 +8,24 @@
     }
   </script>
   <h2>Today's Limits</h2>
-  <button on:click={e => shutdown()}>shutdown</button>
+  <Button on:click={e => shutdown()}>shutdown computer</Button>
+  
   <div class="listform">
     <div class="row" id="date">
-        <span>{dailyLimit.date.toISOString()}</span>
-    </div>
-    <div class="row" id="dayNumber">
-        <label for="input_dayNumber" class="label">dayNumber</label>
-        <input id="input_dayNumber" type="text" value={dailyLimit.dayNumber}/>
+        {"Su,Mo,Tu,We,Th,Fr,Sa".split(",")[dailyLimit.dayNumber]} <span>{dailyLimit.date.toISOString().replace('T',' ').substring(0,19)}</span>
     </div>
     <div class="row" id="startHourMinute">
-        <label for="input_startHourMinute" class="label">startHourMinute</label>
-        <input id="input_startHourMinute" type="text" value={dailyLimit.startHourMinute}/>
+        <TextInput placeholder="time in millitary format ( 0930 instead of 09:30 )" label="lower time limit" bind:value={dailyLimit.startHourMinute} />
     </div>
     <div class="row" id="endHourMinute">
-        <label for="input_endHourMinute" class="label">endHourMinute</label>
-        <input id="input_endHourMinute" type="text" value={dailyLimit.endHourMinute}/>
+        <TextInput placeholder="time in millitary format ( 0930 instead of 09:30 )" label="upper time limit" bind:value={dailyLimit.endHourMinute} />
     </div>
     <div class="row" id="totalAllowed">
-        <label for="input_totalAllowed" class="label">totalAllowed</label>
-        <input id="input_totalAllowed" type="text" value={dailyLimit.totalAllowed}/>
+        <TextInput placeholder="maximum number of minutes allowed by the configuration" label="total minutes allowed" bind:value={dailyLimit.totalAllowed} />
     </div>
     <div class="row" id="total">
-        <label for="input_total" class="label">total today</label>
-        <input id="input_total" type="text" value={dailyLimit.total}/>
+        <TextInput placeholder="the number of minutes recorded today" label="total recorded today" bind:value={dailyLimit.total} />
     </div>
+    <Button on:click={e => shutdown()}>save</Button>
   </div>
   

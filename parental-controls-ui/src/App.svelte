@@ -1,10 +1,29 @@
 <script lang="ts">
-  import svelteLogo from './assets/svelte.svg'
-  import Counter from './lib/Counter.svelte'
+
+
+	import { SvelteUIProvider, fns, AppShell, Navbar, Header, Title, Divider,Burger } from '@svelteuidev/core';
+
+	import HeadContent from './lib/HeadContent.svelte';
+	import NavContent from './lib/NavContent.svelte';
+
+
+	let isDark = false;
+	let opened = true;
+
+	function toggleTheme() {
+		isDark = !isDark;
+	}
+	function toggleOpened() {
+		opened = !opened;
+	}
+
+	import { Tabs } from '@svelteuidev/core';
+
   import {getCounters,getConfig,Result} from './client-api';
   import type { Config, Counters } from '../../classes';
   import CountersEditor from './lib/CountersEditor.svelte';
   import AppCountersEditor from './lib/AppCountersEditor.svelte';
+
   let to:NodeJS.Timeout;
   async function fetchCounters(){
     clearTimeout(to)
@@ -27,16 +46,52 @@
   fetchCounters()
 </script>
 
-<main>
-  {#if counters }
-    <CountersEditor dailyLimit={counters.dayLimit}></CountersEditor>
-    <AppCountersEditor appCounters={counters.applications}></AppCountersEditor>
-    <pre>{JSON.stringify(counters,null,"  ")}</pre>  
-  {:else}
-    <div>loading counter data</div>
-  {/if}
-  
-</main>
+<SvelteUIProvider>
+<AppShell>
+	<nav slot="navbar" hidden={!opened} class="app-header">
+		<NavContent />
+  </nav>
+	<Header slot="header" height={64}>
+    <Burger
+        {opened}
+        size='md'
+        on:click={() => toggleOpened()}
+    />
+		<HeadContent />
+	</Header>
+
+	<slot>
+    <Tabs color='teal'>
+      <Tabs.Tab label='Daily'>
+        {#if counters }
+          <CountersEditor dailyLimit={counters.dayLimit}></CountersEditor>
+        {:else}
+          <div>loading counter data</div>
+        {/if}
+      </Tabs.Tab>
+      <Tabs.Tab label='Applications'>
+        
+        {#if counters }
+          <AppCountersEditor appCounters={counters.applications}></AppCountersEditor>
+        {:else}
+          <div>loading counter data</div>
+        {/if}
+      </Tabs.Tab>
+      <Tabs.Tab label='Debug' color='pink'>
+        
+        {#if counters }
+          <pre>{JSON.stringify(counters,null,"  ")}</pre>  
+        {:else}
+          <div>loading counter data</div>
+        {/if}
+      </Tabs.Tab>
+    </Tabs>
+  </slot>
+</AppShell>
+</SvelteUIProvider>
 
 <style>
+  nav.app-header{
+    max-width: 300px;
+  }
 </style>

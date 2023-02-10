@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { Button,TextInput,Card,Group,Text,Image,Badge,SimpleGrid } from '@svelteuidev/core';
     import type { ConfigurationRecord } from '../../../classes';
     export let appCounters: ConfigurationRecord[];
     function killapp(counter:ConfigurationRecord){
@@ -7,30 +8,34 @@
     }
   </script>
   <h2>Per-Application Counters</h2>
+  <SimpleGrid  cols={3}>
   {#each appCounters as appCounter}
-  <div class="listform">
-    <h3>{appCounter.appid}</h3>
-    <button on:click={e => killapp(appCounter)}>kill {appCounter.appid}</button>
-    <div class="row" id="processregex">
-        <label for="input_processregex" class="label">processregex</label>
-        <input id="input_startHourMinute" type="text" value={appCounter.processregex}/>
-    </div>
-    <div class="row" id="allowedMinutes">
-        <label for="input_allowedMinutes" class="label">allowedMinutes</label>
-        <input id="input_endHourMinute" type="text" value={appCounter.allowedMinutes}/>
-    </div>
-    <div class="row" id="usedMinutes">
-        <label for="input_usedMinutes" class="label">usedMinutes</label>
-        <input id="input_totalAllowed" type="text" value={appCounter.usedMinutes}/>
-    </div>
-    
-  </div>
-  {/each}
-  <style>
-    .listform{
 
+  <Card p="lg" padding='lg' withBorder={appCounter.isOn} radius="lg" shadow={appCounter.isOn?"lg":"sm"} class="appcard" style={appCounter.isOn?"border:1px solid #333;":"border:1px solid #ddd;"}>
+    <Card.Section padding='lg' style="margin:1px;">
+      <Text size="lg">Application {appCounter.appid}</Text>
+      {#if appCounter.isOn}
+        <Badge color='green' variant='light'>Is On</Badge>
+        {:else}
+        <Badge color='red' variant='light'>Is Off</Badge>
+      {/if}
+    </Card.Section>
+  
+    <Group position='apart'>
+        <TextInput placeholder="regex" label="match application command" bind:value={appCounter.processregex} />
+        <TextInput type="number" placeholder="maximum number of minutes allowed by the configuration" label="total minutes allowed" bind:value={appCounter.allowedMinutes} />
+        <TextInput type="number" placeholder="the number of minutes recorded today" label="total recorded today"  bind:value={appCounter.usedMinutes} />
+    </Group>
+    <Button fullSize variant="outline" compact ripple size="sm" on:click={e => killapp(appCounter)}>save</Button>
+    <Button  fullSize variant="outline" compact ripple size="sm" on:click={e => killapp(appCounter)}>kill</Button>
+  </Card>
+  {/each}
+</SimpleGrid>
+  <style>
+    .appcard{
+      border:1px solid #333;
+      padding:20px;
+      box-sizing: content-box;
     }
-    .row{}
-    .label{}
   </style>
   

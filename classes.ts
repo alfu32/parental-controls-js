@@ -12,18 +12,21 @@ export function mkdirp(dir:string){
     }
 }
 export interface IConfigurationRecord{
+    isOn:boolean;
     appid:string;
     processregex:string;
     allowedMinutes:number;
     usedMinutes:number;
 }
 export class ConfigurationRecord implements IConfigurationRecord{
+    isOn=false;
     appid="";
     processregex="";
     allowedMinutes=120;
     usedMinutes=0;
     static from(cr:IConfigurationRecord):ConfigurationRecord{
         const r=new ConfigurationRecord()
+        r.isOn=cr.isOn
         r.appid=cr.appid
         r.processregex=cr.processregex
         r.allowedMinutes=cr.allowedMinutes

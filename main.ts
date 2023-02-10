@@ -227,6 +227,9 @@ async function backend_worker_synchro_iteration():Promise<Counters> {
       if(count > 2) {
         counter.usedMinutes += 1 / frequencyPerTimeUnit;
         addToTotal = true;
+        counter.isOn = true;
+      }else {
+        counter.isOn = false;
       }
       if(counter.usedMinutes > counter.allowedMinutes) {
         messagesToUser.push(`"you have used all the ${configItem.allowedMinutes} allowed minutes for ${configItem.appid}"`);
