@@ -45,6 +45,12 @@
   ],
   "applications": [
     {
+      "appid": "deno",
+      "processregex": "deno",
+      "allowedMinutes": 1440,
+      "usedMinutes": 10
+    },
+    {
       "appid": "majong",
       "processregex": "majong",
       "allowedMinutes": 120,

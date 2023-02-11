@@ -118,7 +118,7 @@ export class Config {
         {startHourMinute:"1000",endHourMinute:"1800",totalAllowed:120,total:0},
         {startHourMinute:"1000",endHourMinute:"1800",totalAllowed:120,total:0},
     ].map(DailyLimitConfig.fromJson)
-    applications=[
+    applications:ConfigurationRecord[]=([
         {
           "appid": "libreoffice-write",
           "processregex": "soffice.bin",
@@ -137,7 +137,7 @@ export class Config {
           "allowedMinutes": 120,
           "usedMinutes": 3
         }
-      ].map(ConfigurationRecord.from);
+      ] as IConfigurationRecord[]).map(ConfigurationRecord.from);
       getCurrentDayLimitConfig(d:Date):DailyLimitConfig{
         console.log("dailyLimitStatus",d);
         return this.dailyLimits[d.getDay()];
