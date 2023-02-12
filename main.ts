@@ -14,6 +14,7 @@ import {
   sleep,
 } from "./classes.ts";
 import { Zenity } from "./desktop-notifications.ts";
+import { rateLimited } from "./functions.ts";
 import { spawnProcess } from "./spawnProcess.ts";
 process.env;
 let io = {
@@ -24,17 +25,12 @@ import { HttpRequest, Router } from "./webserver.router.ts";
 const server = Deno.listen({ port: 8080 });
 console.log(`HTTP webserver running.  Access it at:  http://localhost:8080/`);
 
-const pollTiming = 20000;
+const pollTiming = 15000;
 const frequencyPerTimeUnit = 60000 / pollTiming;
 
 const router: Router = new Router();
-router.middleware.push(function (requestEvent: HttpRequest): Promise<Response> {
-  return Promise.resolve(
-    new Response(JSON.stringify(requestEvent, null, "  "), {
-      status: 302,
-      headers: { "content-type": "text/plain" },
-    }),
-  );
+router.middleware.push(function (requestEvent: HttpRequest): HttpRequest {
+  return requestEvent.copy()
 });
 router.add("GET", "/config", async function (requestEvent: HttpRequest) {
   // The native HTTP server uses the web standard `Request` and `Response`
@@ -140,7 +136,7 @@ router.add("POST", "/shutdown", async function (requestEvent: HttpRequest) {
   return requestEvent.respondWithJson({ shutdownResult, notificationResult });
 });
 router.add(
-  "GET",
+  "POST",
   "/shutdown/abort",
   async function (requestEvent: HttpRequest) {
     // The native HTTP server uses the web standard `Request` and `Response`
@@ -246,9 +242,17 @@ async function* mainLoop() {
     const config = await Config.fromFile("config.json");
     // const md=moment(d.getTime());
     const {
+      logs,
+      countersDir,
       hourMinute,
       countfile,
     } = getTransientConfig();
+    if(!fs.existsSync(countersDir)){
+      mkdirp(countersDir)
+    }
+    if(!fs.existsSync(logs)){
+      mkdirp(logs)
+    }
     const counters = Counters.fromFile(countfile, config);
 
     const iResult = backend_worker_synchro_iteration({
@@ -256,7 +260,7 @@ async function* mainLoop() {
       config,
       hourMinute,
     });
-    const i2Result = process_notifications(iResult);
+    const i2Result = rateLimited(process_notifications,50000)(iResult);
 
     fs.writeFileSync(countfile, JSON.stringify(counters, null, "  "));
     fs.writeFileSync("config.json", JSON.stringify(config, null, "  "));

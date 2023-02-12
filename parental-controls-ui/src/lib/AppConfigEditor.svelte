@@ -2,7 +2,7 @@
     import { Button,TextInput,Card,Group,Text,Image,Badge,SimpleGrid } from '@svelteuidev/core';
     import { ConfigurationRecord } from '../../../classes';
     export let appCounters: ConfigurationRecord[];
-    let newAppCounter: ConfigurationRecord = new ConfigurationRecord()
+    let newAppCounterConfig: ConfigurationRecord = new ConfigurationRecord()
     import { createEventDispatcher } from "svelte";
     import AppCard from './AppCard.svelte';
     const dispatch = createEventDispatcher();
@@ -10,16 +10,14 @@
         dispatch("save", appCounters);
     }
     function create() {
-        dispatch("create", newAppCounter.copy());
-        newAppCounter=new ConfigurationRecord()
+        dispatch("create", newAppCounterConfig.copy());
+        newAppCounterConfig = new ConfigurationRecord()
     }
     function terminateapp(appCounter:ConfigurationRecord) {
         dispatch("terminateapprequest", appCounter);
     }
   </script>
-  <slot name="title"><h2>Per-Application Counters</h2></slot>
-
-  {#if appCounters != null}
+  <h2>Per-Application Configuration</h2>
   <SimpleGrid  cols={3}>
   {#each appCounters as appCounter}
     <AppCard appCounter={appCounter} on:save on:terminateapprequest>
@@ -29,15 +27,12 @@
       </div>
     </AppCard>
   {/each}
-  <AppCard appCounter={newAppCounter} on:save on:terminateapprequest>
+  <AppCard appCounter={newAppCounterConfig} on:save on:terminateapprequest>
     <div>
-      <Button fullSize variant="outline" compact ripple size="sm" on:click={e => create()}>add</Button>
+      <Button fullSize variant="outline" compact ripple size="sm" on:click={e => create()}>create</Button>
     </div>
   </AppCard>
 </SimpleGrid>
-{:else}
-  no data
-{/if}
   <style>
     .appcard{
       border:1px solid #333;

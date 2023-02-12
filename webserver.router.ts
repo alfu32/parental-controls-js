@@ -22,6 +22,10 @@ export class HttpRequest{
         )
         return req;
     }
+    copy(): HttpRequest {
+        const r= HttpRequest.from(this.event);
+        return r;
+    }
     async text():Promise<string>{
         try{
             this._body= await this.event.request.text()
@@ -46,13 +50,20 @@ export class HttpRequest{
         return this.respondWith(text,"text/plain")
     }
     respondWith(body:string,contentType:string,status=200): Response{
+        const origin = this.event.request.headers.get("Origin")
+            ||this.event.request.headers.get("Referer")
+            ||this.event.request.headers.get("origin")
+            ||this.event.request.headers.get("referer")
+            ||"*"
         return new Response(
             body,
             {
                 status,
                 headers:{
                     "content-type":contentType,
-                    "Access-Control-Allow-Origin":this.event.request.headers.get("Origin")||"*"
+                    "Access-Control-Allow-Origin":origin,
+                    "Access-Control-Allow-Methods":"GET,POST,PUT,DELETE,TRACE,PATCH,OPTIONS",
+                    "Access-Control-Allow-Headers":"XContent-Type"
                 }
             }
         )
@@ -63,9 +74,10 @@ export interface HttpResponse{
     headers:{[name:string]:string}
 }
 export declare type RequestHandler = (requestEvent:HttpRequest) => Promise<Response>
+export declare type MiddlewareHandler = (requestEvent:HttpRequest) => HttpRequest
 export class Router{
     routeHandlers:{[methodPath:string]:RequestHandler}={};
-    middleware:RequestHandler[]=[];
+    middleware:MiddlewareHandler[]=[];
     add(method:string,path:string,handler:RequestHandler){
         this.routeHandlers[`${method.toUpperCase()}|${path}`]=handler;
     }
@@ -79,9 +91,10 @@ export class Router{
         let nomatch=true
         let error:Error|null = null;
         for(const methodPath in this.routeHandlers) {
-            console.log(`TESTING ${methodPath}===${req.method}|${req.url?.pathname}`)
+            //console.log(`TESTING ${methodPath}===${req.method}|${req.url?.pathname}`)
             if(req.url && methodPath === `${req.method}|${req.url?.pathname}`) {
                 try{
+                    // const newreq = this.passtroughMiddleware(req);
                     const result = await this.routeHandlers[methodPath](req);
                     req.event.respondWith(result)
                 }catch(err){
@@ -118,5 +131,12 @@ export class Router{
             req.event.respondWith(result)
             return;
         }
+    }
+    passtroughMiddleware(req: HttpRequest):HttpRequest {
+        return this.middleware.reduce(
+            (prev:HttpRequest,mwfn) => {
+                return mwfn(prev)
+            },req
+        )
     }
 }

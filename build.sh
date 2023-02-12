@@ -13,3 +13,4 @@ for arch in x86_64-unknown-linux-gnu x86_64-pc-windows-msvc x86_64-apple-darwin 
     echo "ARCHITECTURE [$arch] [$OUT]"
     deno compile --allow-read --allow-write --allow-run --target "$arch" -o "$OUT" main.ts
 done
+cp config.json build/

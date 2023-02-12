@@ -2,14 +2,15 @@
     import { Button,TextInput,Card } from '@svelteuidev/core';
     import type { Counters,DailyLimit } from '../../../classes';
     export let dailyLimit: DailyLimit;
-    function shutdown(){
-        console.log({})
-        alert(`shutting down computer`)
+    import { createEventDispatcher } from "svelte";
+    const dispatch = createEventDispatcher();
+    function change() {
+        dispatch("save", dailyLimit);
     }
   </script>
+
   <h2>Today's Limits</h2>
-  <Button on:click={e => shutdown()}>shutdown computer</Button>
-  
+  {#if dailyLimit != null}
   <div class="listform">
     <div class="row" id="date">
         {"Su,Mo,Tu,We,Th,Fr,Sa".split(",")[dailyLimit.dayNumber]} <span>{dailyLimit.date.toISOString().replace('T',' ').substring(0,19)}</span>
@@ -26,6 +27,10 @@
     <div class="row" id="total">
         <TextInput placeholder="the number of minutes recorded today" label="total recorded today" bind:value={dailyLimit.total} />
     </div>
-    <Button on:click={e => shutdown()}>save</Button>
+    <Button on:click={e => change()}>save</Button>
+    <Button on:click={e => change()}>reset</Button>
   </div>
+  {:else}
+    no data
+  {/if}
   

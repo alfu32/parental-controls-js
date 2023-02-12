@@ -99,6 +99,9 @@ export interface IConfig{
     applications:ConfigurationRecord[];
 }
 export class Config {
+    copy() {
+        return Config.fromJson(JSON.parse(JSON.stringify(this)));
+    }
     static async fromFile(filename: string):Promise<Config> {
         const content = await fs.promises.readFile(filename)
         return Config.fromJson(JSON.parse(content.toString("utf-8")));
@@ -118,26 +121,7 @@ export class Config {
         {startHourMinute:"1000",endHourMinute:"1800",totalAllowed:120,total:0},
         {startHourMinute:"1000",endHourMinute:"1800",totalAllowed:120,total:0},
     ].map(DailyLimitConfig.fromJson)
-    applications:ConfigurationRecord[]=([
-        {
-          "appid": "libreoffice-write",
-          "processregex": "soffice.bin",
-          "allowedMinutes": 120,
-          "usedMinutes": 1
-        },
-        {
-          "appid": "libreoffice-calc",
-          "processregex": "libreoffice-calc",
-          "allowedMinutes": 120,
-          "usedMinutes": 2
-        },
-        {
-          "appid": "vscode",
-          "processregex": "code",
-          "allowedMinutes": 120,
-          "usedMinutes": 3
-        }
-      ] as IConfigurationRecord[]).map(ConfigurationRecord.from);
+    applications:ConfigurationRecord[]=[];
       getCurrentDayLimitConfig(d:Date):DailyLimitConfig{
         console.log("dailyLimitStatus",d);
         return this.dailyLimits[d.getDay()];
@@ -148,6 +132,9 @@ export interface ICounters{
     applications:ConfigurationRecord[]
 }
 export class Counters {
+    copy() {
+        return Counters.fromJson(JSON.parse(JSON.stringify(this)));
+    }
     static fromFile(countfile:string,config:Config):Counters{
         if(fs.existsSync(countfile)) {
             return Counters.fromJson(JSON.parse(fs.readFileSync(countfile).toString("utf-8")));
