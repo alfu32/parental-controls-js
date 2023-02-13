@@ -1,0 +1,47 @@
+{
+  "dailyLimits": [
+    {
+      "startHourMinute": "0300",
+      "endHourMinute": "2300",
+      "totalAllowed": 120,
+      "total": 0
+    },
+    {
+      "startHourMinute": "0300",
+      "endHourMinute": "2300",
+      "totalAllowed": 120,
+      "total": 0
+    },
+    {
+      "startHourMinute": "0300",
+      "endHourMinute": "2300",
+      "totalAllowed": 120,
+      "total": 0
+    },
+    {
+      "startHourMinute": "0300",
+      "endHourMinute": "2300",
+      "totalAllowed": 120,
+      "total": 0
+    },
+    {
+      "startHourMinute": "0300",
+      "endHourMinute": "2300",
+      "totalAllowed": 120,
+      "total": 0
+    },
+    {
+      "startHourMinute": "0300",
+      "endHourMinute": "2300",
+      "totalAllowed": 120,
+      "total": 0
+    },
+    {
+      "startHourMinute": "0300",
+      "endHourMinute": "2300",
+      "totalAllowed": 120,
+      "total": 0
+    }
+  ],
+  "applications": []
+}

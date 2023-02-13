@@ -1,7 +1,6 @@
 export function add(a: number, b: number): number {
   return a + b;
 }
-// import moment from 'npm:moment';
 import child_process, { execSync } from "node:child_process";
 import fs from "node:fs";
 import process from "node:process";
@@ -240,7 +239,6 @@ async function* mainLoop() {
   }
   while (io.sig) {
     const config = await Config.fromFile("config.json");
-    // const md=moment(d.getTime());
     const {
       logs,
       countersDir,

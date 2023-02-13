@@ -11,6 +11,12 @@ for arch in x86_64-unknown-linux-gnu x86_64-pc-windows-msvc x86_64-apple-darwin 
         OUT="build/parental-controls-$arch.bin"
     fi
     echo "ARCHITECTURE [$arch] [$OUT]"
-    deno build --allow-read --allow-write --allow-run --allow-net --allow-env --target "$arch" -o "$OUT" main.ts
+    echo "deno build --allow-read --allow-write --allow-run --allow-net --allow-env --target \"$arch\" -o \"$OUT\" src/main.ts"
+    deno compile --unstable --node-modules-dir --allow-read --allow-write --allow-run --allow-net --allow-env --target "$arch" -o "$OUT" src/main.ts
 done
+deno bundle src/main.ts > build/parental-controls.app.deno.js
+cp scripts/parental-controls.app.deno.sh build/
 cp config.json build/
+cp -r node_modules build/
+cp build/parental-controls.app.deno.js ./
+minifier build/parental-controls.app.deno.js build/parental-controls.app.deno.min.js

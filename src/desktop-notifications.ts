@@ -1,10 +1,26 @@
 import { listeners } from 'node:process';
 import {spawnProcess, SpawnProcessResult} from './spawnProcess.ts';
+import { Notification } from "https://deno.land/x/deno_notify@1.3.1/ts/mod.ts";
+
 export interface INotifier{
     info(title:string,detail:string):Promise<SpawnProcessResult>
     warning(title:string,detail:string):Promise<SpawnProcessResult>
     error(title:string,detail:string):Promise<SpawnProcessResult>
     notification(title:string,detail:string):Promise<SpawnProcessResult>
+}
+export const DenoNotifier:INotifier = {
+    async info(title:string,detail:string):Promise<SpawnProcessResult>{
+        return await sendDenoNotifyMessage("info",title,detail)
+    },
+    async warning(title:string,detail:string):Promise<SpawnProcessResult>{
+        return await sendDenoNotifyMessage("warning",title,detail)
+    },
+    async error(title:string,detail:string):Promise<SpawnProcessResult>{
+        return await sendDenoNotifyMessage("error",title,detail)
+    },
+    async notification(title:string,detail:string):Promise<SpawnProcessResult>{
+        return await sendDenoNotifyMessage("notification",title,detail)
+    }
 }
 export const Zenity:INotifier = {
     async info(title:string,detail:string):Promise<SpawnProcessResult>{
@@ -42,4 +58,13 @@ export async function sendZenityMessage(type:"error"|"warning"|"notification"|"i
 export async function sendZenityNotification(title:string,detail:string):Promise<SpawnProcessResult>{
     const body = splitBodyText(detail,10)
     return await spawnProcess('zenity',[`--notification`,`--text`,`${title}${"\n"}${body}`,`--hint`,body])
+}
+export async function sendDenoNotifyMessage(type:"error"|"warning"|"notification"|"info",title:string,detail:string):Promise<SpawnProcessResult>{
+    new Notification({ macos: true })
+  .title(title)
+  .subtitle(type)
+  .body(detail)
+  .soundName("Basso")
+  .show();
+  return Promise.resolve({out:"",error:""});
 }
