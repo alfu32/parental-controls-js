@@ -1,7 +1,8 @@
 #!/bin/bash
 
 CDIR=´pwd´
-cd /home/alfu64/parental-controls/
+eval "export $(egrep -z DBUS_SESSION_BUS_ADDRESS /proc/$(pgrep -u $LOGNAME gnome-session)/environ)"
+cd $SUPER_HOME # /home/alfu64/parental-controls/
 
 DATE=`date +'%Y/%m/%d'`
 LOGS="logs/$DATE"

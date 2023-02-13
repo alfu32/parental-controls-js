@@ -47,24 +47,18 @@
     {
       "appid": "deno",
       "processregex": "deno",
-      "allowedMinutes": 1440,
+      "allowedMinutes": 360,
       "usedMinutes": 10
     },
     {
       "appid": "majong",
       "processregex": "majong",
-      "allowedMinutes": 120,
+      "allowedMinutes": 240,
       "usedMinutes": 0
     },
     {
       "appid": "libreoffice-write",
       "processregex": "soffice.bin",
-      "allowedMinutes": 120,
-      "usedMinutes": 0
-    },
-    {
-      "appid": "libreoffice-calc",
-      "processregex": "libreoffice-calc",
       "allowedMinutes": 120,
       "usedMinutes": 0
     },
@@ -83,12 +77,6 @@
     {
       "appid": "npmjs.com",
       "processregex": "npmjs",
-      "allowedMinutes": 120,
-      "usedMinutes": 0
-    },
-    {
-      "appid": "vmware",
-      "processregex": "vmware/bin/mksSandbox",
       "allowedMinutes": 120,
       "usedMinutes": 0
     }
