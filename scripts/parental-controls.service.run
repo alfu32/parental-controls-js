@@ -1,0 +1,11 @@
+#!/bin/bash
+
+CDIR=´pwd´
+cd /home/alfu64/parental-controls/
+
+DATE=`date +'%Y/%m/%d'`
+LOGS="logs/$DATE"
+
+./parental-controls-x86_64-unknown-linux-gnu.bin
+
+cd $CDIR
