@@ -9,7 +9,7 @@ import {
 import { spawnProcess } from "./spawnProcess.ts";
 import { HttpRequest } from "./webserver.router.ts";
 import { getTransientConfig } from "./getTransientConfig.ts";
-import { Zenity,DenoNotifier,NotifySend, INotifier } from "./desktop-notifications.ts";
+import { Zenity,NotifySend, INotifier } from "./desktop-notifications.ts";
 const NOTIFIER:INotifier = NotifySend;
 
 export const router: Router = new Router();

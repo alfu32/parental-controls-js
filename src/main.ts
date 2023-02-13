@@ -10,7 +10,7 @@ import {
   mkdirp,
   sleep,
 } from "./classes.ts";
-import { Zenity,DenoNotifier,NotifySend,INotifier } from "./desktop-notifications.ts";
+import { Zenity,NotifySend,INotifier } from "./desktop-notifications.ts";
 const NOTIFIER:INotifier = NotifySend;
 import { rateLimited } from "./functions.ts";
 import { getTransientConfig } from "./getTransientConfig.ts";
