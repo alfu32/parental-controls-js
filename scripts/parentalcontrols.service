@@ -1,9 +1,0 @@
-[Unit]
-Description=Parental Controls
-
-[Service]
-ExecStart=/home/alfu64/parental-controls/parental-controls.service.run
-
-[Install]
-WantedBy=multi-user.target
-
