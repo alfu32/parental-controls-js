@@ -11,6 +11,8 @@ for arch in x86_64-unknown-linux-gnu x86_64-pc-windows-msvc x86_64-apple-darwin 
         OUT="build/parental-controls-$arch.bin"
     fi
     echo "ARCHITECTURE [$arch] [$OUT]"
-    deno compile --allow-read --allow-write --allow-run --target "$arch" -o "$OUT" main.ts
+    deno compile --allow-read --allow-write --allow-run --allow-net --allow-env --target "$arch" -o "$OUT" main.ts
 done
-cp config.json build/
+cp scripts/config.json build/
+cp scripts/parentalcontrols.service build/
+cp scripts/parental-controls.service.run build/

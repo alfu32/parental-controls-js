@@ -2,7 +2,7 @@
 Description=Parental Controls
 
 [Service]
-ExecStart=/home/devlin/Development/000-parental-controls/script.sh
+ExecStart=/home/alfu64/parental-controls/parental-controls.service.run
 
 [Install]
 WantedBy=multi-user.target

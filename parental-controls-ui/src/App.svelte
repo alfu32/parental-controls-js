@@ -30,6 +30,7 @@
   let config:Config=null;
   let host="localhost"
   let gapi=new ParentalControlsApi(`${host}:8080`)
+  let error=null;
 
   function selectHost(e){
     console.log("selecting host",e.target.value)
@@ -43,7 +44,7 @@
   let to:NodeJS.Timeout;
   async function fetchCounters(){
     clearTimeout(to)
-
+  try{
     let api=new ParentalControlsApi(`${host}:8080`)
     const pct = api.getCounters();
     const pcf = api.getConfig()
@@ -53,6 +54,13 @@
     ])
     counters = ct.unwrap()
     config = cf.unwrap()
+    error=null
+  }catch(err){
+    console.warn(err);
+    error={message:err.message,stacktrace:err.stack.split("\n")}
+    counters=null;
+    config=null;
+  }
     to=setTimeout(fetchCounters,10000)
   }
   onMount(async ()=>{
@@ -118,6 +126,10 @@
     <TextInput bind:value={messageText} multiline></TextInput>
     <Button on:click={message}>send message</Button>
     <hr/>
+    {#if error}
+      <p>error connecting to {host}</p>
+      <pre>{JSON.stringify(error,null," ")}</pre>
+    {/if}
     <Tabs color='teal'>
       <Tabs.Tab label='Current Global Limits'>
           <Button on:click={e => sendShutdown()}>shutdown computer</Button>
