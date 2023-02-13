@@ -24541,7 +24541,7 @@ router.add("POST", "/kill", async function(requestEvent) {
 });
 router.add("POST", "/message", async function(requestEvent) {
     const message = await requestEvent.text();
-    const notificationResult = await Zenity.info("important message from Mother", message);
+    const notificationResult = await Zenity.info("From Parental Controls", message);
     return requestEvent.respondWithJson({
         notificationResult
     });
@@ -24701,7 +24701,7 @@ function process_notifications(params) {
         notificationsToUser.push(`"Time to shutdown, you have 1 minute left."`);
     }
     messagesToUser.map((message)=>{
-        const notificationResult = Zenity.info("important message from Mother", message);
+        const notificationResult = Zenity.info("From Parental Controls", message);
         return notificationResult;
     });
     notificationsToUser.map((message)=>{

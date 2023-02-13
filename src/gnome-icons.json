@@ -1,0 +1,4330 @@
+[
+    {
+        "cat": "actions",
+        "name": "add.png"
+    },
+    {
+        "cat": "actions",
+        "name": "address-book-new.png"
+    },
+    {
+        "cat": "actions",
+        "name": "application-exit.png"
+    },
+    {
+        "cat": "actions",
+        "name": "appointment-new.png"
+    },
+    {
+        "cat": "actions",
+        "name": "appointment.png"
+    },
+    {
+        "cat": "actions",
+        "name": "back.png"
+    },
+    {
+        "cat": "actions",
+        "name": "bookmark_add.png"
+    },
+    {
+        "cat": "actions",
+        "name": "bookmark-new.png"
+    },
+    {
+        "cat": "actions",
+        "name": "bookmarks_list_add.png"
+    },
+    {
+        "cat": "actions",
+        "name": "bottom.png"
+    },
+    {
+        "cat": "actions",
+        "name": "call-start.png"
+    },
+    {
+        "cat": "actions",
+        "name": "call-stop.png"
+    },
+    {
+        "cat": "actions",
+        "name": "centrejust.png"
+    },
+    {
+        "cat": "actions",
+        "name": "contact-new.png"
+    },
+    {
+        "cat": "actions",
+        "name": "document-new.png"
+    },
+    {
+        "cat": "actions",
+        "name": "document-open.png"
+    },
+    {
+        "cat": "actions",
+        "name": "document-open-recent.png"
+    },
+    {
+        "cat": "actions",
+        "name": "document-page-setup.png"
+    },
+    {
+        "cat": "actions",
+        "name": "document-print.png"
+    },
+    {
+        "cat": "actions",
+        "name": "document-print-preview.png"
+    },
+    {
+        "cat": "actions",
+        "name": "document-properties.png"
+    },
+    {
+        "cat": "actions",
+        "name": "document-revert.png"
+    },
+    {
+        "cat": "actions",
+        "name": "document-revert-rtl.png"
+    },
+    {
+        "cat": "actions",
+        "name": "document-save-as.png"
+    },
+    {
+        "cat": "actions",
+        "name": "document-save.png"
+    },
+    {
+        "cat": "actions",
+        "name": "document-send.png"
+    },
+    {
+        "cat": "actions",
+        "name": "down.png"
+    },
+    {
+        "cat": "actions",
+        "name": "edit-clear.png"
+    },
+    {
+        "cat": "actions",
+        "name": "editclear.png"
+    },
+    {
+        "cat": "actions",
+        "name": "edit-copy.png"
+    },
+    {
+        "cat": "actions",
+        "name": "editcopy.png"
+    },
+    {
+        "cat": "actions",
+        "name": "edit-cut.png"
+    },
+    {
+        "cat": "actions",
+        "name": "editcut.png"
+    },
+    {
+        "cat": "actions",
+        "name": "edit-delete.png"
+    },
+    {
+        "cat": "actions",
+        "name": "editdelete.png"
+    },
+    {
+        "cat": "actions",
+        "name": "edit-find.png"
+    },
+    {
+        "cat": "actions",
+        "name": "edit-find-replace.png"
+    },
+    {
+        "cat": "actions",
+        "name": "edit-paste.png"
+    },
+    {
+        "cat": "actions",
+        "name": "editpaste.png"
+    },
+    {
+        "cat": "actions",
+        "name": "edit-redo.png"
+    },
+    {
+        "cat": "actions",
+        "name": "edit-redo-rtl.png"
+    },
+    {
+        "cat": "actions",
+        "name": "edit-select-all.png"
+    },
+    {
+        "cat": "actions",
+        "name": "edit-undo.png"
+    },
+    {
+        "cat": "actions",
+        "name": "edit-undo-rtl.png"
+    },
+    {
+        "cat": "actions",
+        "name": "exit.png"
+    },
+    {
+        "cat": "actions",
+        "name": "filefind.png"
+    },
+    {
+        "cat": "actions",
+        "name": "filenew.png"
+    },
+    {
+        "cat": "actions",
+        "name": "fileopen.png"
+    },
+    {
+        "cat": "actions",
+        "name": "fileprint.png"
+    },
+    {
+        "cat": "actions",
+        "name": "filequickprint.png"
+    },
+    {
+        "cat": "actions",
+        "name": "filesaveas.png"
+    },
+    {
+        "cat": "actions",
+        "name": "filesave.png"
+    },
+    {
+        "cat": "actions",
+        "name": "find.png"
+    },
+    {
+        "cat": "actions",
+        "name": "finish.png"
+    },
+    {
+        "cat": "actions",
+        "name": "folder_new.png"
+    },
+    {
+        "cat": "actions",
+        "name": "folder-new.png"
+    },
+    {
+        "cat": "actions",
+        "name": "format-indent-less.png"
+    },
+    {
+        "cat": "actions",
+        "name": "format-indent-less-rtl.png"
+    },
+    {
+        "cat": "actions",
+        "name": "format-indent-more.png"
+    },
+    {
+        "cat": "actions",
+        "name": "format-indent-more-rtl.png"
+    },
+    {
+        "cat": "actions",
+        "name": "format-justify-center.png"
+    },
+    {
+        "cat": "actions",
+        "name": "format-justify-fill.png"
+    },
+    {
+        "cat": "actions",
+        "name": "format-justify-left.png"
+    },
+    {
+        "cat": "actions",
+        "name": "format-justify-right.png"
+    },
+    {
+        "cat": "actions",
+        "name": "format-text-bold.png"
+    },
+    {
+        "cat": "actions",
+        "name": "format-text-direction-ltr.png"
+    },
+    {
+        "cat": "actions",
+        "name": "format-text-direction-rtl.png"
+    },
+    {
+        "cat": "actions",
+        "name": "format-text-italic.png"
+    },
+    {
+        "cat": "actions",
+        "name": "format-text-strikethrough.png"
+    },
+    {
+        "cat": "actions",
+        "name": "format-text-underline.png"
+    },
+    {
+        "cat": "actions",
+        "name": "forward.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gnome-lockscreen.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gnome-logout.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gnome-run.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gnome-searchtool.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gnome-session-logout.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gnome-shutdown.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gnome-stock-mail-fwd.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gnome-stock-mail-new.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gnome-stock-mail-rpl.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gnome-stock-mail-snd.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gnome-stock-text-indent.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gnome-stock-text-unindent.png"
+    },
+    {
+        "cat": "actions",
+        "name": "go-bottom.png"
+    },
+    {
+        "cat": "actions",
+        "name": "go-down.png"
+    },
+    {
+        "cat": "actions",
+        "name": "go-first.png"
+    },
+    {
+        "cat": "actions",
+        "name": "go-first-rtl.png"
+    },
+    {
+        "cat": "actions",
+        "name": "go-home.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gohome.png"
+    },
+    {
+        "cat": "actions",
+        "name": "go-jump.png"
+    },
+    {
+        "cat": "actions",
+        "name": "go-last.png"
+    },
+    {
+        "cat": "actions",
+        "name": "go-last-rtl.png"
+    },
+    {
+        "cat": "actions",
+        "name": "go-next.png"
+    },
+    {
+        "cat": "actions",
+        "name": "go-next-rtl.png"
+    },
+    {
+        "cat": "actions",
+        "name": "go-previous.png"
+    },
+    {
+        "cat": "actions",
+        "name": "go-previous-rtl.png"
+    },
+    {
+        "cat": "actions",
+        "name": "go-top.png"
+    },
+    {
+        "cat": "actions",
+        "name": "go-up.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-about.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-add.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-bold.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-cancel.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-clear.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-close.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-copy.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-cut.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-delete.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-execute.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-find-and-replace.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-find.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-fullscreen.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-go-back-ltr.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-go-back-rtl.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-go-down.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-go-forward-ltr.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-go-forward-rtl.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-goto-bottom.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-goto-first-ltr.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-goto-first-rtl.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-goto-last-ltr.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-goto-last-rtl.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-goto-top.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-go-up.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-help.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-home.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-indent-ltr.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-indent-rtl.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-italic.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-jump-to-ltr.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-jump-to-rtl.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-justify-center.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-justify-fill.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-justify-left.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-justify-right.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-leave-fullscreen.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-media-forward-ltr.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-media-forward-rtl.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-media-next-ltr.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-media-next-rtl.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-media-pause.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-media-play-ltr.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-media-previous-ltr.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-media-previous-rtl.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-media-record.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-media-rewind-ltr.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-media-rewind-rtl.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-media-stop.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-new.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-open.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-paste.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-print.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-print-preview.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-properties.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-quit.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-redo-ltr.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-refresh.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-remove.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-revert-to-saved-ltr.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-revert-to-saved-rtl.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-save-as.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-save.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-select-all.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-sort-ascending.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-sort-descending.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-spell-check.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-stop.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-strikethrough.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-underline.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-undo-ltr.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-unindent-ltr.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-unindent-rtl.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-zoom-100.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-zoom-fit.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-zoom-in.png"
+    },
+    {
+        "cat": "actions",
+        "name": "gtk-zoom-out.png"
+    },
+    {
+        "cat": "actions",
+        "name": "help-about.png"
+    },
+    {
+        "cat": "actions",
+        "name": "help-contents.png"
+    },
+    {
+        "cat": "actions",
+        "name": "help-faq.png"
+    },
+    {
+        "cat": "actions",
+        "name": "help.png"
+    },
+    {
+        "cat": "actions",
+        "name": "insert-image.png"
+    },
+    {
+        "cat": "actions",
+        "name": "insert-link.png"
+    },
+    {
+        "cat": "actions",
+        "name": "insert-object.png"
+    },
+    {
+        "cat": "actions",
+        "name": "insert-text.png"
+    },
+    {
+        "cat": "actions",
+        "name": "kfind.png"
+    },
+    {
+        "cat": "actions",
+        "name": "kfm_home.png"
+    },
+    {
+        "cat": "actions",
+        "name": "leftjust.png"
+    },
+    {
+        "cat": "actions",
+        "name": "list-add.png"
+    },
+    {
+        "cat": "actions",
+        "name": "list-remove.png"
+    },
+    {
+        "cat": "actions",
+        "name": "lock.png"
+    },
+    {
+        "cat": "actions",
+        "name": "mail_forward.png"
+    },
+    {
+        "cat": "actions",
+        "name": "mail-forward.png"
+    },
+    {
+        "cat": "actions",
+        "name": "mail-mark-important.png"
+    },
+    {
+        "cat": "actions",
+        "name": "mail-mark-junk.png"
+    },
+    {
+        "cat": "actions",
+        "name": "mail-mark-notjunk.png"
+    },
+    {
+        "cat": "actions",
+        "name": "mail-mark-read.png"
+    },
+    {
+        "cat": "actions",
+        "name": "mail-mark-unread.png"
+    },
+    {
+        "cat": "actions",
+        "name": "mail-message-new.png"
+    },
+    {
+        "cat": "actions",
+        "name": "mail_new.png"
+    },
+    {
+        "cat": "actions",
+        "name": "mail_replyall.png"
+    },
+    {
+        "cat": "actions",
+        "name": "mail-reply-all.png"
+    },
+    {
+        "cat": "actions",
+        "name": "mail_reply.png"
+    },
+    {
+        "cat": "actions",
+        "name": "mail-reply-sender.png"
+    },
+    {
+        "cat": "actions",
+        "name": "mail_send.png"
+    },
+    {
+        "cat": "actions",
+        "name": "mail-send.png"
+    },
+    {
+        "cat": "actions",
+        "name": "mail-send-receive.png"
+    },
+    {
+        "cat": "actions",
+        "name": "mail_spam.png"
+    },
+    {
+        "cat": "actions",
+        "name": "media-eject.png"
+    },
+    {
+        "cat": "actions",
+        "name": "media-playback-pause.png"
+    },
+    {
+        "cat": "actions",
+        "name": "media-playback-start.png"
+    },
+    {
+        "cat": "actions",
+        "name": "media-playback-start-rtl.png"
+    },
+    {
+        "cat": "actions",
+        "name": "media-playback-stop.png"
+    },
+    {
+        "cat": "actions",
+        "name": "media-record.png"
+    },
+    {
+        "cat": "actions",
+        "name": "media-seek-backward.png"
+    },
+    {
+        "cat": "actions",
+        "name": "media-seek-backward-rtl.png"
+    },
+    {
+        "cat": "actions",
+        "name": "media-seek-forward.png"
+    },
+    {
+        "cat": "actions",
+        "name": "media-seek-forward-rtl.png"
+    },
+    {
+        "cat": "actions",
+        "name": "media-skip-backward.png"
+    },
+    {
+        "cat": "actions",
+        "name": "media-skip-backward-rtl.png"
+    },
+    {
+        "cat": "actions",
+        "name": "media-skip-forward.png"
+    },
+    {
+        "cat": "actions",
+        "name": "media-skip-forward-rtl.png"
+    },
+    {
+        "cat": "actions",
+        "name": "next.png"
+    },
+    {
+        "cat": "actions",
+        "name": "object-flip-horizontal.png"
+    },
+    {
+        "cat": "actions",
+        "name": "object-flip-vertical.png"
+    },
+    {
+        "cat": "actions",
+        "name": "object-rotate-left.png"
+    },
+    {
+        "cat": "actions",
+        "name": "object-rotate-right.png"
+    },
+    {
+        "cat": "actions",
+        "name": "player_eject.png"
+    },
+    {
+        "cat": "actions",
+        "name": "player_end.png"
+    },
+    {
+        "cat": "actions",
+        "name": "player_fwd.png"
+    },
+    {
+        "cat": "actions",
+        "name": "player_pause.png"
+    },
+    {
+        "cat": "actions",
+        "name": "player_play.png"
+    },
+    {
+        "cat": "actions",
+        "name": "player_record.png"
+    },
+    {
+        "cat": "actions",
+        "name": "player_rew.png"
+    },
+    {
+        "cat": "actions",
+        "name": "player_start.png"
+    },
+    {
+        "cat": "actions",
+        "name": "player_stop.png"
+    },
+    {
+        "cat": "actions",
+        "name": "previous.png"
+    },
+    {
+        "cat": "actions",
+        "name": "process-stop.png"
+    },
+    {
+        "cat": "actions",
+        "name": "redhat-home.png"
+    },
+    {
+        "cat": "actions",
+        "name": "redo.png"
+    },
+    {
+        "cat": "actions",
+        "name": "reload3.png"
+    },
+    {
+        "cat": "actions",
+        "name": "reload_all_tabs.png"
+    },
+    {
+        "cat": "actions",
+        "name": "reload_page.png"
+    },
+    {
+        "cat": "actions",
+        "name": "reload.png"
+    },
+    {
+        "cat": "actions",
+        "name": "remove.png"
+    },
+    {
+        "cat": "actions",
+        "name": "revert.png"
+    },
+    {
+        "cat": "actions",
+        "name": "rightjust.png"
+    },
+    {
+        "cat": "actions",
+        "name": "search.png"
+    },
+    {
+        "cat": "actions",
+        "name": "start.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_about.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_add-bookmark.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_bottom.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_close.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_copy.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_cut.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_delete.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_down.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_file-properites.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_first.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_fullscreen.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_help-add-bookmark.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_help.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_home.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_last.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_leave-fullscreen.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_left.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_mail-compose.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_mail-forward.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_mail-reply.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_mail-reply-to-all.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_mail-send.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_mail-send-receive.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_media-fwd.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_media-next.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_media-pause.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_media-play.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_media-prev.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_media-rec.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_media-rew.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_media-stop.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_new-address-book.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_new-appointment.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_new-bcard.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_new-dir.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_new-text.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_new-window.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_paste.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_print.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_print-preview.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_print-setup.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_properties.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_redo.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_refresh.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_right.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_save-as.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_save.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_search-and-replace.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_search.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_select-all.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_spam.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_spellcheck.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_stop.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_text_bold.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_text_center.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_text_indent.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_text_italic.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_text_justify.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_text_left.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_text_right.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_text-strikethrough.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_text_underlined.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_text_unindent.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_top.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_undo.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_up.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_zoom-1.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_zoom-in.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_zoom-out.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stock_zoom-page.png"
+    },
+    {
+        "cat": "actions",
+        "name": "stop.png"
+    },
+    {
+        "cat": "actions",
+        "name": "system-lock-screen.png"
+    },
+    {
+        "cat": "actions",
+        "name": "system-log-out.png"
+    },
+    {
+        "cat": "actions",
+        "name": "system-run.png"
+    },
+    {
+        "cat": "actions",
+        "name": "system-search.png"
+    },
+    {
+        "cat": "actions",
+        "name": "system-shutdown.png"
+    },
+    {
+        "cat": "actions",
+        "name": "text_bold.png"
+    },
+    {
+        "cat": "actions",
+        "name": "text_italic.png"
+    },
+    {
+        "cat": "actions",
+        "name": "text_strike.png"
+    },
+    {
+        "cat": "actions",
+        "name": "text_under.png"
+    },
+    {
+        "cat": "actions",
+        "name": "tools-check-spelling.png"
+    },
+    {
+        "cat": "actions",
+        "name": "top.png"
+    },
+    {
+        "cat": "actions",
+        "name": "undo.png"
+    },
+    {
+        "cat": "actions",
+        "name": "up.png"
+    },
+    {
+        "cat": "actions",
+        "name": "view-fullscreen.png"
+    },
+    {
+        "cat": "actions",
+        "name": "viewmag1.png"
+    },
+    {
+        "cat": "actions",
+        "name": "viewmagfit.png"
+    },
+    {
+        "cat": "actions",
+        "name": "viewmag-.png"
+    },
+    {
+        "cat": "actions",
+        "name": "viewmag+.png"
+    },
+    {
+        "cat": "actions",
+        "name": "view-refresh.png"
+    },
+    {
+        "cat": "actions",
+        "name": "view-restore.png"
+    },
+    {
+        "cat": "actions",
+        "name": "view-sort-ascending.png"
+    },
+    {
+        "cat": "actions",
+        "name": "view-sort-descending.png"
+    },
+    {
+        "cat": "actions",
+        "name": "window-close.png"
+    },
+    {
+        "cat": "actions",
+        "name": "window_fullscreen.png"
+    },
+    {
+        "cat": "actions",
+        "name": "window_new.png"
+    },
+    {
+        "cat": "actions",
+        "name": "window-new.png"
+    },
+    {
+        "cat": "actions",
+        "name": "window_nofullscreen.png"
+    },
+    {
+        "cat": "actions",
+        "name": "xfce-system-exit.png"
+    },
+    {
+        "cat": "actions",
+        "name": "xfce-system-lock.png"
+    },
+    {
+        "cat": "actions",
+        "name": "zoom-best-fit.png"
+    },
+    {
+        "cat": "actions",
+        "name": "zoom-fit-best.png"
+    },
+    {
+        "cat": "actions",
+        "name": "zoom-in.png"
+    },
+    {
+        "cat": "actions",
+        "name": "zoom-original.png"
+    },
+    {
+        "cat": "actions",
+        "name": "zoom-out.png"
+    },
+    {
+        "cat": "animations",
+        "name": "gnome-spinner.png"
+    },
+    {
+        "cat": "animations",
+        "name": "process-working.png"
+    },
+    {
+        "cat": "apps",
+        "name": "accessibility-directory.png"
+    },
+    {
+        "cat": "apps",
+        "name": "accessories-calculator.png"
+    },
+    {
+        "cat": "apps",
+        "name": "accessories-character-map.png"
+    },
+    {
+        "cat": "apps",
+        "name": "accessories-dictionary.png"
+    },
+    {
+        "cat": "apps",
+        "name": "accessories-text-editor.png"
+    },
+    {
+        "cat": "apps",
+        "name": "access.png"
+    },
+    {
+        "cat": "apps",
+        "name": "applets-screenshooter.png"
+    },
+    {
+        "cat": "apps",
+        "name": "arts.png"
+    },
+    {
+        "cat": "apps",
+        "name": "background.png"
+    },
+    {
+        "cat": "apps",
+        "name": "calc.png"
+    },
+    {
+        "cat": "apps",
+        "name": "config-language.png"
+    },
+    {
+        "cat": "apps",
+        "name": "config-users.png"
+    },
+    {
+        "cat": "apps",
+        "name": "file-manager.png"
+    },
+    {
+        "cat": "apps",
+        "name": "fonts.png"
+    },
+    {
+        "cat": "apps",
+        "name": "gnome-calculator.png"
+    },
+    {
+        "cat": "apps",
+        "name": "gnome-character-map.png"
+    },
+    {
+        "cat": "apps",
+        "name": "gnome-help.png"
+    },
+    {
+        "cat": "apps",
+        "name": "gnome-mixer.png"
+    },
+    {
+        "cat": "apps",
+        "name": "gnome-monitor.png"
+    },
+    {
+        "cat": "apps",
+        "name": "gnome-remote-desktop.png"
+    },
+    {
+        "cat": "apps",
+        "name": "gnome-settings-accessibility-technologies.png"
+    },
+    {
+        "cat": "apps",
+        "name": "gnome-settings-background.png"
+    },
+    {
+        "cat": "apps",
+        "name": "gnome-settings-font.png"
+    },
+    {
+        "cat": "apps",
+        "name": "gnome-settings-keybindings.png"
+    },
+    {
+        "cat": "apps",
+        "name": "gnome-settings-theme.png"
+    },
+    {
+        "cat": "apps",
+        "name": "gnome-terminal.png"
+    },
+    {
+        "cat": "apps",
+        "name": "gnome-window-manager.png"
+    },
+    {
+        "cat": "apps",
+        "name": "gucharmap.png"
+    },
+    {
+        "cat": "apps",
+        "name": "help-browser.png"
+    },
+    {
+        "cat": "apps",
+        "name": "kcalc.png"
+    },
+    {
+        "cat": "apps",
+        "name": "kcharselect.png"
+    },
+    {
+        "cat": "apps",
+        "name": "kcmkwm.png"
+    },
+    {
+        "cat": "apps",
+        "name": "kcmsound.png"
+    },
+    {
+        "cat": "apps",
+        "name": "kedit.png"
+    },
+    {
+        "cat": "apps",
+        "name": "key_bindings.png"
+    },
+    {
+        "cat": "apps",
+        "name": "kfm.png"
+    },
+    {
+        "cat": "apps",
+        "name": "khelpcenter.png"
+    },
+    {
+        "cat": "apps",
+        "name": "konsole.png"
+    },
+    {
+        "cat": "apps",
+        "name": "krfb.png"
+    },
+    {
+        "cat": "apps",
+        "name": "kscreensaver.png"
+    },
+    {
+        "cat": "apps",
+        "name": "ksysguard.png"
+    },
+    {
+        "cat": "apps",
+        "name": "kuser.png"
+    },
+    {
+        "cat": "apps",
+        "name": "kwin.png"
+    },
+    {
+        "cat": "apps",
+        "name": "libreoffice-base.png"
+    },
+    {
+        "cat": "apps",
+        "name": "libreoffice-calc.png"
+    },
+    {
+        "cat": "apps",
+        "name": "libreoffice-draw.png"
+    },
+    {
+        "cat": "apps",
+        "name": "libreoffice-impress.png"
+    },
+    {
+        "cat": "apps",
+        "name": "libreoffice-main.png"
+    },
+    {
+        "cat": "apps",
+        "name": "libreoffice-math.png"
+    },
+    {
+        "cat": "apps",
+        "name": "libreoffice-startcenter.png"
+    },
+    {
+        "cat": "apps",
+        "name": "libreoffice-writer.png"
+    },
+    {
+        "cat": "apps",
+        "name": "locale.png"
+    },
+    {
+        "cat": "apps",
+        "name": "multimedia.png"
+    },
+    {
+        "cat": "apps",
+        "name": "multimedia-volume-control.png"
+    },
+    {
+        "cat": "apps",
+        "name": "openterm.png"
+    },
+    {
+        "cat": "apps",
+        "name": "preferences-desktop-accessibility.png"
+    },
+    {
+        "cat": "apps",
+        "name": "preferences-desktop-display.png"
+    },
+    {
+        "cat": "apps",
+        "name": "preferences-desktop-font.png"
+    },
+    {
+        "cat": "apps",
+        "name": "preferences-desktop-keyboard.png"
+    },
+    {
+        "cat": "apps",
+        "name": "preferences-desktop-keyboard-shortcuts.png"
+    },
+    {
+        "cat": "apps",
+        "name": "preferences-desktop-locale.png"
+    },
+    {
+        "cat": "apps",
+        "name": "preferences-desktop-remote-desktop.png"
+    },
+    {
+        "cat": "apps",
+        "name": "preferences-desktop-screensaver.png"
+    },
+    {
+        "cat": "apps",
+        "name": "preferences-desktop-theme.png"
+    },
+    {
+        "cat": "apps",
+        "name": "preferences-desktop-wallpaper.png"
+    },
+    {
+        "cat": "apps",
+        "name": "preferences-system-notifications.png"
+    },
+    {
+        "cat": "apps",
+        "name": "preferences-system-privacy.png"
+    },
+    {
+        "cat": "apps",
+        "name": "preferences-system-search.png"
+    },
+    {
+        "cat": "apps",
+        "name": "preferences-system-sharing.png"
+    },
+    {
+        "cat": "apps",
+        "name": "preferences-system-windows.png"
+    },
+    {
+        "cat": "apps",
+        "name": "redhat-filemanager.png"
+    },
+    {
+        "cat": "apps",
+        "name": "screensaver.png"
+    },
+    {
+        "cat": "apps",
+        "name": "style.png"
+    },
+    {
+        "cat": "apps",
+        "name": "susehelpcenter.png"
+    },
+    {
+        "cat": "apps",
+        "name": "system-config-users.png"
+    },
+    {
+        "cat": "apps",
+        "name": "system-file-manager.png"
+    },
+    {
+        "cat": "apps",
+        "name": "system-software-install.png"
+    },
+    {
+        "cat": "apps",
+        "name": "system-software-update.png"
+    },
+    {
+        "cat": "apps",
+        "name": "system-users.png"
+    },
+    {
+        "cat": "apps",
+        "name": "terminal.png"
+    },
+    {
+        "cat": "apps",
+        "name": "text-editor.png"
+    },
+    {
+        "cat": "apps",
+        "name": "update-manager.png"
+    },
+    {
+        "cat": "apps",
+        "name": "user-info.png"
+    },
+    {
+        "cat": "apps",
+        "name": "utilities-system-monitor.png"
+    },
+    {
+        "cat": "apps",
+        "name": "utilities-terminal.png"
+    },
+    {
+        "cat": "apps",
+        "name": "volume-knob.png"
+    },
+    {
+        "cat": "apps",
+        "name": "wallpaper.png"
+    },
+    {
+        "cat": "apps",
+        "name": "web-browser.png"
+    },
+    {
+        "cat": "apps",
+        "name": "xfce4-backdrop.png"
+    },
+    {
+        "cat": "apps",
+        "name": "xfce4-mixer.png"
+    },
+    {
+        "cat": "apps",
+        "name": "xfce4-ui.png"
+    },
+    {
+        "cat": "apps",
+        "name": "xfce-edit.png"
+    },
+    {
+        "cat": "apps",
+        "name": "xfce-filemanager.png"
+    },
+    {
+        "cat": "apps",
+        "name": "xfce-man.png"
+    },
+    {
+        "cat": "apps",
+        "name": "xfce-terminal.png"
+    },
+    {
+        "cat": "apps",
+        "name": "xfwm4.png"
+    },
+    {
+        "cat": "apps",
+        "name": "xscreensaver.png"
+    },
+    {
+        "cat": "apps",
+        "name": "zen-icon.png"
+    },
+    {
+        "cat": "categories",
+        "name": "applications-accessories.png"
+    },
+    {
+        "cat": "categories",
+        "name": "applications-development.png"
+    },
+    {
+        "cat": "categories",
+        "name": "applications-engineering.png"
+    },
+    {
+        "cat": "categories",
+        "name": "applications-games.png"
+    },
+    {
+        "cat": "categories",
+        "name": "applications-graphics.png"
+    },
+    {
+        "cat": "categories",
+        "name": "applications-internet.png"
+    },
+    {
+        "cat": "categories",
+        "name": "applications-multimedia.png"
+    },
+    {
+        "cat": "categories",
+        "name": "applications-office.png"
+    },
+    {
+        "cat": "categories",
+        "name": "applications-other.png"
+    },
+    {
+        "cat": "categories",
+        "name": "applications-science.png"
+    },
+    {
+        "cat": "categories",
+        "name": "applications-system.png"
+    },
+    {
+        "cat": "categories",
+        "name": "applications-utilities.png"
+    },
+    {
+        "cat": "categories",
+        "name": "gnome-applications.png"
+    },
+    {
+        "cat": "categories",
+        "name": "gnome-devel.png"
+    },
+    {
+        "cat": "categories",
+        "name": "gnome-globe.png"
+    },
+    {
+        "cat": "categories",
+        "name": "gnome-graphics.png"
+    },
+    {
+        "cat": "categories",
+        "name": "gnome-joystick.png"
+    },
+    {
+        "cat": "categories",
+        "name": "gnome-multimedia.png"
+    },
+    {
+        "cat": "categories",
+        "name": "gnome-other.png"
+    },
+    {
+        "cat": "categories",
+        "name": "gnome-settings.png"
+    },
+    {
+        "cat": "categories",
+        "name": "gnome-system.png"
+    },
+    {
+        "cat": "categories",
+        "name": "gnome-util.png"
+    },
+    {
+        "cat": "categories",
+        "name": "gtk-preferences.png"
+    },
+    {
+        "cat": "categories",
+        "name": "input_devices_settings.png"
+    },
+    {
+        "cat": "categories",
+        "name": "kcontrol.png"
+    },
+    {
+        "cat": "categories",
+        "name": "package_development.png"
+    },
+    {
+        "cat": "categories",
+        "name": "package_games.png"
+    },
+    {
+        "cat": "categories",
+        "name": "package_graphics.png"
+    },
+    {
+        "cat": "categories",
+        "name": "package_multimedia.png"
+    },
+    {
+        "cat": "categories",
+        "name": "package_network.png"
+    },
+    {
+        "cat": "categories",
+        "name": "package_office.png"
+    },
+    {
+        "cat": "categories",
+        "name": "package_settings.png"
+    },
+    {
+        "cat": "categories",
+        "name": "package_system.png"
+    },
+    {
+        "cat": "categories",
+        "name": "package_utilities.png"
+    },
+    {
+        "cat": "categories",
+        "name": "preferences-desktop-peripherals.png"
+    },
+    {
+        "cat": "categories",
+        "name": "preferences-desktop-personal.png"
+    },
+    {
+        "cat": "categories",
+        "name": "preferences-desktop.png"
+    },
+    {
+        "cat": "categories",
+        "name": "preferences-other.png"
+    },
+    {
+        "cat": "categories",
+        "name": "preferences-system-network.png"
+    },
+    {
+        "cat": "categories",
+        "name": "preferences-system.png"
+    },
+    {
+        "cat": "categories",
+        "name": "redhat-accessories.png"
+    },
+    {
+        "cat": "categories",
+        "name": "redhat-games.png"
+    },
+    {
+        "cat": "categories",
+        "name": "redhat-graphics.png"
+    },
+    {
+        "cat": "categories",
+        "name": "redhat-internet.png"
+    },
+    {
+        "cat": "categories",
+        "name": "redhat-office.png"
+    },
+    {
+        "cat": "categories",
+        "name": "redhat-preferences.png"
+    },
+    {
+        "cat": "categories",
+        "name": "redhat-programming.png"
+    },
+    {
+        "cat": "categories",
+        "name": "redhat-sound_video.png"
+    },
+    {
+        "cat": "categories",
+        "name": "redhat-system_settings.png"
+    },
+    {
+        "cat": "categories",
+        "name": "redhat-system_tools.png"
+    },
+    {
+        "cat": "categories",
+        "name": "stock_internet.png"
+    },
+    {
+        "cat": "categories",
+        "name": "system-help.png"
+    },
+    {
+        "cat": "categories",
+        "name": "xfce4-settings.png"
+    },
+    {
+        "cat": "categories",
+        "name": "xfce-devel.png"
+    },
+    {
+        "cat": "categories",
+        "name": "xfce-games.png"
+    },
+    {
+        "cat": "categories",
+        "name": "xfce-graphics.png"
+    },
+    {
+        "cat": "categories",
+        "name": "xfce-internet.png"
+    },
+    {
+        "cat": "categories",
+        "name": "xfce-multimedia.png"
+    },
+    {
+        "cat": "categories",
+        "name": "xfce-office.png"
+    },
+    {
+        "cat": "categories",
+        "name": "xfce-system.png"
+    },
+    {
+        "cat": "categories",
+        "name": "xfce-system-settings.png"
+    },
+    {
+        "cat": "categories",
+        "name": "xfce-utils.png"
+    },
+    {
+        "cat": "devices",
+        "name": "3floppy_unmount.png"
+    },
+    {
+        "cat": "devices",
+        "name": "ac-adapter.png"
+    },
+    {
+        "cat": "devices",
+        "name": "audio-card.png"
+    },
+    {
+        "cat": "devices",
+        "name": "audio-headphones.png"
+    },
+    {
+        "cat": "devices",
+        "name": "audio-headset.png"
+    },
+    {
+        "cat": "devices",
+        "name": "audio-input-microphone.png"
+    },
+    {
+        "cat": "devices",
+        "name": "audio-speakers.png"
+    },
+    {
+        "cat": "devices",
+        "name": "battery.png"
+    },
+    {
+        "cat": "devices",
+        "name": "camera-photo.png"
+    },
+    {
+        "cat": "devices",
+        "name": "camera.png"
+    },
+    {
+        "cat": "devices",
+        "name": "camera_unmount.png"
+    },
+    {
+        "cat": "devices",
+        "name": "camera-video.png"
+    },
+    {
+        "cat": "devices",
+        "name": "camera-web.png"
+    },
+    {
+        "cat": "devices",
+        "name": "cdrom_unmount.png"
+    },
+    {
+        "cat": "devices",
+        "name": "cdwriter_unmount.png"
+    },
+    {
+        "cat": "devices",
+        "name": "chardevice.png"
+    },
+    {
+        "cat": "devices",
+        "name": "computer.png"
+    },
+    {
+        "cat": "devices",
+        "name": "display.png"
+    },
+    {
+        "cat": "devices",
+        "name": "drive-cdrom.png"
+    },
+    {
+        "cat": "devices",
+        "name": "drive-harddisk.png"
+    },
+    {
+        "cat": "devices",
+        "name": "drive-multidisk.png"
+    },
+    {
+        "cat": "devices",
+        "name": "drive-optical.png"
+    },
+    {
+        "cat": "devices",
+        "name": "drive-removable-media.png"
+    },
+    {
+        "cat": "devices",
+        "name": "dvd_unmount.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-dev-battery.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-dev-cdrom-audio.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-dev-cdrom.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-dev-computer.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-dev-disc-cdr.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-dev-disc-cdrw.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-dev-disc-dvdram.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-dev-disc-dvdrom.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-dev-disc-dvdr-plus.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-dev-disc-dvdr.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-dev-disc-dvdrw.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-dev-dvd.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-dev-ethernet.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-dev-floppy.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-dev-harddisk-1394.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-dev-harddisk.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-dev-harddisk-usb.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-dev-ipod.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-dev-keyboard.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-dev-media-cf.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-dev-media-ms.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-dev-media-sdmmc.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-dev-media-sm.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-dev-mouse-ball.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-dev-mouse-optical.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-dev-printer.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-dev-removable-1394.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-dev-removable.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-dev-removable-usb.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-dev-wavelan.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-fs-client.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-modem.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gnome-stock-mic.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gtk-cdrom.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gtk-floppy.png"
+    },
+    {
+        "cat": "devices",
+        "name": "gtk-harddisk.png"
+    },
+    {
+        "cat": "devices",
+        "name": "harddrive.png"
+    },
+    {
+        "cat": "devices",
+        "name": "hdd_unmount.png"
+    },
+    {
+        "cat": "devices",
+        "name": "input-dialpad.png"
+    },
+    {
+        "cat": "devices",
+        "name": "input-gaming.png"
+    },
+    {
+        "cat": "devices",
+        "name": "input-keyboard.png"
+    },
+    {
+        "cat": "devices",
+        "name": "input-mouse.png"
+    },
+    {
+        "cat": "devices",
+        "name": "input-tablet.png"
+    },
+    {
+        "cat": "devices",
+        "name": "input-touchpad.png"
+    },
+    {
+        "cat": "devices",
+        "name": "ipod_mount.png"
+    },
+    {
+        "cat": "devices",
+        "name": "joystick.png"
+    },
+    {
+        "cat": "devices",
+        "name": "keyboard.png"
+    },
+    {
+        "cat": "devices",
+        "name": "kjobviewer.png"
+    },
+    {
+        "cat": "devices",
+        "name": "kxkb.png"
+    },
+    {
+        "cat": "devices",
+        "name": "media-cdrom.png"
+    },
+    {
+        "cat": "devices",
+        "name": "media-flash.png"
+    },
+    {
+        "cat": "devices",
+        "name": "media-floppy.png"
+    },
+    {
+        "cat": "devices",
+        "name": "media-optical.png"
+    },
+    {
+        "cat": "devices",
+        "name": "media-removable.png"
+    },
+    {
+        "cat": "devices",
+        "name": "media-tape.png"
+    },
+    {
+        "cat": "devices",
+        "name": "modem.png"
+    },
+    {
+        "cat": "devices",
+        "name": "mouse.png"
+    },
+    {
+        "cat": "devices",
+        "name": "multimedia-player.png"
+    },
+    {
+        "cat": "devices",
+        "name": "network-vpn.png"
+    },
+    {
+        "cat": "devices",
+        "name": "network-wired.png"
+    },
+    {
+        "cat": "devices",
+        "name": "network-wireless.png"
+    },
+    {
+        "cat": "devices",
+        "name": "nm-adhoc.png"
+    },
+    {
+        "cat": "devices",
+        "name": "nm-device-wired.png"
+    },
+    {
+        "cat": "devices",
+        "name": "nm-device-wireless.png"
+    },
+    {
+        "cat": "devices",
+        "name": "pda.png"
+    },
+    {
+        "cat": "devices",
+        "name": "phone.png"
+    },
+    {
+        "cat": "devices",
+        "name": "printer1.png"
+    },
+    {
+        "cat": "devices",
+        "name": "printer-network.png"
+    },
+    {
+        "cat": "devices",
+        "name": "printer.png"
+    },
+    {
+        "cat": "devices",
+        "name": "printer-remote.png"
+    },
+    {
+        "cat": "devices",
+        "name": "printmgr.png"
+    },
+    {
+        "cat": "devices",
+        "name": "scanner.png"
+    },
+    {
+        "cat": "devices",
+        "name": "stock_cell-phone.png"
+    },
+    {
+        "cat": "devices",
+        "name": "stock_mic.png"
+    },
+    {
+        "cat": "devices",
+        "name": "stock_printers.png"
+    },
+    {
+        "cat": "devices",
+        "name": "system-floppy.png"
+    },
+    {
+        "cat": "devices",
+        "name": "system.png"
+    },
+    {
+        "cat": "devices",
+        "name": "uninterruptible-power-supply.png"
+    },
+    {
+        "cat": "devices",
+        "name": "usbpendrive_unmount.png"
+    },
+    {
+        "cat": "devices",
+        "name": "video-display.png"
+    },
+    {
+        "cat": "devices",
+        "name": "xfce4-display.png"
+    },
+    {
+        "cat": "devices",
+        "name": "xfce4-keyboard.png"
+    },
+    {
+        "cat": "devices",
+        "name": "xfce4-mouse.png"
+    },
+    {
+        "cat": "devices",
+        "name": "xfce-printer.png"
+    },
+    {
+        "cat": "devices",
+        "name": "yast_HD.png"
+    },
+    {
+        "cat": "devices",
+        "name": "yast_idetude.png"
+    },
+    {
+        "cat": "devices",
+        "name": "yast_joystick.png"
+    },
+    {
+        "cat": "devices",
+        "name": "yast_mouse.png"
+    },
+    {
+        "cat": "devices",
+        "name": "yast_printer.png"
+    },
+    {
+        "cat": "devices",
+        "name": "yast_soundcard.png"
+    },
+    {
+        "cat": "emblems",
+        "name": "emblem-default.png"
+    },
+    {
+        "cat": "emblems",
+        "name": "emblem-documents.png"
+    },
+    {
+        "cat": "emblems",
+        "name": "emblem-downloads.png"
+    },
+    {
+        "cat": "emblems",
+        "name": "emblem-favorite.png"
+    },
+    {
+        "cat": "emblems",
+        "name": "emblem-generic.png"
+    },
+    {
+        "cat": "emblems",
+        "name": "emblem-important.png"
+    },
+    {
+        "cat": "emblems",
+        "name": "emblem-mail.png"
+    },
+    {
+        "cat": "emblems",
+        "name": "emblem-new.png"
+    },
+    {
+        "cat": "emblems",
+        "name": "emblem-noread.png"
+    },
+    {
+        "cat": "emblems",
+        "name": "emblem-nowrite.png"
+    },
+    {
+        "cat": "emblems",
+        "name": "emblem-package.png"
+    },
+    {
+        "cat": "emblems",
+        "name": "emblem-photos.png"
+    },
+    {
+        "cat": "emblems",
+        "name": "emblem-readonly.png"
+    },
+    {
+        "cat": "emblems",
+        "name": "emblem-shared.png"
+    },
+    {
+        "cat": "emblems",
+        "name": "emblem-symbolic-link.png"
+    },
+    {
+        "cat": "emblems",
+        "name": "emblem-synchronizing.png"
+    },
+    {
+        "cat": "emblems",
+        "name": "emblem-system.png"
+    },
+    {
+        "cat": "emblems",
+        "name": "emblem-unreadable.png"
+    },
+    {
+        "cat": "emblems",
+        "name": "emblem-urgent.png"
+    },
+    {
+        "cat": "emblems",
+        "name": "emblem-web.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "face-angel.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "face-angry.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "face-cool.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "face-crying.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "face-devilish.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "face-embarrassed.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "face-glasses.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "face-kiss.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "face-laugh.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "face-monkey.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "face-plain.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "face-raspberry.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "face-sad.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "face-sick.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "face-smile-big.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "face-smile.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "face-smirk.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "face-surprise.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "face-tired.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "face-uncertain.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "face-wink.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "face-worried.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "stock_smiley-10.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "stock_smiley-11.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "stock_smiley-13.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "stock_smiley-15.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "stock_smiley-18.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "stock_smiley-1.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "stock_smiley-22.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "stock_smiley-2.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "stock_smiley-3.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "stock_smiley-4.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "stock_smiley-5.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "stock_smiley-6.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "stock_smiley-7.png"
+    },
+    {
+        "cat": "emotes",
+        "name": "stock_smiley-8.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "application-certificate.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "application-vnd.ms-excel.sheet.macroEnabled.12.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "application-vnd.ms-powerpoint.presentation.macroEnabled.12.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "application-vnd.ms-word.document.macroEnabled.12.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "application-vnd.openxmlformats-officedocument.presentationml.presentation.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "application-vnd.openxmlformats-officedocument.presentationml.template.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "application-vnd.openxmlformats-officedocument.spreadsheetml.sheet.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "application-vnd.openxmlformats-officedocument.spreadsheetml.template.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "application-vnd.openxmlformats-officedocument.wordprocessingml.document.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "application-vnd.openxmlformats-officedocument.wordprocessingml.template.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "application-x-addon.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "application-x-executable.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "ascii.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "audio-x-generic.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "binary.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "contents2.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "deb.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "document.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "empty.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "exec.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "folder_tar.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "font_bitmap.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "font.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "font_truetype.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "font_type1.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "font-x-generic.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-fs-executable.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-fs-regular.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-magicpoint.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-msword.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-ogg.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-pdf.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-postscript.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-rtf.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-vnd.lotus-1-2-3.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-vnd.ms-excel.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-vnd.ms-powerpoint.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-vnd.oasis.opendocument.graphics.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-vnd.oasis.opendocument.graphics-template.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-vnd.oasis.opendocument.image.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-vnd.oasis.opendocument.presentation.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-vnd.oasis.opendocument.presentation-template.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-vnd.oasis.opendocument.spreadsheet.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-vnd.oasis.opendocument.spreadsheet-template.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-vnd.oasis.opendocument.text.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-vnd.oasis.opendocument.text-template.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-vnd.oasis.opendocument.text-web.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-vnd.rn-realmedia.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-vnd.rn-realmedia-secure.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-vnd.rn-realmedia-vbr.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-vnd.stardivision.calc.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-vnd.stardivision.impress.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-vnd.stardivision.writer.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-vnd.sun.xml.calc.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-vnd.sun.xml.calc.template.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-vnd.sun.xml.draw.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-vnd.sun.xml.draw.template.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-vnd.sun.xml.impress.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-vnd.sun.xml.impress.template.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-vnd.sun.xml.writer.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-vnd.sun.xml.writer.template.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-wordperfect.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-7z-compressed.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-abiword.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-applix-spreadsheet.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-applix-word.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-archive.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-arj.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-bzip-compressed-tar.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-bzip.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-compressed-tar.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-compress.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-cpio-compressed.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-cpio.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-deb.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-dvi.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-executable.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-font-afm.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-font-bdf.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-font-linux-psf.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-font-pcf.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-font-sunos-news.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-font-ttf.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-gnumeric.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-gzip.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-gzpostscript.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-xhtml+xml.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-jar.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-killustrator.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-kpresenter.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-kspread.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-kword.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-lha.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-lhz.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-lzma-compressed-tar.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-lzma.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-ms-dos-executable.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-perl.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-php.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-python-bytecode.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-rar.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-rpm.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-scribus.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-shellscript.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-shockwave-flash.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-stuffit.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-tar.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-tarz.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-x-tex.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-application-zip.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-audio.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-image.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-text-html.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-text.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-text-vnd.wap.wml.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-text-x-csh.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-text-x-python.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-text-x-sh.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-text-x-vcalendar.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-text-x-vcard.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-text-x-zsh.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-video.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-mime-x-font-afm.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gnome-package.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "gtk-file.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "html.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "image.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "image-x-generic.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "kpresenter_kpr.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "libreoffice-database.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "libreoffice-drawing.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "libreoffice-drawing-template.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "libreoffice-extension.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "libreoffice-formula.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "libreoffice-master-document.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "libreoffice-oasis-database.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "libreoffice-oasis-drawing.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "libreoffice-oasis-drawing-template.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "libreoffice-oasis-formula.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "libreoffice-oasis-master-document.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "libreoffice-oasis-presentation.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "libreoffice-oasis-presentation-template.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "libreoffice-oasis-spreadsheet.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "libreoffice-oasis-spreadsheet-template.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "libreoffice-oasis-text.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "libreoffice-oasis-text-template.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "libreoffice-oasis-web-template.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "libreoffice-presentation.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "libreoffice-presentation-template.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "libreoffice-spreadsheet.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "libreoffice-spreadsheet-template.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "libreoffice-text.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "libreoffice-text-template.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "mime_ascii.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "misc.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "package_editors.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "package.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "package_wordprocessing.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "package-x-generic.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "plan.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "rpm.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "shellscript.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "sound.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "spreadsheet.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "stock_addressbook.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "stock_calendar.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "stock_certificate.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "stock_script.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "tar.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "template_source.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "text-html.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "text-x-generic.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "text-x-generic-template.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "text-x-preview.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "text-x-script.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "tgz.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "txt2.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "txt.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "unknown.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "vcalendar.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "vcard.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "video.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "video-x-generic.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "wordprocessing.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "www.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "x-office-address-book.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "x-office-calendar.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "x-office-document.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "x-office-document-template.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "x-office-drawing.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "x-office-drawing-template.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "x-office-presentation.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "x-office-presentation-template.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "x-office-spreadsheet.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "x-office-spreadsheet-template.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "x-package-repository.png"
+    },
+    {
+        "cat": "mimetypes",
+        "name": "zip.png"
+    },
+    {
+        "cat": "places",
+        "name": "application-x-gnome-saved-search.png"
+    },
+    {
+        "cat": "places",
+        "name": "debian-swirl.png"
+    },
+    {
+        "cat": "places",
+        "name": "desktop.png"
+    },
+    {
+        "cat": "places",
+        "name": "distributor-logo.png"
+    },
+    {
+        "cat": "places",
+        "name": "emptytrash.png"
+    },
+    {
+        "cat": "places",
+        "name": "folder-documents.png"
+    },
+    {
+        "cat": "places",
+        "name": "folder-download.png"
+    },
+    {
+        "cat": "places",
+        "name": "folder_home.png"
+    },
+    {
+        "cat": "places",
+        "name": "folder-music.png"
+    },
+    {
+        "cat": "places",
+        "name": "folder-pictures.png"
+    },
+    {
+        "cat": "places",
+        "name": "folder.png"
+    },
+    {
+        "cat": "places",
+        "name": "folder-publicshare.png"
+    },
+    {
+        "cat": "places",
+        "name": "folder-remote.png"
+    },
+    {
+        "cat": "places",
+        "name": "folder-saved-search.png"
+    },
+    {
+        "cat": "places",
+        "name": "folder-templates.png"
+    },
+    {
+        "cat": "places",
+        "name": "folder-videos.png"
+    },
+    {
+        "cat": "places",
+        "name": "gnome-foot.png"
+    },
+    {
+        "cat": "places",
+        "name": "gnome-fs-desktop.png"
+    },
+    {
+        "cat": "places",
+        "name": "gnome-fs-directory.png"
+    },
+    {
+        "cat": "places",
+        "name": "gnome-fs-ftp.png"
+    },
+    {
+        "cat": "places",
+        "name": "gnome-fs-home.png"
+    },
+    {
+        "cat": "places",
+        "name": "gnome-fs-network.png"
+    },
+    {
+        "cat": "places",
+        "name": "gnome-fs-nfs.png"
+    },
+    {
+        "cat": "places",
+        "name": "gnome-fs-server.png"
+    },
+    {
+        "cat": "places",
+        "name": "gnome-fs-share.png"
+    },
+    {
+        "cat": "places",
+        "name": "gnome-fs-smb.png"
+    },
+    {
+        "cat": "places",
+        "name": "gnome-fs-ssh.png"
+    },
+    {
+        "cat": "places",
+        "name": "gnome-fs-trash-empty.png"
+    },
+    {
+        "cat": "places",
+        "name": "gnome-main-menu.png"
+    },
+    {
+        "cat": "places",
+        "name": "gnome-mime-x-directory-nfs-server.png"
+    },
+    {
+        "cat": "places",
+        "name": "gnome-mime-x-directory-smb-server.png"
+    },
+    {
+        "cat": "places",
+        "name": "gnome-mime-x-directory-smb-share.png"
+    },
+    {
+        "cat": "places",
+        "name": "gnome-mime-x-directory-smb-workgroup.png"
+    },
+    {
+        "cat": "places",
+        "name": "gnome-stock-trash.png"
+    },
+    {
+        "cat": "places",
+        "name": "gtk-directory.png"
+    },
+    {
+        "cat": "places",
+        "name": "gtk-network.png"
+    },
+    {
+        "cat": "places",
+        "name": "inode-directory.png"
+    },
+    {
+        "cat": "places",
+        "name": "network_local.png"
+    },
+    {
+        "cat": "places",
+        "name": "network.png"
+    },
+    {
+        "cat": "places",
+        "name": "network-server.png"
+    },
+    {
+        "cat": "places",
+        "name": "network-workgroup.png"
+    },
+    {
+        "cat": "places",
+        "name": "novell-button.png"
+    },
+    {
+        "cat": "places",
+        "name": "redhat-network-server.png"
+    },
+    {
+        "cat": "places",
+        "name": "server.png"
+    },
+    {
+        "cat": "places",
+        "name": "start-here.png"
+    },
+    {
+        "cat": "places",
+        "name": "stock_folder.png"
+    },
+    {
+        "cat": "places",
+        "name": "trashcan_empty.png"
+    },
+    {
+        "cat": "places",
+        "name": "user-bookmarks.png"
+    },
+    {
+        "cat": "places",
+        "name": "user-desktop.png"
+    },
+    {
+        "cat": "places",
+        "name": "user-home.png"
+    },
+    {
+        "cat": "places",
+        "name": "user-trash.png"
+    },
+    {
+        "cat": "places",
+        "name": "xfce-trash_empty.png"
+    },
+    {
+        "cat": "status",
+        "name": "appointment-missed.png"
+    },
+    {
+        "cat": "status",
+        "name": "appointment-soon.png"
+    },
+    {
+        "cat": "status",
+        "name": "audio-volume-high.png"
+    },
+    {
+        "cat": "status",
+        "name": "audio-volume-low.png"
+    },
+    {
+        "cat": "status",
+        "name": "audio-volume-medium.png"
+    },
+    {
+        "cat": "status",
+        "name": "audio-volume-muted.png"
+    },
+    {
+        "cat": "status",
+        "name": "avatar-default.png"
+    },
+    {
+        "cat": "status",
+        "name": "battery-caution-charging.png"
+    },
+    {
+        "cat": "status",
+        "name": "battery-caution.png"
+    },
+    {
+        "cat": "status",
+        "name": "battery-empty.png"
+    },
+    {
+        "cat": "status",
+        "name": "battery-full-charged.png"
+    },
+    {
+        "cat": "status",
+        "name": "battery-full-charging.png"
+    },
+    {
+        "cat": "status",
+        "name": "battery-full.png"
+    },
+    {
+        "cat": "status",
+        "name": "battery-good-charging.png"
+    },
+    {
+        "cat": "status",
+        "name": "battery-good.png"
+    },
+    {
+        "cat": "status",
+        "name": "battery-low-charging.png"
+    },
+    {
+        "cat": "status",
+        "name": "battery-low.png"
+    },
+    {
+        "cat": "status",
+        "name": "battery-missing.png"
+    },
+    {
+        "cat": "status",
+        "name": "changes-allow.png"
+    },
+    {
+        "cat": "status",
+        "name": "changes-prevent.png"
+    },
+    {
+        "cat": "status",
+        "name": "computer-fail.png"
+    },
+    {
+        "cat": "status",
+        "name": "connect_creating.png"
+    },
+    {
+        "cat": "status",
+        "name": "connect_established.png"
+    },
+    {
+        "cat": "status",
+        "name": "connect_no.png"
+    },
+    {
+        "cat": "status",
+        "name": "dialog-error.png"
+    },
+    {
+        "cat": "status",
+        "name": "dialog-information.png"
+    },
+    {
+        "cat": "status",
+        "name": "dialog-password.png"
+    },
+    {
+        "cat": "status",
+        "name": "dialog-question.png"
+    },
+    {
+        "cat": "status",
+        "name": "dialog-warning.png"
+    },
+    {
+        "cat": "status",
+        "name": "edittrash.png"
+    },
+    {
+        "cat": "status",
+        "name": "error.png"
+    },
+    {
+        "cat": "status",
+        "name": "folder-drag-accept.png"
+    },
+    {
+        "cat": "status",
+        "name": "folder_open.png"
+    },
+    {
+        "cat": "status",
+        "name": "folder-open.png"
+    },
+    {
+        "cat": "status",
+        "name": "folder-visiting.png"
+    },
+    {
+        "cat": "status",
+        "name": "gnome-fs-directory-accept.png"
+    },
+    {
+        "cat": "status",
+        "name": "gnome-fs-directory-visiting.png"
+    },
+    {
+        "cat": "status",
+        "name": "gnome-fs-loading-icon.png"
+    },
+    {
+        "cat": "status",
+        "name": "gnome-fs-trash-full.png"
+    },
+    {
+        "cat": "status",
+        "name": "gnome-netstatus-disconn.png"
+    },
+    {
+        "cat": "status",
+        "name": "gnome-netstatus-error.png"
+    },
+    {
+        "cat": "status",
+        "name": "gnome-netstatus-idle.png"
+    },
+    {
+        "cat": "status",
+        "name": "gnome-netstatus-rx.png"
+    },
+    {
+        "cat": "status",
+        "name": "gnome-netstatus-tx.png"
+    },
+    {
+        "cat": "status",
+        "name": "gnome-netstatus-txrx.png"
+    },
+    {
+        "cat": "status",
+        "name": "gnome-stock-trash-full.png"
+    },
+    {
+        "cat": "status",
+        "name": "gtk-dialog-authentication.png"
+    },
+    {
+        "cat": "status",
+        "name": "gtk-dialog-error.png"
+    },
+    {
+        "cat": "status",
+        "name": "gtk-dialog-info.png"
+    },
+    {
+        "cat": "status",
+        "name": "gtk-dialog-question.png"
+    },
+    {
+        "cat": "status",
+        "name": "gtk-dialog-warning.png"
+    },
+    {
+        "cat": "status",
+        "name": "gtk-directory.png"
+    },
+    {
+        "cat": "status",
+        "name": "gtk-missing-image.png"
+    },
+    {
+        "cat": "status",
+        "name": "image-loading.png"
+    },
+    {
+        "cat": "status",
+        "name": "image-missing.png"
+    },
+    {
+        "cat": "status",
+        "name": "important.png"
+    },
+    {
+        "cat": "status",
+        "name": "info.png"
+    },
+    {
+        "cat": "status",
+        "name": "mail-attachment.png"
+    },
+    {
+        "cat": "status",
+        "name": "mail-read.png"
+    },
+    {
+        "cat": "status",
+        "name": "mail-replied.png"
+    },
+    {
+        "cat": "status",
+        "name": "mail-unread.png"
+    },
+    {
+        "cat": "status",
+        "name": "media-playlist-repeat.png"
+    },
+    {
+        "cat": "status",
+        "name": "media-playlist-shuffle.png"
+    },
+    {
+        "cat": "status",
+        "name": "messagebox_critical.png"
+    },
+    {
+        "cat": "status",
+        "name": "messagebox_info.png"
+    },
+    {
+        "cat": "status",
+        "name": "messagebox_warning.png"
+    },
+    {
+        "cat": "status",
+        "name": "microphone-sensitivity-high.png"
+    },
+    {
+        "cat": "status",
+        "name": "microphone-sensitivity-low.png"
+    },
+    {
+        "cat": "status",
+        "name": "microphone-sensitivity-medium.png"
+    },
+    {
+        "cat": "status",
+        "name": "microphone-sensitivity-muted.png"
+    },
+    {
+        "cat": "status",
+        "name": "network-cellular-connected.png"
+    },
+    {
+        "cat": "status",
+        "name": "network-error.png"
+    },
+    {
+        "cat": "status",
+        "name": "network-idle.png"
+    },
+    {
+        "cat": "status",
+        "name": "network-offline.png"
+    },
+    {
+        "cat": "status",
+        "name": "network-receive.png"
+    },
+    {
+        "cat": "status",
+        "name": "network-transmit.png"
+    },
+    {
+        "cat": "status",
+        "name": "network-transmit-receive.png"
+    },
+    {
+        "cat": "status",
+        "name": "network-wired-disconnected.png"
+    },
+    {
+        "cat": "status",
+        "name": "nm-no-connection.png"
+    },
+    {
+        "cat": "status",
+        "name": "non-starred.png"
+    },
+    {
+        "cat": "status",
+        "name": "printer-error.png"
+    },
+    {
+        "cat": "status",
+        "name": "printer-printing.png"
+    },
+    {
+        "cat": "status",
+        "name": "security-high.png"
+    },
+    {
+        "cat": "status",
+        "name": "security-low.png"
+    },
+    {
+        "cat": "status",
+        "name": "security-medium.png"
+    },
+    {
+        "cat": "status",
+        "name": "semi-starred.png"
+    },
+    {
+        "cat": "status",
+        "name": "semi-starred-rtl.png"
+    },
+    {
+        "cat": "status",
+        "name": "software-update-available.png"
+    },
+    {
+        "cat": "status",
+        "name": "software-update-urgent.png"
+    },
+    {
+        "cat": "status",
+        "name": "starred.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_appointment-reminder-excl.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_appointment-reminder.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_attach.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_dialog-error.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_dialog-info.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_dialog-question.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_dialog-warning.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_lock-broken.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_lock-ok.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_lock-open.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_lock.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_mail-open.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_mail-replied.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_mail-unread.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_open.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_repeat.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_shuffle.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_trash_full.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_volume-0.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_volume-max.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_volume-med.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_volume-min.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_volume-mute.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_volume.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_weather-cloudy.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_weather-few-clouds.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_weather-fog.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_weather-night-clear.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_weather-night-few-clouds.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_weather-showers.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_weather-snow.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_weather-storm.png"
+    },
+    {
+        "cat": "status",
+        "name": "stock_weather-sunny.png"
+    },
+    {
+        "cat": "status",
+        "name": "sunny.png"
+    },
+    {
+        "cat": "status",
+        "name": "task-due.png"
+    },
+    {
+        "cat": "status",
+        "name": "task-past-due.png"
+    },
+    {
+        "cat": "status",
+        "name": "trashcan_full.png"
+    },
+    {
+        "cat": "status",
+        "name": "trophy-bronze.png"
+    },
+    {
+        "cat": "status",
+        "name": "trophy-gold.png"
+    },
+    {
+        "cat": "status",
+        "name": "trophy-silver.png"
+    },
+    {
+        "cat": "status",
+        "name": "user-available.png"
+    },
+    {
+        "cat": "status",
+        "name": "user-away.png"
+    },
+    {
+        "cat": "status",
+        "name": "user-busy.png"
+    },
+    {
+        "cat": "status",
+        "name": "user-idle.png"
+    },
+    {
+        "cat": "status",
+        "name": "user-invisible.png"
+    },
+    {
+        "cat": "status",
+        "name": "user-offline.png"
+    },
+    {
+        "cat": "status",
+        "name": "user-trash-full.png"
+    },
+    {
+        "cat": "status",
+        "name": "weather-clear-night.png"
+    },
+    {
+        "cat": "status",
+        "name": "weather-clear.png"
+    },
+    {
+        "cat": "status",
+        "name": "weather-few-clouds-night.png"
+    },
+    {
+        "cat": "status",
+        "name": "weather-few-clouds.png"
+    },
+    {
+        "cat": "status",
+        "name": "weather-fog.png"
+    },
+    {
+        "cat": "status",
+        "name": "weather-overcast.png"
+    },
+    {
+        "cat": "status",
+        "name": "weather-severe-alert.png"
+    },
+    {
+        "cat": "status",
+        "name": "weather-showers.png"
+    },
+    {
+        "cat": "status",
+        "name": "weather-showers-scattered.png"
+    },
+    {
+        "cat": "status",
+        "name": "weather-snow.png"
+    },
+    {
+        "cat": "status",
+        "name": "weather-storm.png"
+    },
+    {
+        "cat": "status",
+        "name": "xfce-trash_full.png"
+    }
+]

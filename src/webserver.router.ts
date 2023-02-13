@@ -63,7 +63,7 @@ export class HttpRequest{
                     "content-type":contentType,
                     "Access-Control-Allow-Origin":origin,
                     "Access-Control-Allow-Methods":"GET,POST,PUT,DELETE,TRACE,PATCH,OPTIONS",
-                    "Access-Control-Allow-Headers":"XContent-Type"
+                    "Access-Control-Allow-Headers":"Content-Type"
                 }
             }
         )
@@ -98,6 +98,7 @@ export class Router{
                     const result = await this.routeHandlers[methodPath](req);
                     req.event.respondWith(result)
                 }catch(err){
+                    console.error(err)
                     error = err
                 }
                 nomatch=false
@@ -113,9 +114,10 @@ export class Router{
                 request:req,
                 router:this,
             }
-            console.log("ERRHANDLER",req,this);
+            console.log("ERRHANDLER",error,req,this);
             const result = req.respondWithJson(data,500)
             req.event.respondWith(result)
+            error=null;
             return;
         }
         if(nomatch){

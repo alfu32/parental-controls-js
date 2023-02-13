@@ -1,5 +1,5 @@
 {
   "tasks": {
-    "dev": "deno run --watch src/**.ts"
+    "dev": "deno run --watch src/classes.ts src/desktop-notifications.ts src/functions.ts src/main.ts src/spawnProcess.ts src/webserver.router.ts src/webserver.ts "
   }
 }

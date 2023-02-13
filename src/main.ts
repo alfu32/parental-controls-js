@@ -6,215 +6,28 @@ import fs from "node:fs";
 import process from "node:process";
 import {
   Config,
-  ConfigurationRecord,
   Counters,
   mkdirp,
-  Process,
   sleep,
 } from "./classes.ts";
-import { Zenity } from "./desktop-notifications.ts";
+import { Zenity,DenoNotifier,NotifySend,INotifier } from "./desktop-notifications.ts";
+const NOTIFIER:INotifier = NotifySend;
 import { rateLimited } from "./functions.ts";
-import { spawnProcess } from "./spawnProcess.ts";
+import { getTransientConfig } from "./getTransientConfig.ts";
+import { router } from "./router.config.ts";
+import { HttpRequest } from "./webserver.router.ts";
 process.env;
+
 let io = {
   sig: true,
 };
-import { HttpRequest, Router } from "./webserver.router.ts";
 
-const server = Deno.listen({ port: 8080 });
-console.log(`HTTP webserver running.  Access it at:  http://localhost:8080/`);
+const port=8080
+const server = Deno.listen({ port });
+console.log(`HTTP webserver running.  Access it at:  http://localhost:${port}/`);
 
 const pollTiming = 15000;
 const frequencyPerTimeUnit = 60000 / pollTiming;
-
-const router: Router = new Router();
-router.middleware.push(function (requestEvent: HttpRequest): HttpRequest {
-  return requestEvent.copy()
-});
-router.add("GET", "/config", async function (requestEvent: HttpRequest) {
-  // The native HTTP server uses the web standard `Request` and `Response`
-  // objects.
-  const config = await Config.fromFile("config.json");
-  const countfile = getTransientConfig().countfile;
-  const counters = Counters.fromFile(countfile, config);
-  // The requestEvent's `.respondWith()` method is how we send the response
-  // back to the client.
-  config.applications.forEach(
-    (appConfig) => {
-      let statusItem = counters.applications.find((ci) =>
-        ci.appid === appConfig.appid
-      );
-      if (!statusItem) {
-        statusItem = ConfigurationRecord.from(appConfig);
-        counters.applications.push(statusItem);
-      }
-      statusItem.allowedMinutes = appConfig.allowedMinutes;
-    },
-  );
-  return requestEvent.respondWithJson(config);
-});
-router.add("PUT", "/config", async function (requestEvent: HttpRequest) {
-  // The native HTTP server uses the web standard `Request` and `Response`
-  // objects.
-  // const data = await requestEvent.event.request.text()
-  const json = await requestEvent.json();
-  const config = Config.fromJson(json);
-  // The requestEvent's `.respondWith()` method is how we send the response
-  // back to the client.
-  fs.writeFileSync("config.json", JSON.stringify(config, null, "  "));
-  return requestEvent.respondWithJson(config);
-});
-router.add("GET", "/counters", async function (requestEvent: HttpRequest) {
-  // The native HTTP server uses the web standard `Request` and `Response`
-  // objects.
-  let date: Date = new Date();
-  if (requestEvent.params.date) {
-    try {
-      date = new Date(requestEvent.params.date);
-    } catch (err) {
-      date = new Date();
-    }
-  }
-  if (date.toString() === "Invalid Date") {
-    date = new Date();
-  }
-
-  const {
-    dfolder,
-    dprefix,
-    hourMinute,
-    d,
-    logs,
-    countersDir,
-    logfile,
-    countfile,
-  } = getTransientConfig(date);
-  const config = await Config.fromFile("config.json");
-  const counters = Counters.fromFile(countfile, config);
-  return requestEvent.respondWithJson({
-    ...counters,
-    dfolder,
-    dprefix,
-    hourMinute,
-    d,
-    logs,
-    countersDir,
-    logfile,
-    countfile,
-  });
-});
-router.add("GET", "/counter", async function (requestEvent: HttpRequest) {
-  // The native HTTP server uses the web standard `Request` and `Response`
-  // objects.
-  const config = await Config.fromFile("config.json");
-  const countfile = getTransientConfig().countfile;
-  const counters = Counters.fromFile(countfile, config);
-  return requestEvent.respondWithJson(
-    counters.applications.find((ci) => ci.appid === requestEvent.params?.appid),
-  );
-});
-router.add("PUT", "/counters", async function (requestEvent: HttpRequest) {
-  // The native HTTP server uses the web standard `Request` and `Response`
-  // objects.
-  const json = await requestEvent.json();
-  const countfile = getTransientConfig().countfile;
-  const counters = Counters.fromJson(json);
-  fs.writeFileSync(countfile, JSON.stringify(counters, null, "  "));
-  return requestEvent.respondWithJson(counters);
-});
-router.add("POST", "/shutdown", async function (requestEvent: HttpRequest) {
-  // The native HTTP server uses the web standard `Request` and `Response`
-  // objects.
-  const text = await requestEvent.text();
-  // const notificationResult = await spawnProcess('zenity',[`--error`,`--text`,"Shutting computer down in 59 seconds. Save your work !"])
-  const notificationResult = await Zenity.error(
-    "Shutdown",
-    "Shutting computer down in 59 seconds. Save your work !",
-  );
-  const shutdownResult = await spawnProcess("shutdown", []);
-  return requestEvent.respondWithJson({ shutdownResult, notificationResult });
-});
-router.add(
-  "POST",
-  "/shutdown/abort",
-  async function (requestEvent: HttpRequest) {
-    // The native HTTP server uses the web standard `Request` and `Response`
-    // objects.
-    const text = await requestEvent.text();
-    // const notificationResult0 = await spawnProcess('zenity',[`--notification`,`--text`,"Shutting down computer aborted!"])
-    const notificationResult = await Zenity.notification(
-      "Shutdown",
-      "Shutting down computer aborted!",
-    );
-    const shutdownCancelResult = await spawnProcess("shutdown", ["-c"]);
-    return requestEvent.respondWithJson({
-      notificationResult,
-      shutdownCancelResult,
-    });
-  },
-);
-router.add("GET", "/processes", async function (requestEvent: HttpRequest) {
-  // The native HTTP server uses the web standard `Request` and `Response`
-  // objects.
-  const psListResult = await spawnProcess("ps", [`-aux`]);
-  return requestEvent.respondWithJson({
-    lines: psListResult.out.split("\n").map(Process.fromFixedLengthText),
-    error: psListResult.error,
-  });
-});
-router.add("GET", "/process", async function (requestEvent: HttpRequest) {
-  // The native HTTP server uses the web standard `Request` and `Response`
-  // objects.
-  const pid = requestEvent.params.pid;
-  const psListResult = await spawnProcess(`ps`, ["-aux"]);
-  return requestEvent.respondWithJson({
-    lines: psListResult.out.split("\n")
-      .map(Process.fromFixedLengthText)
-      .filter((process: Process, i: number) => i === 0 || process.PID === pid),
-    error: psListResult.error,
-  });
-});
-router.add("POST", "/kill", async function (requestEvent: HttpRequest) {
-  // The native HTTP server uses the web standard `Request` and `Response`
-  // objects.
-  const appid = await requestEvent.params.appid;
-  const notificationResult = await Zenity.info(
-    "Application shutdown",
-    `The application ${appid} will be shut down in 10 seconds`,
-  );
-  // await spawnProcess('zenity',[`--error`,`--text`,`The application ${appid} will be shut down in 10 seconds`])
-  await sleep(10000);
-  const pkillResult = await spawnProcess("pkill", [appid]);
-  return requestEvent.respondWithJson({
-    ...pkillResult,
-    notificationResult,
-    appid,
-  });
-});
-router.add("POST", "/message", async function (requestEvent: HttpRequest) {
-  // The native HTTP server uses the web standard `Request` and `Response`
-  // objects.
-  const message = await requestEvent.text();
-  // const notificationResult0 = await spawnProcess('zenity',[`--warning`,`--text`,message])
-  const notificationResult = await Zenity.info(
-    "important message from Mother",
-    message,
-  );
-  return requestEvent.respondWithJson({ notificationResult });
-});
-router.add("GET", "/notification", async function (requestEvent: HttpRequest) {
-  // The native HTTP server uses the web standard `Request` and `Response`
-  // objects.
-  const message = requestEvent.params.message;
-  const title = requestEvent.params.title || "From Mother";
-  if (message !== undefined) {
-    // const notificationResult = await spawnProcess('zenity',[`--info`,`--text`,message])
-    const notificationResult = await Zenity.notification(title, message);
-    return requestEvent.respondWithJson(notificationResult);
-  } else {
-    return requestEvent.respondWithJson({ message });
-  }
-});
 
 // Learn more at https://deno.land/manual/examples/module_metadata#concepts
 if (import.meta.main) {
@@ -277,42 +90,8 @@ async function serveHttp(conn: Deno.Conn) {
     router.handle(req);
   }
 }
-function getTransientConfig(refDate: Date = new Date()): {
-  dfolder: string;
-  dprefix: string;
-  hourMinute: string;
-  d: Date;
-  logs: string;
-  countersDir: string;
-  logfile: string;
-  countfile: string;
-} {
-  const d = refDate.toString() === "Invalid Date" ? new Date() : refDate;
-  const hourMinute = `${d.getHours().toString(10).padStart(2, "0")}${
-    d.getMinutes().toString(10).padStart(2, "0")
-  }`;
-  const dfolder = `${d.getFullYear()}/${
-    (d.getMonth() + 1).toString(10).padStart(2, "0")
-  }`; // md.format("YYYY/MM")
-  const dprefix = `${dfolder}/${d.getDate().toString(10).padStart(2, "0")}`; //md.format("YYYY/MM/DD")
-  const logs = `logs/${dfolder}`;
-  const countersDir = `counters/${dfolder}`;
-  const logfile = `logs/${dprefix}.log`;
-  const countfile = `counters/${dprefix}.json`;
-  return {
-    dfolder,
-    dprefix,
-    hourMinute,
-    d,
-    logs,
-    countersDir,
-    logfile,
-    countfile,
-  };
-}
-function backend_worker_synchro_iteration(
-  params: { counters: Counters; config: Config; hourMinute: string },
-): { counters: Counters; config: Config; hourMinute: string } {
+function backend_worker_synchro_iteration( params: { counters: Counters; config: Config; hourMinute: string }, ):{ counters: Counters; config: Config; hourMinute: string }
+{
   const { counters, config, hourMinute } = params;
   let addToTotal = false;
   config.applications.forEach(
@@ -415,19 +194,17 @@ function process_notifications(
     notificationsToUser.push(`"Time to shutdown, you have 1 minute left."`);
   }
   messagesToUser.map((message) => {
-    const notificationResult = Zenity.info(
-      "important message from Mother",
+    const notificationResult = NOTIFIER.info(
+      "From Parental Controls",
       message,
     );
-    // return await spawnProcess('zenity',[`--warning`,`--text`,message])
     return notificationResult;
   });
   notificationsToUser.map((message) => {
-    const notificationResult = Zenity.notification(
+    const notificationResult = NOTIFIER.notification(
       "Parental Controls",
       message,
     );
-    // return await spawnProcess('zenity',[`--warning`,`--text`,message])
     return notificationResult;
   });
   return { counters, config, hourMinute };
