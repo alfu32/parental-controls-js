@@ -1,39 +1,34 @@
 <script lang="ts">
     import { Button,TextInput,Card,Group,Text,Image,Badge,SimpleGrid } from '@svelteuidev/core';
-    import { ConfigurationRecord } from '../../../classes';
+    import type { ConfigurationRecord } from '../../../src/classes';
     export let appCounters: ConfigurationRecord[];
-    let newAppCounter: ConfigurationRecord = new ConfigurationRecord()
-    import { createEventDispatcher } from "svelte";
+    import { createEventDispatcher, onMount } from "svelte";
     import AppCard from './AppCard.svelte';
     const dispatch = createEventDispatcher();
     function change() {
         dispatch("save", appCounters);
     }
-    function create() {
-        dispatch("create", newAppCounter.copy());
-        newAppCounter=new ConfigurationRecord()
+    function deleteItem(item) {
+        dispatch("save", appCounters.filter(i => i !== item));
     }
     function terminateapp(appCounter:ConfigurationRecord) {
         dispatch("terminateapprequest", appCounter);
     }
+    onMount(()=>{
+      console.log("AppCountersEditor.onMount",{appCounters})
+    })
   </script>
   <slot name="title"><h2>Per-Application Counters</h2></slot>
 
   {#if appCounters != null}
   <SimpleGrid  cols={3}>
   {#each appCounters as appCounter}
-    <AppCard appCounter={appCounter} on:save on:terminateapprequest>
+    <AppCard disabled configurationRecord={appCounter} on:save on:terminateapprequest>
       <div>
-        <Button fullSize variant="outline" compact ripple size="sm" on:click={e => change()}>save</Button>
-        <Button  fullSize variant="outline" compact ripple size="sm" on:click={e => terminateapp(appCounter)}>terminate</Button>
+        <Button  fullSize variant="outline" compact ripple size="sm" on:click={e => terminateapp(appCounter)}>close all instances</Button>
       </div>
     </AppCard>
   {/each}
-  <AppCard appCounter={newAppCounter} on:save on:terminateapprequest>
-    <div>
-      <Button fullSize variant="outline" compact ripple size="sm" on:click={e => create()}>add</Button>
-    </div>
-  </AppCard>
 </SimpleGrid>
 {:else}
   no data

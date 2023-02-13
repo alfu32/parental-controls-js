@@ -21,10 +21,11 @@
 	import { Tabs } from '@svelteuidev/core';
 
   import {ParentalControlsApi,Result,} from './client-api';
-  import type { Config, ConfigurationRecord, Counters } from '../../classes';
+  import type { Config, ConfigurationRecord, Counters, DailyLimitConfig } from '../../src/classes';
   import CountersEditor from './lib/CountersEditor.svelte';
   import AppCountersEditor from './lib/AppCountersEditor.svelte';
     import DailyConfigEditor from './lib/DailyConfigEditor.svelte';
+    import AppConfigEditor from './lib/AppConfigEditor.svelte';
 
   let counters:Counters=null;
   let config:Config=null;
@@ -70,9 +71,17 @@
     const result = await gapi.updateCounters(counters);
     console.log({fn:saveCounters,result})
   }
-  async function saveConfig(){
-    const result = await gapi.updateConfig(config);
-    console.log({fn:saveConfig,result})
+  async function saveConfigLimits(newConfigLimits:CustomEvent<DailyLimitConfig[]>){
+    const newConfig = config.copy()
+    newConfig.dailyLimits=newConfigLimits.detail
+    const result = await gapi.updateConfig(newConfig);
+    console.log({fn:"saveConfigLimits",newConfigLimits,result})
+  }
+  async function saveAppConfigs(newAppConfigLimits:CustomEvent<ConfigurationRecord[]>){
+    const newConfig = config.copy()
+    newConfig.applications=newAppConfigLimits.detail
+    const result = await gapi.updateConfig(newConfig);
+    console.log({fn:"saveAppConfigs",config:config.copy(),result})
   }
   async function createAppConfig(newAppConfig:CustomEvent<ConfigurationRecord>){
     console.log({appConfig:newAppConfig.detail})
@@ -80,7 +89,7 @@
     newConfig.applications.push(newAppConfig.detail)
     console.log({newConfig})
     const result = await gapi.updateConfig(newConfig);
-    console.log({fn:saveConfig,result})
+    console.log({fn:gapi.updateConfig,result})
     config=result.unwrap();
   }
   async function createAppCounter(newAppCounter:CustomEvent<ConfigurationRecord>){
@@ -147,16 +156,16 @@
       <Tabs.Tab label='Weekly Configuration'>
         {#if config }
           {#each config.dailyLimits as  conf,index }
-            <DailyConfigEditor dayIndex={index} conf={conf} on:save={saveConfig}></DailyConfigEditor>
+            <DailyConfigEditor dayIndex={index} conf={conf} on:saveLimits={saveConfigLimits}></DailyConfigEditor>
           {/each}
         {:else}
           <div>loading counter data</div>
         {/if}
       </Tabs.Tab>
-      <Tabs.Tab label='Application Configuration'>
-          <AppCountersEditor appCounters={config?.applications} on:save={saveConfig} on:create={createAppConfig}>
+      <Tabs.Tab label='Applications Configuration'>
+          <AppConfigEditor appConfigs={config?.applications} on:saveAppConfigs={saveAppConfigs} on:create={createAppConfig}>
             <h2 slot="title">Per-Application Limits Configuration</h2>
-          </AppCountersEditor>
+          </AppConfigEditor>
       </Tabs.Tab>
       <Tabs.Tab label='Debug-Config' color='pink'>
           <pre>{JSON.stringify(config,null,"  ")}</pre>

@@ -1,4 +1,4 @@
-import { Config, Counters } from "../../classes";
+import { Config, Counters } from "../../src/classes";
 
 export interface Ok<T> {
   _tag: "Ok";
@@ -92,8 +92,8 @@ export class ParentalControlsApi {
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
       const raw = JSON.stringify(config);
-      console.log("API.appendurl",{url:`http://${this.host}/counters`})
-      const response = await fetch(`http://${this.host}/counters`, {
+      console.log("API.updateConfig",{url:`http://${this.host}/config`})
+      const response = await fetch(`http://${this.host}/config`, {
         method: "PUT",
         headers: myHeaders,
         body: raw,

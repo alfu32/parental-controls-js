@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Button,TextInput,Card } from '@svelteuidev/core';
-    import type { Counters,DailyLimit } from '../../../classes';
+    import type { Counters,DailyLimit } from '../../../src/classes';
     export let dailyLimit: DailyLimit;
     import { createEventDispatcher } from "svelte";
     const dispatch = createEventDispatcher();

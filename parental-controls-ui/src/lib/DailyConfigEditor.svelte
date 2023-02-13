@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Button,TextInput,Card } from '@svelteuidev/core';
-    import type { Counters,DailyLimit, DailyLimitConfig } from '../../../classes';
+    import type { Counters,DailyLimit, DailyLimitConfig } from '../../../src/classes';
     export let dayIndex: number;
     export let conf: DailyLimitConfig;
     const days="Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday"
@@ -11,7 +11,7 @@
     import { createEventDispatcher } from "svelte";
     const dispatch = createEventDispatcher();
     function change({ detail }) {
-        dispatch("save", conf);
+        dispatch("saveLimits", conf);
     }
   </script>
   <h2>Limits for {days.split(",")[dayIndex]}s</h2>

@@ -1,35 +1,47 @@
 <script lang="ts">
     import { Button,TextInput,Card,Group,Text,Image,Badge,SimpleGrid } from '@svelteuidev/core';
-    import { ConfigurationRecord } from '../../../classes';
-    export let appCounters: ConfigurationRecord[];
-    let newAppCounterConfig: ConfigurationRecord = new ConfigurationRecord()
+    import { ConfigurationRecord } from '../../../src/classes';
+    export let appConfigs: ConfigurationRecord[];
+    export let copies: ConfigurationRecord[] = appConfigs?.map(c=>c.copy());
+    let newAppConfig: ConfigurationRecord = new ConfigurationRecord()
     import { createEventDispatcher } from "svelte";
     import AppCard from './AppCard.svelte';
     const dispatch = createEventDispatcher();
     function change() {
-        dispatch("save", appCounters);
+        dispatch("saveAppConfigs", appConfigs);
+    }
+    function deleteItem(item) {
+        dispatch("saveAppConfigs", appConfigs.filter(i => i !== item));
     }
     function create() {
-        dispatch("create", newAppCounterConfig.copy());
-        newAppCounterConfig = new ConfigurationRecord()
+        dispatch("create", newAppConfig.copy());
+        newAppConfig = new ConfigurationRecord()
     }
-    function terminateapp(appCounter:ConfigurationRecord) {
-        dispatch("terminateapprequest", appCounter);
+    function resetItemAtIndex(index:number) {
+      appConfigs[index].allowedMinutes=copies[index].allowedMinutes
+      appConfigs[index].appid=copies[index].appid
+      appConfigs[index].processregex=copies[index].processregex
+      appConfigs[index].usedMinutes=copies[index].usedMinutes
     }
   </script>
-  <h2>Per-Application Configuration</h2>
+  <slot name="title"><h2>Per-Application Configuration</h2></slot>
   <SimpleGrid  cols={3}>
-  {#each appCounters as appCounter}
-    <AppCard appCounter={appCounter} on:save on:terminateapprequest>
+
+  {#if appConfigs != null}
+  {#each appConfigs as appConfig,index }
+    <AppCard configurationRecord={appConfig} reference={appConfig.copy()} on:save on:terminateapprequest>
       <div>
-        <Button fullSize variant="outline" compact ripple size="sm" on:click={e => change()}>save</Button>
-        <Button  fullSize variant="outline" compact ripple size="sm" on:click={e => terminateapp(appCounter)}>terminate</Button>
+        <Button fullSize variant="filled" compact ripple size="sm" on:click={e => change()}>save configuration</Button>
+        <Button fullSize variant="outline" compact ripple size="sm" on:click={e => resetItemAtIndex(index)}>reset</Button>
+        <Button fullSize variant="outline" color="red" compact ripple size="sm" on:click={e => deleteItem(appConfig)}>delete configuration</Button>
       </div>
     </AppCard>
   {/each}
-  <AppCard appCounter={newAppCounterConfig} on:save on:terminateapprequest>
+  {/if}
+  <AppCard configurationRecord={newAppConfig} on:save on:terminateapprequest>
     <div>
       <Button fullSize variant="outline" compact ripple size="sm" on:click={e => create()}>create</Button>
+      <Button fullSize variant="outline" compact ripple size="sm" on:click={e => newAppConfig = new ConfigurationRecord()}>reset</Button>
     </div>
   </AppCard>
 </SimpleGrid>
