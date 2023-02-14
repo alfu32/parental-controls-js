@@ -98,7 +98,7 @@ export class Router{
                     const result = await this.routeHandlers[methodPath](req);
                     req.event.respondWith(result)
                 }catch(err){
-                    console.error(err)
+                    console.error("ERROR ROUTE",methodPath,err?.message,err?.stack?.split("\n"))
                     error = err
                 }
                 nomatch=false
@@ -114,7 +114,7 @@ export class Router{
                 request:req,
                 router:this,
             }
-            console.log("ERRHANDLER",error,req,this);
+            console.log("ERRHANDLER",{message:error.message,stacktrace:error?.stack?.split("\n")},req,this);
             const result = req.respondWithJson(data,500)
             req.event.respondWith(result)
             error=null;

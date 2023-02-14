@@ -62,7 +62,7 @@
     counters=null;
     config=null;
   }
-    to=setTimeout(fetchCounters,10000)
+    to=setTimeout(fetchCounters,60000)
   }
   onMount(async ()=>{
     await fetchCounters()

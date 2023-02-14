@@ -20,7 +20,8 @@ export function spawnProcess(
     });
     cmd.on('close', (code) => {
       if(code !== 0) {
-        console.log(`ps process exited with code ${code}`);
+        console.log(`${command} exited with code ${code}`);
+        console.log(`COMMAND was ${command} ${args.join(" ")}`);
         reject({ out, error });
       } else {
         resolve({ out, error });

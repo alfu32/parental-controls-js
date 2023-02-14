@@ -22,6 +22,7 @@ arch=$2
 ## deno bundle src/main.ts > build/parental-controls.app.deno.js
 ## cp scripts/parental-controls.app.deno.sh build/
 cp config.json build/
+cp scripts/send-notifications.sh build/
 ## cp -r node_modules build/
 ########## cp scripts/parental-controls.service.run build/
 ########## cp scripts/parentalcontrols.service build/

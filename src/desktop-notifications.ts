@@ -1,4 +1,6 @@
+import { existsSync, writeFileSync } from 'node:fs';
 import { listeners } from 'node:process';
+import { mkdirp } from './classes.ts';
 import {spawnProcess, SpawnProcessResult} from './spawnProcess.ts';
 export declare type NotificationCategory = "error"|"warning"|"notification"|"info";
 
@@ -82,12 +84,20 @@ export async function sendNotifySendNotification(type:NotificationCategory,title
         "notification":"computer-fail",
     }
     const body = splitBodyText(detail,10)
-    return await(new NotifySendData()
+    let spr;
+    try{
+        spr = await(new NotifySendData()
         .category("presence")
         .icon(icons_mapping[type])
         .summary(title)
         .body(body)
-        .send())
+        .send());
+        return spr;
+    }catch(err){
+        console.error("ERROR.sendNotifySendNotification",err)
+        return {out:"",error:err};
+    }
+    
 }
 class NotifySendData{
     _urgency:NotifySendUrgency="low";
@@ -120,7 +130,60 @@ class NotifySendData{
         this._body=bodyValue;
         return this;
     }
-    async send(){
+    toString(){
+        return `{
+            _urgency:${this._urgency},
+            _expireTimeMillis:${this._expireTimeMillis},
+            _icon:${this._icon},
+            _category:${this._category},
+            _summary:${this._summary},
+            _body:${this._body},
+        }`
+    }
+    command(){
+        return `notify-send --urgency ${this._urgency} --expire-time ${this._expireTimeMillis} --icon ${this._icon} --category ${this._category} "${this._summary}" "${this._body.replace(/\n/gi,"\\n")}"`
+    }
+    async senddeno():Promise<SpawnProcessResult>{
+        console.log("NOTIFYSEND.spawnprocess",this.toString())
+        if( !existsSync("notifications") ){
+            mkdirp("notifications/todo")
+            // mkdirp("notifications/done")
+        }
+        const rname=`${Date.now()}.${Math.random()}`
+        writeFileSync(`notifications/todo/${rname}`,this.command())
+        let out="";
+        // deno-lint-ignore no-explicit-any
+        let error:any;
+        try{
+            const proc = await Deno.run({cmd:[
+                'notify-send',
+                "--urgency",this._urgency,
+                "--expire-time",this._expireTimeMillis.toString(10),
+                "--icon",this._icon,
+                "--category",this._category,
+                this._summary,
+                this._body,
+            ]})
+            const errbuf=new Uint8Array(2048);
+            const outbuf=new Uint8Array(2048);
+            await proc.stdout?.read(outbuf);
+            await proc.stderr?.read(errbuf);
+            out=new TextDecoder().decode(outbuf);
+            error=new TextDecoder().decode(errbuf);
+        }catch(err){
+            error=err
+        }
+        return {out,error}
+    }
+    async send():Promise<SpawnProcessResult>{
+        console.log("NOTIFYSEND.spawnprocess",this.toString())
+        if( !existsSync("notifications") ){
+            mkdirp("notifications/todo")
+            // mkdirp("notifications/done")
+        }
+        const rname=`${Date.now()}.${Math.random()}`
+        writeFileSync(`notifications/todo/${rname}`,this.command())
+        
         return await spawnProcess('notify-send',[
             "--urgency",this._urgency,
             "--expire-time",this._expireTimeMillis.toString(10),
@@ -128,7 +191,9 @@ class NotifySendData{
             "--category",this._category,
             this._summary,
             this._body,
-        ])
+        ],{
+
+        })
     }
 }
 
