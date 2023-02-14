@@ -88,3 +88,12 @@ All done!
 ## Conclusion
 
 Congratulation, You have successfully configured a shell script to run at system startup. This can be helpful to run your custom scripts that are required to start at system boot. This tutorial helped you to configure a shell script as systemd service.
+
+### notifications
+
+after a lot of fiddling
+
+
+i'm using https://github.com/alfu32/systembus-notify.git
+
+wich works out of thebox from a systemd service
