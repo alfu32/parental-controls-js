@@ -96,4 +96,4 @@ after a lot of fiddling
 
 i'm using https://github.com/alfu32/systembus-notify.git
 
-wich works out of thebox from a systemd service
+wich works out of the box from a systemd service
