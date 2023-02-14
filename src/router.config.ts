@@ -151,13 +151,15 @@ router.add("GET", "/process", async function(requestEvent: HttpRequest) {
     error: psListResult.error,
   });
 });
-router.add("POST", "/kill", async function(requestEvent: HttpRequest) {
+router.add("POST", "/pkillall", async function(requestEvent: HttpRequest) {
   // The native HTTP server uses the web standard `Request` and `Response`
   // objects.
   const appid = await requestEvent.params.appid;
+  const json = await requestEvent.json();
+  const cr = ConfigurationRecord.from(json)
   const notificationResult = await NOTIFIER.info(
     "Application shutdown",
-    `The application ${appid} will be shut down in 10 seconds`
+    `The application ${cr.appid} will be shut down in 10 seconds`
   );
   await sleep(10000);
   const pkillResult = await spawnProcess("pkill", [appid]);

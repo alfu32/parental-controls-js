@@ -1,4 +1,4 @@
-import { Config, Counters } from "../../src/classes";
+import { Config, ConfigurationRecord, Counters } from "../../src/classes.ts";
 
 export interface Ok<T> {
   _tag: "Ok";
@@ -8,7 +8,7 @@ export interface Ok<T> {
 export interface Err<E> {
   _tag: "Err";
   err: E;
-  unwrap: () => T;
+  unwrap: <T>() => T;
 }
 export type Result<T, E> = Ok<T> | Err<E>;
 export const Ok = <T, E>(ok: T): Result<T, E> => ({
@@ -21,7 +21,7 @@ export const Ok = <T, E>(ok: T): Result<T, E> => ({
 export const Err = <T, E>(err: E): Result<T, E> => ({
   _tag: "Err",
   err,
-  unwrap(): T {
+  unwrap<T>(): T {
     throw this.err;
     return null as T;
   },
@@ -138,6 +138,20 @@ export class ParentalControlsApi {
         method: "POST",
         redirect: "follow",
         body: message,
+      });
+      const json = await response.json();
+      return Ok<ShutdownResult, Error>(json as ShutdownResult);
+    } catch (err) {
+      return Err<ShutdownResult, Error>(err);
+    }
+  }
+  async killAllInstancesOf(conf: ConfigurationRecord): Promise<Result<any, Error>> {
+    try {
+      console.log("API.sendMessage",{url:`http://${this.host}/pkillall`})
+      const response = await fetch(`http://${this.host}/pkillall`, {
+        method: "POST",
+        redirect: "follow",
+        body: JSON.stringify(conf,null," "),
       });
       const json = await response.json();
       return Ok<ShutdownResult, Error>(json as ShutdownResult);

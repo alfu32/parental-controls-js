@@ -114,6 +114,10 @@
     const response = await gapi.sendMessage(messageText)
     console.log({response})
   }
+  async function pkillall(e:CustomEvent<ConfigurationRecord>){
+    console.log("killall",e.detail)
+    gapi.killAllInstancesOf(e.detail)
+  }
 </script>
 
 <SvelteUIProvider>
@@ -146,7 +150,7 @@
           <CountersEditor dailyLimit={counters?.dayLimit} on:save={saveCounters}></CountersEditor>
       </Tabs.Tab>
       <Tabs.Tab label='Current Application Limits'>
-          <AppCountersEditor appCounters={counters?.applications} on:save={saveCounters} on:create={createAppCounter}>
+          <AppCountersEditor appCounters={counters?.applications} on:save={saveCounters} on:create={createAppCounter} on:terminateapprequest={pkillall}>
             <h2 slot="title">Current Application Limits and Counters</h2>
           </AppCountersEditor>
       </Tabs.Tab>
