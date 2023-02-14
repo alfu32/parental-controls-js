@@ -37,10 +37,13 @@ echo "export XDG_RUNTIME_DIR=/run/user/$ID"
 cat << SERVICEDEF
 ####################### done copying environment of $TARGET_USER
 
-export DISPLAY=:0
-export XAUTHORITY=/home/$TARGET_USER/.Xauthority
+#### export XDG_RUNTIME_DIR=/run/user/\$(id -u)
+#### export DISPLAY=:0
+#### export XAUTHORITY=/home/$TARGET_USER/.Xauthority
+#### export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/\$(id -u)/bus
 #### eval \"export \\$\(egrep -z DBUS_SESSION_BUS_ADDRESS \\"/proc/\\$\(pgrep -u $TARGET_USER gnome-session)/environ\)\\"\)\"
-#### export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+#### export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/\$(id -u)/bus
+export DBUS_SESSION_BUS_ADDRESS="${DBUS_SESSION_BUS_ADDRESS:-unix:path=/run/user/${UID}/bus}"
 cd \$SUPER_HOME # /home/$TARGET_USER/parental-controls/
 
 DATE=\`date +'%Y/%m/%d'\`
@@ -74,9 +77,10 @@ cd $CDIR
 NOTIFIER
 chmod +x build/send-notifications.sh
 
-
+# ~/.config/systemd/user/
 sudo systemctl disable parentalcontrols
 sudo systemctl stop parentalcontrols
+sudo mkdir -p ~/.config/systemd/user
 sudo cp build/parentalcontrols.service /lib/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl start parentalcontrols
