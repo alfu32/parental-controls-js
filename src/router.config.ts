@@ -154,7 +154,6 @@ router.add("GET", "/process", async function(requestEvent: HttpRequest) {
 router.add("POST", "/pkillall", async function(requestEvent: HttpRequest) {
   // The native HTTP server uses the web standard `Request` and `Response`
   // objects.
-  const appid = await requestEvent.params.appid;
   const json = await requestEvent.json();
   const cr = ConfigurationRecord.from(json)
   const notificationResult = await NOTIFIER.info(
@@ -162,11 +161,11 @@ router.add("POST", "/pkillall", async function(requestEvent: HttpRequest) {
     `The application ${cr.appid} will be shut down in 10 seconds`
   );
   await sleep(10000);
-  const pkillResult = await spawnProcess("pkill", [appid]);
+  const pkillResult = await spawnProcess("pkill", ['-SIGTERM',cr.processregex]);
   return requestEvent.respondWithJson({
-    ...pkillResult,
+    pkillResult,
+    configurationRecord:cr,
     notificationResult,
-    appid,
   });
 });
 router.add("POST", "/message", async function(requestEvent: HttpRequest) {

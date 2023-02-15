@@ -6,6 +6,7 @@ import fs from "node:fs";
 import process from "node:process";
 import {
   Config,
+  ConfigurationRecord,
   Counters,
   mkdirp,
   sleep,
@@ -72,6 +73,7 @@ async function* mainLoop() {
       hourMinute,
     });
     const i2Result = rateLimited(process_notifications,50000)(iResult);
+    processEvents()
 
     fs.writeFileSync(countfile, JSON.stringify(counters, null, "  "));
     fs.writeFileSync("config.json", JSON.stringify(config, null, "  "));
@@ -80,6 +82,7 @@ async function* mainLoop() {
     yield iResult;
   }
 }
+function processEvents(){}
 async function serveHttp(conn: Deno.Conn) {
   // This "upgrades" a network connection into an HTTP connection.
   const httpConn: Deno.HttpConn = Deno.serveHttp(conn);
