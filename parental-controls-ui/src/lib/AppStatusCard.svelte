@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Button,TextInput,Card,Group,Text,Image,Badge,SimpleGrid } from '@svelteuidev/core';
+    import { Button,TextInput,Card,Group,Text,Image,Badge } from '@svelteuidev/core';
     import type { ConfigurationRecord } from '../../../src/classes';
     export let configurationRecord: ConfigurationRecord;
     export let reference: ConfigurationRecord = configurationRecord.copy();

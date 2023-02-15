@@ -1,1 +1,0 @@
-<span>TODO HeadContent</span>

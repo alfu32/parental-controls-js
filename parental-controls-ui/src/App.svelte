@@ -2,10 +2,7 @@
 	import { onMount } from 'svelte';
 
 
-	import { SvelteUIProvider, fns, AppShell, Navbar, Header, Title, Divider,Burger, Stack, Button, TextInput, Input,SimpleGrid } from '@svelteuidev/core';
-
-	import HeadContent from './lib/HeadContent.svelte';
-	import NavContent from './lib/NavContent.svelte';
+	import { Grid,SvelteUIProvider, fns, AppShell, Navbar, Header, Title, Divider,Burger, Stack, Button, TextInput, Input,SimpleGrid } from '@svelteuidev/core';
 
 
 	let isDark = false;
@@ -23,9 +20,9 @@
   import {ParentalControlsApi,Result,} from './client-api';
   import type { Config, ConfigurationRecord, Counters, DailyLimitConfig } from '../../src/classes';
   import CountersEditor from './lib/CountersEditor.svelte';
-  import AppCountersEditor from './lib/AppCountersEditor.svelte';
-    import DailyConfigEditor from './lib/DailyConfigEditor.svelte';
+  import AppCountersList from './lib/AppCounters.svelte';
     import AppConfigEditor from './lib/AppConfigEditor.svelte';
+    import WeeklyConfigEditor from './lib/WeeklyConfigEditor.svelte';
     let hosts=[
       {address:"localhost",label:"local"},
       {address:"hefaistos.local",label:"mihai"},
@@ -39,9 +36,9 @@
   let gapi=new ParentalControlsApi(`${host.address}:8080`)
   let error=null;
 
-  async function selectHost(e){
-    console.log("selecting host",e.target.value)
-    host = hosts[e.target.value]
+  async function selectHost(index){
+    console.log("selecting host",hosts[index])
+    host = hosts[index]
     gapi=new ParentalControlsApi(`${host.address}:8080`)
     await fetchConfig()
     await fetchCounters()
@@ -141,65 +138,53 @@
 <AppShell>
 
 	<slot>
-    <h1>Managing  {host.label}</h1>
-    <Tabs color='teal'>
-      <Tabs.Tab label='Settings' color='pink'>
-        <h3>Currently Selected computer {host.label}</h3>
+    <Grid>
+      <Grid.Col span={2}>
+        <h4>Managing  {host.label}</h4>
         <hr/>
         <strong>Select a different computer</strong>
-        <Input root="select" on:change={selectHost}>
-          {#each hosts as value,index}
-          <option value={index}>{value.label}</option>
-          {/each}
-          <option value="hefaistos.local">mihai</option>
-          <option value="artemis.local">gabriela</option>
-          <option value="192.168.1.27">mihai-IP</option>
-          <option value="192.168.1.31">gabriela-31</option>
-        </Input>
-      </Tabs.Tab>
-      <Tabs.Tab label='Current Global Limits'>
-          <CountersEditor dailyLimit={counters?.dayLimit} on:save={saveCounters}></CountersEditor>
-      </Tabs.Tab>
-      <Tabs.Tab label='Current Application Limits'>
-          <AppCountersEditor appCounters={counters?.applications} on:save={saveCounters} on:create={createAppCounter} on:terminateapprequest={pkillall}>
-            <h2 slot="title">Current Application Limits and Counters</h2>
-          </AppCountersEditor>
-      </Tabs.Tab>
-      <Tabs.Tab label='Weekly Configuration'>
-        {#if config }
-          {#each config.dailyLimits as  conf,index }
-            <DailyConfigEditor dayIndex={index} conf={conf} on:saveLimits={saveConfigLimits}></DailyConfigEditor>
-          {/each}
-        {:else}
-          <div>loading counter data</div>
-        {/if}
-      </Tabs.Tab>
-      <Tabs.Tab label='Applications Configuration'>
-          <AppConfigEditor appConfigs={config?.applications} on:saveAppConfigs={saveAppConfigs} on:create={createAppConfig}>
-            <h2 slot="title">Per-Application Limits Configuration</h2>
-          </AppConfigEditor>
-      </Tabs.Tab>
-      <Tabs.Tab label='Task Manager' color='pink'>
-        <SimpleGrid  cols={5}>
-          <Button on:click={e => sendShutdown()}>shutdown computer</Button>
-          <Button variant="outline" on:click={e => sendAbortShutdown()}>abort shutdown</Button>
-        </SimpleGrid>
-          <pre>{JSON.stringify(config,null,"  ")}</pre>
-      </Tabs.Tab>
-      <Tabs.Tab label='Notifications' color='pink'>
-        <SimpleGrid  cols={3}>
-          <strong>send a notification to {host}</strong>
-          <TextInput bind:value={messageText} multiline></TextInput>
-          <Button on:click={message}>send message</Button>
-        </SimpleGrid>
-      </Tabs.Tab>
-      <Tabs.Tab label='Config' color='pink'>
-          <pre>{JSON.stringify(config,null,"  ")}</pre>
-      </Tabs.Tab>
-      <Tabs.Tab label='Report' color='pink'>
-          <pre>{JSON.stringify(counters,null,"  ")}</pre>
-      </Tabs.Tab>
-    </Tabs>
+        {#each hosts as value,index}
+        <div class={host===value?"host host-selected":"host"} on:keypress on:click={e => selectHost(index)}>{value.label}</div>
+        {/each}
+        <hr/>
+        <strong>send a notification to {host.label}</strong>
+        <TextInput bind:value={messageText} multiline></TextInput>
+        <Button on:click={message}>send message</Button>
+      </Grid.Col>
+      <Grid.Col span={8}>
+        <Tabs color='teal'>
+          <Tabs.Tab label='Settings' color='pink'>
+          </Tabs.Tab>
+          <Tabs.Tab label='{host.label} Status'>
+              <CountersEditor dailyLimit={counters?.dayLimit} on:save={saveCounters}></CountersEditor>
+              <AppCountersList appCounters={counters?.applications} on:save={saveCounters} on:create={createAppCounter} on:terminateapprequest={pkillall}>
+                <h2 slot="title">Current Application Limits and Counters</h2>
+              </AppCountersList>
+          </Tabs.Tab>
+          <Tabs.Tab label='{host.label} Configuration'>
+              <WeeklyConfigEditor config={config} on:saveLimits={saveConfigLimits}></WeeklyConfigEditor>
+              <AppConfigEditor appConfigs={config?.applications} on:saveAppConfigs={saveAppConfigs} on:create={createAppConfig}>
+                <h2 slot="title">Per-Application Limits Configuration</h2>
+              </AppConfigEditor>
+          </Tabs.Tab>
+          <Tabs.Tab label='Task Manager' color='pink'>
+            <SimpleGrid  cols={5}>
+              <Button on:click={e => sendShutdown()}>shutdown computer</Button>
+              <Button variant="outline" on:click={e => sendAbortShutdown()}>abort shutdown</Button>
+            </SimpleGrid>
+              <pre>{JSON.stringify(config,null,"  ")}</pre>
+          </Tabs.Tab>
+          <Tabs.Tab label='Notifications' color='pink'>
+          </Tabs.Tab>
+          <!--Tabs.Tab label='Config' color='pink'>
+              <pre>{JSON.stringify(config,null,"  ")}</pre>
+          </Tabs.Tab>
+          <Tabs.Tab label='Report' color='pink'>
+              <pre>{JSON.stringify(counters,null,"  ")}</pre>
+          </Tabs.Tab-->
+        </Tabs>
+      </Grid.Col>
+  </Grid>
   </slot>
   {#if error}
     <p>error connecting to {host.label}</p>
@@ -209,7 +194,14 @@
 </SvelteUIProvider>
 
 <style>
-  nav.app-header{
+  .host{
     max-width: 300px;
+    border-left: 5px solid transparent;
+    cursor:pointer;
+    margin:2px;
+    padding:4px 4px 4px 12px;
+  }
+  .host.host-selected{
+    border-left: 5px solid teal;
   }
 </style>

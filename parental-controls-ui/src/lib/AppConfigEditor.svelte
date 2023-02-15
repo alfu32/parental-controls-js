@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Button,TextInput,Card,Group,Text,Image,Badge,SimpleGrid } from '@svelteuidev/core';
+    import { Button,TextInput,Card,Group,Text,Image,Badge } from '@svelteuidev/core';
     import { ConfigurationRecord } from '../../../src/classes';
     export let appConfigs: ConfigurationRecord[];
     export let copies: ConfigurationRecord[] = appConfigs?.map(c=>c.copy());
@@ -25,26 +25,37 @@
     }
   </script>
   <slot name="title"><h2>Per-Application Configuration</h2></slot>
-  <SimpleGrid  cols={3}>
-
+  <table>
+  <tr>
+    <th></th>
+    <th>Name</th>
+    <th>Search Pattern</th>
+    <!--th>Used Minutes</th-->
+    <th>Allowed Minutes</th>
+  </tr>
   {#if appConfigs != null}
   {#each appConfigs as appConfig,index }
-    <AppConfigCard configurationRecord={appConfig} reference={appConfig.copy()} on:save on:terminateapprequest>
-      <div>
-        <Button fullSize variant="filled" compact ripple size="sm" on:click={e => change()}>save configuration</Button>
-        <Button fullSize variant="outline" compact ripple size="sm" on:click={e => resetItemAtIndex(index)}>reset</Button>
-        <Button fullSize variant="outline" color="red" compact ripple size="sm" on:click={e => deleteItem(appConfig)}>delete configuration</Button>
-      </div>
-    </AppConfigCard>
+    <tr>
+      <td>{index + 1}</td>
+      <td><TextInput bind:value={appConfig.appid}/></td>
+      <td><TextInput bind:value={appConfig.processregex}/></td>
+      <!--td><TextInput bind:value={appConfig.usedMinutes}/></td-->
+      <td><TextInput bind:value={appConfig.allowedMinutes}/></td>
+      <td><Button fullSize variant="outline" color="red" compact ripple size="sm" on:click={e => deleteItem(appConfig)}>delete</Button></td>
+      <td><Button fullSize variant="outline" compact ripple size="sm" on:click={e => resetItemAtIndex(index)}>reset</Button></td>
+    </tr>
   {/each}
+  <tr>
+    <td>*</td>
+    <td><TextInput bind:value={newAppConfig.appid}/></td>
+    <td><TextInput bind:value={newAppConfig.processregex}/></td>
+    <!--td>{newAppConfig.usedMinutes}</td-->
+    <td><TextInput bind:value={newAppConfig.allowedMinutes}/></td>
+    <td><Button fullSize compact ripple size="sm" on:click={e => create()}>create</Button></td>
+    <td><Button fullSize variant="outline" compact ripple size="sm" on:click={e => newAppConfig = new ConfigurationRecord()}>reset</Button></td>
+  </tr>
   {/if}
-  <AppConfigCard configurationRecord={newAppConfig} on:save on:terminateapprequest>
-    <div>
-      <Button fullSize compact ripple size="sm" on:click={e => create()}>create</Button>
-      <Button fullSize variant="outline" compact ripple size="sm" on:click={e => newAppConfig = new ConfigurationRecord()}>reset</Button>
-    </div>
-  </AppConfigCard>
-</SimpleGrid>
+  </table>
   <style>
     .appcard{
       border:1px solid #333;

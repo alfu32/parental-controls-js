@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Button,TextInput,Card, SimpleGrid } from '@svelteuidev/core';
+    import { Button,TextInput,Card } from '@svelteuidev/core';
     import type { Counters,DailyLimit } from '../../../src/classes';
     export let dailyLimit: DailyLimit;
     import { createEventDispatcher } from "svelte";
@@ -9,28 +9,41 @@
     }
   </script>
 
-<SimpleGrid  cols={2}>
-  <h2>Today's Limits</h2>
   {#if dailyLimit != null}
-    <div id="date">
-        {"Su,Mo,Tu,We,Th,Fr,Sa".split(",")[dailyLimit.dayNumber]} <span>{dailyLimit.date.toISOString().replace('T',' ').substring(0,19)}</span>
-    </div>
-    <div id="startHourMinute">
-        <TextInput placeholder="time in millitary format ( 0930 instead of 09:30 )" label="lower time limit" bind:value={dailyLimit.startHourMinute} />
-    </div>
-    <div id="endHourMinute">
-        <TextInput placeholder="time in millitary format ( 0930 instead of 09:30 )" label="upper time limit" bind:value={dailyLimit.endHourMinute} />
-    </div>
-    <div id="totalAllowed">
-        <TextInput placeholder="maximum number of minutes allowed by the configuration" label="total minutes allowed" bind:value={dailyLimit.totalAllowed} />
-    </div>
-    <div id="total">
-        <TextInput placeholder="the number of minutes recorded today" label="total recorded today" bind:value={dailyLimit.total} />
-    </div>
-    <Button on:click={e => change()}>save</Button>
-    <Button variant="outline" on:click={e => change()}>reset</Button>
+    <h1>Today's Limits</h1>
+    <span>{"Su,Mo,Tu,We,Th,Fr,Sa".split(",")[dailyLimit.dayNumber]} {dailyLimit.date.toISOString().replace('T',' ').substring(0,19)}</span>
+    <hr/>
+    <tr>
+        <th>Time Start</th>
+        <th>Time End</th>
+        <th>Max Allowed</th>
+        <th>Used Tdoay</th>
+        <th></th>
+        <th></th>
+    </tr>
+    <tr>
+        <td>time in millitary format<br/>( 0930 instead of 09:30 )</td>
+        <td>time in millitary format<br/>( 0930 instead of 09:30 )</td>
+        <td>maximum number of minutes<br/>allowed by the configuration</td>
+        <td>total minutes running<br/>today</td>
+        <td><Button compact ripple size="sm" on:click={e => change()}>save</Button></td>
+        <td><Button compact ripple size="sm" variant="outline" on:click={e => change()}>reset</Button></td>
+    </tr>
+    <tr>
+        <td>
+            <TextInput bind:value={dailyLimit.startHourMinute} />
+        </td>
+        <td>
+            <TextInput bind:value={dailyLimit.endHourMinute} />
+        </td>
+        <td>
+            <TextInput bind:value={dailyLimit.totalAllowed} />
+        </td>
+        <td>
+            {dailyLimit.total}
+        </td>
+    </tr>
   {:else}
     no data
   {/if}
-</SimpleGrid>
   
