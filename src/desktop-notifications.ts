@@ -177,33 +177,6 @@ class NotifySendData{
     }
     async send():Promise<SpawnProcessResult>{
         console.log("NOTIFYSEND.spawnprocess",this.toString())
-        /// if( !existsSync("notifications") ){
-        ///     mkdirp("notifications/todo")
-        ///     // mkdirp("notifications/done")
-        /// }
-        /// const rname=`${Date.now()}.${Math.random()}`
-        /// writeFileSync(`notifications/todo/${rname}`,this.command())
-        
-        ////////////////////////////////// return await spawnProcess('notify-send',[
-        //////////////////////////////////     // 'sudo',
-        //////////////////////////////////     // "-u", "alfu64",
-        //////////////////////////////////     // 'notify-send',
-        //////////////////////////////////     "--urgency",this._urgency,
-        //////////////////////////////////     "--expire-time",this._expireTimeMillis.toString(10),
-        //////////////////////////////////     "--icon",this._icon,
-        //////////////////////////////////     "--category",this._category,
-        //////////////////////////////////     this._summary,
-        //////////////////////////////////     this._body,
-        ////////////////////////////////// ],{
-        //////////////////////////////////     // DBUS_SESSION_BUS_ADDRESS:"unix:path=/run/user/1000/bus",
-        //////////////////////////////////     // DISPLAY:':0',
-        //////////////////////////////////     // DBUS_SESSION_BUS_ADDRESS:'unix:abstract=/tmp/dbus-4x4P4hCnj1,guid=3fb553d163c944db41042ddd63eae625',
-        //////////////////////////////////     // DBUS_SESSION_BUS_PID:'71234',
-        //////////////////////////////////     // DBUS_SESSION_BUS_WINDOWID:'81788929',
-        //////////////////////////////////     XDG_RUNTIME_DIR:"/run/user/1000",
-        //////////////////////////////////     XAUTHORITY:"/home/alfu64/.Xauthority",
-        ////////////////////////////////// })
-        ////////////////////////////////// 
         return await spawnProcess('dbus-send',[
             '--system',
             '/',
@@ -211,13 +184,6 @@ class NotifySendData{
             'string:'+this._summary,
             'string:'+this._body,
         ],{
-            // DBUS_SESSION_BUS_ADDRESS:"unix:path=/run/user/1000/bus",
-            // DISPLAY:':0',
-            // DBUS_SESSION_BUS_ADDRESS:'unix:abstract=/tmp/dbus-4x4P4hCnj1,guid=3fb553d163c944db41042ddd63eae625',
-            // DBUS_SESSION_BUS_PID:'71234',
-            // DBUS_SESSION_BUS_WINDOWID:'81788929',
-            // XDG_RUNTIME_DIR:"/run/user/1000",
-            // XAUTHORITY:"/home/alfu64/.Xauthority",
         })
     }
 }

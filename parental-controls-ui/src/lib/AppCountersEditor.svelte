@@ -3,7 +3,7 @@
     import type { ConfigurationRecord } from '../../../src/classes';
     export let appCounters: ConfigurationRecord[];
     import { createEventDispatcher, onMount } from "svelte";
-    import AppCard from './AppCard.svelte';
+    import AppStatusCard from './AppStatusCard.svelte';
     const dispatch = createEventDispatcher();
     function change() {
         dispatch("save", appCounters);
@@ -21,13 +21,13 @@
   <slot name="title"><h2>Per-Application Counters</h2></slot>
 
   {#if appCounters != null}
-  <SimpleGrid  cols={3}>
+  <SimpleGrid  cols={5}>
   {#each appCounters as appCounter}
-    <AppCard disabled configurationRecord={appCounter} on:save on:terminateapprequest>
+    <AppStatusCard configurationRecord={appCounter} on:save on:terminateapprequest>
       <div>
         <Button  fullSize variant="outline" compact ripple size="sm" on:click={e => terminateapp(appCounter)}>close all instances</Button>
       </div>
-    </AppCard>
+    </AppStatusCard>
   {/each}
 </SimpleGrid>
 {:else}

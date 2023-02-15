@@ -5,7 +5,7 @@
     export let copies: ConfigurationRecord[] = appConfigs?.map(c=>c.copy());
     let newAppConfig: ConfigurationRecord = new ConfigurationRecord()
     import { createEventDispatcher } from "svelte";
-    import AppCard from './AppCard.svelte';
+    import AppConfigCard from './AppConfigCard.svelte';
     const dispatch = createEventDispatcher();
     function change() {
         dispatch("saveAppConfigs", appConfigs);
@@ -29,21 +29,21 @@
 
   {#if appConfigs != null}
   {#each appConfigs as appConfig,index }
-    <AppCard configurationRecord={appConfig} reference={appConfig.copy()} on:save on:terminateapprequest>
+    <AppConfigCard configurationRecord={appConfig} reference={appConfig.copy()} on:save on:terminateapprequest>
       <div>
         <Button fullSize variant="filled" compact ripple size="sm" on:click={e => change()}>save configuration</Button>
         <Button fullSize variant="outline" compact ripple size="sm" on:click={e => resetItemAtIndex(index)}>reset</Button>
         <Button fullSize variant="outline" color="red" compact ripple size="sm" on:click={e => deleteItem(appConfig)}>delete configuration</Button>
       </div>
-    </AppCard>
+    </AppConfigCard>
   {/each}
   {/if}
-  <AppCard configurationRecord={newAppConfig} on:save on:terminateapprequest>
+  <AppConfigCard configurationRecord={newAppConfig} on:save on:terminateapprequest>
     <div>
-      <Button fullSize variant="outline" compact ripple size="sm" on:click={e => create()}>create</Button>
+      <Button fullSize compact ripple size="sm" on:click={e => create()}>create</Button>
       <Button fullSize variant="outline" compact ripple size="sm" on:click={e => newAppConfig = new ConfigurationRecord()}>reset</Button>
     </div>
-  </AppCard>
+  </AppConfigCard>
 </SimpleGrid>
   <style>
     .appcard{

@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 
 
-	import { SvelteUIProvider, fns, AppShell, Navbar, Header, Title, Divider,Burger, Stack, Button, TextInput, Input } from '@svelteuidev/core';
+	import { SvelteUIProvider, fns, AppShell, Navbar, Header, Title, Divider,Burger, Stack, Button, TextInput, Input,SimpleGrid } from '@svelteuidev/core';
 
 	import HeadContent from './lib/HeadContent.svelte';
 	import NavContent from './lib/NavContent.svelte';
@@ -26,61 +26,71 @@
   import AppCountersEditor from './lib/AppCountersEditor.svelte';
     import DailyConfigEditor from './lib/DailyConfigEditor.svelte';
     import AppConfigEditor from './lib/AppConfigEditor.svelte';
-
+    let hosts=[
+      {address:"localhost",label:"local"},
+      {address:"hefaistos.local",label:"mihai"},
+      {address:"artemis.local",label:"gabriela"},
+      {address:"192.168.1.27",label:"mihai-IP"},
+      {address:"192.168.1.31",label:"gabriela-IP"},
+    ]
   let counters:Counters=null;
   let config:Config=null;
-  let host="localhost"
-  let gapi=new ParentalControlsApi(`${host}:8080`)
+  let host=hosts[0]
+  let gapi=new ParentalControlsApi(`${host.address}:8080`)
   let error=null;
 
-  function selectHost(e){
+  async function selectHost(e){
     console.log("selecting host",e.target.value)
-    host = e.target.value
-    gapi=new ParentalControlsApi(`${host}:8080`)
+    host = hosts[e.target.value]
+    gapi=new ParentalControlsApi(`${host.address}:8080`)
+    await fetchConfig()
+    await fetchCounters()
   }
-  let serverlist=[
-    "localhost",
-  ]
-
+  async function fetchConfig(){
+    try{
+      let api=new ParentalControlsApi(`${host.address}:8080`)
+      const pcf = await api.getConfig()
+      config = pcf.unwrap()
+      error=null
+    }catch(err){
+      console.warn(err);
+      error={message:err.message,stacktrace:err.stack.split("\n")}
+      counters=null;
+      config=null;
+    }
+  }
   let to:NodeJS.Timeout;
   async function fetchCounters(){
     clearTimeout(to)
-  try{
-    let api=new ParentalControlsApi(`${host}:8080`)
-    const pct = api.getCounters();
-    const pcf = api.getConfig()
-    const [ct,cf] = await Promise.all([
-      pct,
-      pcf,
-    ])
-    counters = ct.unwrap()
-    config = cf.unwrap()
-    error=null
-  }catch(err){
-    console.warn(err);
-    error={message:err.message,stacktrace:err.stack.split("\n")}
-    counters=null;
-    config=null;
-  }
-    to=setTimeout(fetchCounters,60000)
+    try{
+      let api=new ParentalControlsApi(`${host.address}:8080`)
+      const ct = await api.getCounters();
+      counters = ct.unwrap()
+      error=null
+    }catch(err){
+      console.warn(err);
+      error={message:err.message,stacktrace:err.stack.split("\n")}
+      counters=null;
+      config=null;
+    }
+    to=setTimeout(fetchCounters,10000)
   }
   onMount(async ()=>{
-    await fetchCounters()
+    await fetchConfig();
+    await fetchCounters();
   })
-  async function saveCounters(){
-    const result = await gapi.updateCounters(counters);
-    console.log({fn:saveCounters,result})
-  }
   async function saveConfigLimits(newConfigLimits:CustomEvent<DailyLimitConfig[]>){
     const newConfig = config.copy()
     newConfig.dailyLimits=newConfigLimits.detail
     const result = await gapi.updateConfig(newConfig);
+    config=result.unwrap()
     console.log({fn:"saveConfigLimits",newConfigLimits,result})
   }
   async function saveAppConfigs(newAppConfigLimits:CustomEvent<ConfigurationRecord[]>){
     const newConfig = config.copy()
     newConfig.applications=newAppConfigLimits.detail
     const result = await gapi.updateConfig(newConfig);
+    config=result.unwrap()
     console.log({fn:"saveAppConfigs",config:config.copy(),result})
   }
   async function createAppConfig(newAppConfig:CustomEvent<ConfigurationRecord>){
@@ -89,8 +99,14 @@
     newConfig.applications.push(newAppConfig.detail)
     console.log({newConfig})
     const result = await gapi.updateConfig(newConfig);
+    config=result.unwrap()
     console.log({fn:gapi.updateConfig,result})
     config=result.unwrap();
+  }
+  async function saveCounters(){
+    const result = await gapi.updateCounters(counters);
+    counters=result.unwrap()
+    console.log({fn:saveCounters,result})
   }
   async function createAppCounter(newAppCounter:CustomEvent<ConfigurationRecord>){
     console.log({appCounter:newAppCounter.detail})
@@ -98,6 +114,7 @@
     newCounters.applications.push(newAppCounter.detail)
     console.log({newCounters})
     const result = await gapi.updateCounters(newCounters);
+    counters=result.unwrap()
     console.log({fn:gapi.updateCounters,result})
     counters=result.unwrap();
   }
@@ -124,38 +141,29 @@
 <AppShell>
 
 	<slot>
-    <h3>Currently Selected computer {host}</h3>
-    <hr/>
-    <strong>Select a different computer</strong>
-    <Input root="select" on:change={selectHost}>
-      <option value="localhost">local</option>
-      <option value="hefaistos.local">mihai</option>
-      <option value="artemis.local">gabriela</option>
-      <option value="192.168.1.27">mihai-IP</option>
-      <option value="192.168.1.31">gabriela-31</option>
-    </Input>
-    <hr/>
-    <strong>send a notification to {host}</strong>
-    <TextInput bind:value={messageText} multiline></TextInput>
-    <Button on:click={message}>send message</Button>
-    <hr/>
-    {#if error}
-      <p>error connecting to {host}</p>
-      <pre>{JSON.stringify(error,null," ")}</pre>
-    {/if}
+    <h1>Managing  {host.label}</h1>
     <Tabs color='teal'>
+      <Tabs.Tab label='Settings' color='pink'>
+        <h3>Currently Selected computer {host.label}</h3>
+        <hr/>
+        <strong>Select a different computer</strong>
+        <Input root="select" on:change={selectHost}>
+          {#each hosts as value,index}
+          <option value={index}>{value.label}</option>
+          {/each}
+          <option value="hefaistos.local">mihai</option>
+          <option value="artemis.local">gabriela</option>
+          <option value="192.168.1.27">mihai-IP</option>
+          <option value="192.168.1.31">gabriela-31</option>
+        </Input>
+      </Tabs.Tab>
       <Tabs.Tab label='Current Global Limits'>
-          <Button on:click={e => sendShutdown()}>shutdown computer</Button>
-          <Button on:click={e => gapi.abortShutdown()}>abort shutdown</Button>
           <CountersEditor dailyLimit={counters?.dayLimit} on:save={saveCounters}></CountersEditor>
       </Tabs.Tab>
       <Tabs.Tab label='Current Application Limits'>
           <AppCountersEditor appCounters={counters?.applications} on:save={saveCounters} on:create={createAppCounter} on:terminateapprequest={pkillall}>
             <h2 slot="title">Current Application Limits and Counters</h2>
           </AppCountersEditor>
-      </Tabs.Tab>
-      <Tabs.Tab label='Debug-Counters' color='pink'>
-          <pre>{JSON.stringify(counters,null,"  ")}</pre>
       </Tabs.Tab>
       <Tabs.Tab label='Weekly Configuration'>
         {#if config }
@@ -171,11 +179,32 @@
             <h2 slot="title">Per-Application Limits Configuration</h2>
           </AppConfigEditor>
       </Tabs.Tab>
-      <Tabs.Tab label='Debug-Config' color='pink'>
+      <Tabs.Tab label='Task Manager' color='pink'>
+        <SimpleGrid  cols={5}>
+          <Button on:click={e => sendShutdown()}>shutdown computer</Button>
+          <Button variant="outline" on:click={e => sendAbortShutdown()}>abort shutdown</Button>
+        </SimpleGrid>
           <pre>{JSON.stringify(config,null,"  ")}</pre>
+      </Tabs.Tab>
+      <Tabs.Tab label='Notifications' color='pink'>
+        <SimpleGrid  cols={3}>
+          <strong>send a notification to {host}</strong>
+          <TextInput bind:value={messageText} multiline></TextInput>
+          <Button on:click={message}>send message</Button>
+        </SimpleGrid>
+      </Tabs.Tab>
+      <Tabs.Tab label='Config' color='pink'>
+          <pre>{JSON.stringify(config,null,"  ")}</pre>
+      </Tabs.Tab>
+      <Tabs.Tab label='Report' color='pink'>
+          <pre>{JSON.stringify(counters,null,"  ")}</pre>
       </Tabs.Tab>
     </Tabs>
   </slot>
+  {#if error}
+    <p>error connecting to {host.label}</p>
+    <pre>{JSON.stringify(error,null," ")}</pre>
+  {/if}
 </AppShell>
 </SvelteUIProvider>
 

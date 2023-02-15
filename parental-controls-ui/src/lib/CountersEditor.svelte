@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Button,TextInput,Card } from '@svelteuidev/core';
+    import { Button,TextInput,Card, SimpleGrid } from '@svelteuidev/core';
     import type { Counters,DailyLimit } from '../../../src/classes';
     export let dailyLimit: DailyLimit;
     import { createEventDispatcher } from "svelte";
@@ -9,28 +9,28 @@
     }
   </script>
 
+<SimpleGrid  cols={2}>
   <h2>Today's Limits</h2>
   {#if dailyLimit != null}
-  <div class="listform">
-    <div class="row" id="date">
+    <div id="date">
         {"Su,Mo,Tu,We,Th,Fr,Sa".split(",")[dailyLimit.dayNumber]} <span>{dailyLimit.date.toISOString().replace('T',' ').substring(0,19)}</span>
     </div>
-    <div class="row" id="startHourMinute">
+    <div id="startHourMinute">
         <TextInput placeholder="time in millitary format ( 0930 instead of 09:30 )" label="lower time limit" bind:value={dailyLimit.startHourMinute} />
     </div>
-    <div class="row" id="endHourMinute">
+    <div id="endHourMinute">
         <TextInput placeholder="time in millitary format ( 0930 instead of 09:30 )" label="upper time limit" bind:value={dailyLimit.endHourMinute} />
     </div>
-    <div class="row" id="totalAllowed">
+    <div id="totalAllowed">
         <TextInput placeholder="maximum number of minutes allowed by the configuration" label="total minutes allowed" bind:value={dailyLimit.totalAllowed} />
     </div>
-    <div class="row" id="total">
+    <div id="total">
         <TextInput placeholder="the number of minutes recorded today" label="total recorded today" bind:value={dailyLimit.total} />
     </div>
     <Button on:click={e => change()}>save</Button>
-    <Button on:click={e => change()}>reset</Button>
-  </div>
+    <Button variant="outline" on:click={e => change()}>reset</Button>
   {:else}
     no data
   {/if}
+</SimpleGrid>
   

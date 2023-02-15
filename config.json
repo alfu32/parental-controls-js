@@ -45,40 +45,58 @@
   ],
   "applications": [
     {
-      "appid": "deno",
-      "processregex": "deno",
+      "appid": "busyloop",
+      "processregex": "busyloop",
       "allowedMinutes": 360,
       "usedMinutes": 10
     },
     {
-      "appid": "majong",
-      "processregex": "majong",
-      "allowedMinutes": 240,
-      "usedMinutes": 0
+      "appid": "minecraft",
+      "processregex": "minecraft",
+      "allowedMinutes": 360,
+      "usedMinutes": 10
     },
     {
-      "appid": "libreoffice-write",
-      "processregex": "soffice.bin",
-      "allowedMinutes": 120,
-      "usedMinutes": 0
+      "appid": "candycrushsaga",
+      "processregex": "candycrushsaga",
+      "allowedMinutes": 360,
+      "usedMinutes": 10
     },
     {
-      "appid": "vscode",
-      "processregex": "code/code",
-      "allowedMinutes": 120,
-      "usedMinutes": 0
+      "appid": "firefox",
+      "processregex": "firefox",
+      "allowedMinutes": 360,
+      "usedMinutes": 10
     },
     {
-      "appid": "chrome",
-      "processregex": "chrome",
-      "allowedMinutes": 120,
-      "usedMinutes": 0
+      "appid": "chromium",
+      "processregex": "chromium",
+      "allowedMinutes": 360,
+      "usedMinutes": 10
     },
     {
-      "appid": "npmjs.com",
-      "processregex": "npmjs",
-      "allowedMinutes": 120,
-      "usedMinutes": 0
+      "appid": "edge",
+      "processregex": "edge",
+      "allowedMinutes": 360,
+      "usedMinutes": 10
+    },
+    {
+      "appid": "youtube",
+      "processregex": "youtube",
+      "allowedMinutes": 360,
+      "usedMinutes": 10
+    },
+    {
+      "appid": "netflix",
+      "processregex": "netflix",
+      "allowedMinutes": 360,
+      "usedMinutes": 10
+    },
+    {
+      "appid": "thetelly",
+      "processregex": "thetelly",
+      "allowedMinutes": 360,
+      "usedMinutes": 10
     }
   ]
 }
