@@ -9,11 +9,26 @@ import {
 import { spawnProcess } from "./spawnProcess.ts";
 import { HttpRequest } from "./webserver.router.ts";
 import { getTransientConfig } from "./getTransientConfig.ts";
-import { Zenity,NotifySend, INotifier } from "./desktop-notifications.ts";
+import { NotifySend, INotifier } from "./desktop-notifications.ts";
+import { Reflect } from "https://deno.land/x/reflect_metadata@v0.1.12/mod.ts";
 const NOTIFIER:INotifier = NotifySend;
 
 export const router: Router = new Router();
-
+// deno-lint-ignore require-await
+router.add("GET", "/api.json", async function(requestEvent: HttpRequest) {
+  return requestEvent.respondWithJson({
+    routes:Object.keys(router.routeHandlers).map(
+      mp => {
+        const handler=router.routeHandlers[mp]
+        return {
+          method:mp.split('|')[0],
+          path:mp.split('|')[1],
+          handler:Reflect.getMetadata("router:handlers",handler)
+        }
+      }
+    )
+  });
+},"void","Object");
 router.add("PUT", "/config", async function(requestEvent: HttpRequest) {
   // The native HTTP server uses the web standard `Request` and `Response`
   // objects.
@@ -24,7 +39,7 @@ router.add("PUT", "/config", async function(requestEvent: HttpRequest) {
   // back to the client.
   fs.writeFileSync("config.json", JSON.stringify(config, null, "  "));
   return requestEvent.respondWithJson(config);
-});
+},Config.ctor(),Config.ctor());
 
 router.middleware.push(function(requestEvent: HttpRequest): HttpRequest {
   return requestEvent.copy();
@@ -49,7 +64,7 @@ router.add("GET", "/config", async function(requestEvent: HttpRequest) {
     }
   );
   return requestEvent.respondWithJson(config);
-});
+},"void",Config.ctor());
 router.add("GET", "/counters", async function(requestEvent: HttpRequest) {
   // The native HTTP server uses the web standard `Request` and `Response`
   // objects.
@@ -81,7 +96,7 @@ router.add("GET", "/counters", async function(requestEvent: HttpRequest) {
     logfile,
     countfile,
   });
-});
+},"void",Counters.ctor());
 router.add("GET", "/counter", async function(requestEvent: HttpRequest) {
   // The native HTTP server uses the web standard `Request` and `Response`
   // objects.
@@ -91,7 +106,7 @@ router.add("GET", "/counter", async function(requestEvent: HttpRequest) {
   return requestEvent.respondWithJson(
     counters.applications.find((ci) => ci.appid === requestEvent.params?.appid)
   );
-});
+},"appid:string",ConfigurationRecord.ctor());
 router.add("PUT", "/counters", async function(requestEvent: HttpRequest) {
   // The native HTTP server uses the web standard `Request` and `Response`
   // objects.
@@ -100,7 +115,7 @@ router.add("PUT", "/counters", async function(requestEvent: HttpRequest) {
   const counters = Counters.fromJson(json);
   fs.writeFileSync(countfile, JSON.stringify(counters, null, "  "));
   return requestEvent.respondWithJson(counters);
-});
+},Counters.ctor(),Counters.ctor());
 router.add("POST", "/shutdown", async function(requestEvent: HttpRequest) {
   // The native HTTP server uses the web standard `Request` and `Response`
   // objects.
@@ -111,7 +126,7 @@ router.add("POST", "/shutdown", async function(requestEvent: HttpRequest) {
   );
   const shutdownResult = await spawnProcess("shutdown", []);
   return requestEvent.respondWithJson({ shutdownResult, notificationResult });
-});
+},"void","{ shutdownResult:ProcessResult, notificationResult:ProcessResult }");
 router.add(
   "POST",
   "/shutdown/abort",
@@ -128,7 +143,7 @@ router.add(
       notificationResult,
       shutdownCancelResult,
     });
-  }
+  },"void","{ notificationResult:ProcessResult, shutdownCancelResult:ProcessResult }"
 );
 router.add("GET", "/processes", async function(requestEvent: HttpRequest) {
   // The native HTTP server uses the web standard `Request` and `Response`
@@ -138,7 +153,7 @@ router.add("GET", "/processes", async function(requestEvent: HttpRequest) {
     lines: psListResult.out.split("\n").map(Process.fromFixedLengthText),
     error: psListResult.error,
   });
-});
+},"void","{ lines:Process[], error:Error }");
 router.add("GET", "/process", async function(requestEvent: HttpRequest) {
   // The native HTTP server uses the web standard `Request` and `Response`
   // objects.
@@ -150,7 +165,7 @@ router.add("GET", "/process", async function(requestEvent: HttpRequest) {
       .filter((process: Process, i: number) => i === 0 || process.PID === pid),
     error: psListResult.error,
   });
-});
+},"pid:string","{ lines:Process[], error:Error }");
 router.add("POST", "/pkillall", async function(requestEvent: HttpRequest) {
   // The native HTTP server uses the web standard `Request` and `Response`
   // objects.
@@ -167,7 +182,7 @@ router.add("POST", "/pkillall", async function(requestEvent: HttpRequest) {
     configurationRecord:cr,
     notificationResult,
   });
-});
+},"regex:string","{ pkillResult:Process[], configurationRecord:ConfigurationRecord,notificationResult:ProcessResult }");
 router.add("POST", "/message", async function(requestEvent: HttpRequest) {
   // The native HTTP server uses the web standard `Request` and `Response`
   // objects.
@@ -177,7 +192,7 @@ router.add("POST", "/message", async function(requestEvent: HttpRequest) {
     message
   );
   return requestEvent.respondWithJson({ notificationResult });
-});
+},"message:string","{ notificationResult:ProcessResult }");
 router.add("GET", "/notification", async function(requestEvent: HttpRequest) {
   // The native HTTP server uses the web standard `Request` and `Response`
   // objects.
@@ -189,5 +204,5 @@ router.add("GET", "/notification", async function(requestEvent: HttpRequest) {
   } else {
     return requestEvent.respondWithJson({ message });
   }
-});
+},"message:string","{ notificationResult:ProcessResult }");
 

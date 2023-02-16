@@ -22,7 +22,7 @@ export class EventEmmitter<T>{
             })
         return this;
     }
-    buffer(eventType:EventType,detail:T):this{
+    schedule(eventType:EventType,detail:T):this{
         (this.listeners[eventType]||[])
             .forEach((cbk:EventCallback<T>) => {
                 try{

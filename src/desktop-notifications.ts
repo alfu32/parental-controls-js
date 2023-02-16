@@ -1,5 +1,4 @@
 import { existsSync, writeFileSync } from 'node:fs';
-import { listeners } from 'node:process';
 import { mkdirp } from './classes.ts';
 import {spawnProcess, SpawnProcessResult} from './spawnProcess.ts';
 export declare type NotificationCategory = "error"|"warning"|"notification"|"info";
@@ -9,20 +8,6 @@ export interface INotifier{
     warning(title:string,detail:string):Promise<SpawnProcessResult>
     error(title:string,detail:string):Promise<SpawnProcessResult>
     notification(title:string,detail:string):Promise<SpawnProcessResult>
-}
-export const Zenity:INotifier = {
-    async info(title:string,detail:string):Promise<SpawnProcessResult>{
-        return await sendZenityMessage("info",title,detail)
-    },
-    async warning(title:string,detail:string):Promise<SpawnProcessResult>{
-        return await sendZenityMessage("warning",title,detail)
-    },
-    async error(title:string,detail:string):Promise<SpawnProcessResult>{
-        return await sendZenityMessage("error",title,detail)
-    },
-    async notification(title:string,detail:string):Promise<SpawnProcessResult>{
-        return await sendZenityNotification(title,detail)
-    }
 }
 export const NotifySend:INotifier = {
     async info(title:string,detail:string):Promise<SpawnProcessResult>{
@@ -38,9 +23,9 @@ export const NotifySend:INotifier = {
         return await sendNotifySendNotification("notification",title,detail)
     }
 }
-function splitBodyText(text:string,maxCharsPerLine:number){
+export function splitBodyText(text:string,maxCharsPerLine:number){
     return text.split(" ").reduce(
-        (lines:string[][],word:string,num:number) => {
+        (lines:string[][],word:string) => {
             let currentLine = lines[lines.length-1]
             const currentLineCharLength = currentLine.join(" ").length;
             if(currentLineCharLength > maxCharsPerLine) {
@@ -53,13 +38,6 @@ function splitBodyText(text:string,maxCharsPerLine:number){
         },[[]]
     ).map( line => line.join(" "))
     .join("\n")
-}
-export async function sendZenityMessage(type:NotificationCategory,title:string,detail:string):Promise<SpawnProcessResult>{
-    return await spawnProcess('zenity',[`--${type}`,`--text`,`<big>${title}</big>${"\n"}${splitBodyText(detail,10)}`])
-}
-export async function sendZenityNotification(title:string,detail:string):Promise<SpawnProcessResult>{
-    const body = splitBodyText(detail,10)
-    return await spawnProcess('zenity',[`--notification`,`--text`,`${title}${"\n"}${body}`,`--hint`,body])
 }
 
 ///////////  Usage:
@@ -101,11 +79,11 @@ export async function sendNotifySendNotification(type:NotificationCategory,title
 }
 class NotifySendData{
     _urgency:NotifySendUrgency="low";
-    _expireTimeMillis:number=5000;
+    _expireTimeMillis=5000;
     _icon:NotifySendIcon="dialog-information";
     _category:NotifySendCategory="presence";
-    _summary:string="";
-    _body:string="";
+    _summary="";
+    _body="";
     urgency(urgencyValue:NotifySendUrgency):this{
         this._urgency=urgencyValue;
         return this;

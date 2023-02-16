@@ -76,20 +76,26 @@
     await fetchConfig();
     await fetchCounters();
   })
-  async function saveConfigLimits(newConfigLimits:CustomEvent<DailyLimitConfig[]>){
+  async function saveConfig(newConfigLimits:CustomEvent<Config>){
     const newConfig = config.copy()
-    newConfig.dailyLimits=newConfigLimits.detail
     const result = await gapi.updateConfig(newConfig);
     config=result.unwrap()
     console.log({fn:"saveConfigLimits",newConfigLimits,result})
   }
-  async function saveAppConfigs(newAppConfigLimits:CustomEvent<ConfigurationRecord[]>){
-    const newConfig = config.copy()
-    newConfig.applications=newAppConfigLimits.detail
-    const result = await gapi.updateConfig(newConfig);
-    config=result.unwrap()
-    console.log({fn:"saveAppConfigs",config:config.copy(),result})
-  }
+  //// async function saveConfigLimits(newConfigLimits:CustomEvent<DailyLimitConfig[]>){
+  ////   const newConfig = config.copy()
+  ////   newConfig.dailyLimits=newConfigLimits.detail
+  ////   const result = await gapi.updateConfig(newConfig);
+  ////   config=result.unwrap()
+  ////   console.log({fn:"saveConfigLimits",newConfigLimits,result})
+  //// }
+  //// async function saveAppConfigs(newAppConfigLimits:CustomEvent<ConfigurationRecord[]>){
+  ////   const newConfig = config.copy()
+  ////   newConfig.applications=newAppConfigLimits.detail
+  ////   const result = await gapi.updateConfig(newConfig);
+  ////   config=result.unwrap()
+  ////   console.log({fn:"saveAppConfigs",config:config.copy(),result})
+  //// }
   async function createAppConfig(newAppConfig:CustomEvent<ConfigurationRecord>){
     console.log({appConfig:newAppConfig.detail})
     const newConfig = config.copy()
@@ -138,6 +144,7 @@
 <AppShell>
 
 	<slot>
+    <pre>{JSON.stringify(config,null," ")}</pre>
     <Grid>
       <Grid.Col span={2}>
         <h4>Managing  {host.label}</h4>
@@ -153,17 +160,15 @@
       </Grid.Col>
       <Grid.Col span={8}>
         <Tabs color='teal'>
-          <Tabs.Tab label='Settings' color='pink'>
-          </Tabs.Tab>
           <Tabs.Tab label='{host.label} Status'>
-              <CountersEditor dailyLimit={counters?.dayLimit} on:save={saveCounters}></CountersEditor>
-              <AppCountersList appCounters={counters?.applications} on:save={saveCounters} on:create={createAppCounter} on:terminateapprequest={pkillall}>
+              <CountersEditor counters={counters} on:save={saveCounters}></CountersEditor>
+              <AppCountersList counters={counters} on:save={saveCounters} on:create={createAppCounter} on:terminateapprequest={pkillall}>
                 <h2 slot="title">Current Application Limits and Counters</h2>
               </AppCountersList>
           </Tabs.Tab>
           <Tabs.Tab label='{host.label} Configuration'>
-              <WeeklyConfigEditor config={config} on:saveLimits={saveConfigLimits}></WeeklyConfigEditor>
-              <AppConfigEditor appConfigs={config?.applications} on:saveAppConfigs={saveAppConfigs} on:create={createAppConfig}>
+              <WeeklyConfigEditor config={config} on:save={saveConfig}></WeeklyConfigEditor>
+              <AppConfigEditor config={config} on:save={saveConfig} on:create={createAppConfig}>
                 <h2 slot="title">Per-Application Limits Configuration</h2>
               </AppConfigEditor>
           </Tabs.Tab>

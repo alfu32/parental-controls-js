@@ -1,27 +1,27 @@
 <script lang="ts">
     import { Button,TextInput,Card,Group,Text,Image,Badge } from '@svelteuidev/core';
-    import { ConfigurationRecord } from '../../../src/classes';
-    export let appConfigs: ConfigurationRecord[];
-    export let copies: ConfigurationRecord[] = appConfigs?.map(c=>c.copy());
+    import { ConfigurationRecord,Config } from '../../../src/classes';
+    export let config: Config;
+    $:copy=config?.copy();
     let newAppConfig: ConfigurationRecord = new ConfigurationRecord()
     import { createEventDispatcher } from "svelte";
-    import AppConfigCard from './AppConfigCard.svelte';
     const dispatch = createEventDispatcher();
     function change() {
-        dispatch("saveAppConfigs", appConfigs);
+        dispatch("save", copy);
     }
     function deleteItem(item) {
-        dispatch("saveAppConfigs", appConfigs.filter(i => i !== item));
+        copy.applications=copy.applications.filter(i => i !== item)
+        dispatch("save", copy);
     }
     function create() {
         dispatch("create", newAppConfig.copy());
         newAppConfig = new ConfigurationRecord()
     }
     function resetItemAtIndex(index:number) {
-      appConfigs[index].allowedMinutes=copies[index].allowedMinutes
-      appConfigs[index].appid=copies[index].appid
-      appConfigs[index].processregex=copies[index].processregex
-      appConfigs[index].usedMinutes=copies[index].usedMinutes
+      copy.applications[index].allowedMinutes=config.applications[index].allowedMinutes
+      copy.applications[index].appid=config.applications[index].appid
+      copy.applications[index].processregex=config.applications[index].processregex
+      copy.applications[index].usedMinutes=config.applications[index].usedMinutes
     }
   </script>
   <slot name="title"><h2>Per-Application Configuration</h2></slot>
@@ -33,8 +33,8 @@
     <!--th>Used Minutes</th-->
     <th>Allowed Minutes</th>
   </tr>
-  {#if appConfigs != null}
-  {#each appConfigs as appConfig,index }
+  {#if copy != null}
+  {#each copy.applications as appConfig,index }
     <tr>
       <td>{index + 1}</td>
       <td><TextInput bind:value={appConfig.appid}/></td>
@@ -43,6 +43,7 @@
       <td><TextInput bind:value={appConfig.allowedMinutes}/></td>
       <td><Button fullSize variant="outline" color="red" compact ripple size="sm" on:click={e => deleteItem(appConfig)}>delete</Button></td>
       <td><Button fullSize variant="outline" compact ripple size="sm" on:click={e => resetItemAtIndex(index)}>reset</Button></td>
+      <td><Button fullSize compact ripple size="sm" on:click={e => change()}>save</Button></td>
     </tr>
   {/each}
   <tr>

@@ -1,17 +1,17 @@
 <script lang="ts">
     import { Button,TextInput,Card } from '@svelteuidev/core';
     import type { Counters,DailyLimit } from '../../../src/classes';
-    export let dailyLimit: DailyLimit;
+    export let counters: Counters;
     import { createEventDispatcher } from "svelte";
     const dispatch = createEventDispatcher();
     function change() {
-        dispatch("save", dailyLimit);
+        dispatch("save", counters);
     }
   </script>
 
-  {#if dailyLimit != null}
+  {#if counters != null}
     <h1>Today's Limits</h1>
-    <span>{"Su,Mo,Tu,We,Th,Fr,Sa".split(",")[dailyLimit.dayNumber]} {dailyLimit.date.toISOString().replace('T',' ').substring(0,19)}</span>
+    <span>{"Su,Mo,Tu,We,Th,Fr,Sa".split(",")[counters.dayLimit.dayNumber]} {counters.dayLimit.date.toISOString().replace('T',' ').substring(0,19)}</span>
     <hr/>
     <tr>
         <th>Time Start</th>
@@ -31,16 +31,16 @@
     </tr>
     <tr>
         <td>
-            <TextInput bind:value={dailyLimit.startHourMinute} />
+            <TextInput bind:value={counters.dayLimit.startHourMinute} />
         </td>
         <td>
-            <TextInput bind:value={dailyLimit.endHourMinute} />
+            <TextInput bind:value={counters.dayLimit.endHourMinute} />
         </td>
         <td>
-            <TextInput bind:value={dailyLimit.totalAllowed} />
+            <TextInput bind:value={counters.dayLimit.totalAllowed} />
         </td>
         <td>
-            {dailyLimit.total}
+            {counters.dayLimit.total}
         </td>
     </tr>
   {:else}

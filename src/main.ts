@@ -1,17 +1,16 @@
 export function add(a: number, b: number): number {
   return a + b;
 }
-import child_process, { execSync } from "node:child_process";
+import { execSync } from "node:child_process";
 import fs from "node:fs";
 import process from "node:process";
 import {
   Config,
-  ConfigurationRecord,
   Counters,
   mkdirp,
   sleep,
 } from "./classes.ts";
-import { Zenity,NotifySend,INotifier } from "./desktop-notifications.ts";
+import { NotifySend,INotifier } from "./desktop-notifications.ts";
 const NOTIFIER:INotifier = NotifySend;
 import { rateLimited } from "./functions.ts";
 import { getTransientConfig } from "./getTransientConfig.ts";
@@ -27,7 +26,7 @@ const port=8080
 const server = Deno.listen({ port });
 console.log(`HTTP webserver running.  Access it at:  http://localhost:${port}/`);
 
-const pollTiming = 15000;
+const pollTiming = 5000;
 const frequencyPerTimeUnit = 60000 / pollTiming;
 
 // Learn more at https://deno.land/manual/examples/module_metadata#concepts
@@ -51,6 +50,8 @@ async function* mainLoop() {
   if (!fs.existsSync("config.json")) {
     fs.writeFileSync("config.json", JSON.stringify(new Config(), null, "  "));
   }
+  const rl_process_notifications = rateLimited(process_notifications,60000)
+  console.log(rl_process_notifications.toString())
   while (io.sig) {
     const config = await Config.fromFile("config.json");
     const {
@@ -72,8 +73,9 @@ async function* mainLoop() {
       config,
       hourMinute,
     });
-    const i2Result = rateLimited(process_notifications,50000)(iResult);
-    processEvents()
+    const i2Result = rl_process_notifications(iResult);
+    // process_notifications(iResult);
+    processEvents(i2Result)
 
     fs.writeFileSync(countfile, JSON.stringify(counters, null, "  "));
     fs.writeFileSync("config.json", JSON.stringify(config, null, "  "));
@@ -82,7 +84,10 @@ async function* mainLoop() {
     yield iResult;
   }
 }
-function processEvents(){}
+function processEvents(params: { counters: Counters; config: Config; hourMinute: string }){
+  console.log("3.========== processing events =====================================")
+  console.log("3.====== done ======================================================================")
+}
 async function serveHttp(conn: Deno.Conn) {
   // This "upgrades" a network connection into an HTTP connection.
   const httpConn: Deno.HttpConn = Deno.serveHttp(conn);
@@ -133,6 +138,7 @@ function process_notifications(
   const { counters, config, hourMinute } = params;
   const messagesToUser: string[] = [];
   const notificationsToUser: string[] = [];
+  console.log("2.====== processing notifications ==================================================")
   config.applications.forEach(
     (configItem) => {
       let counter = counters.applications.find((cntItem) =>
@@ -140,7 +146,10 @@ function process_notifications(
       );
       if (!counter) {
         counter = configItem.copy();
+        console.log("process_notifications.!counter",counter)
       }
+
+      console.log("process_notifications:: counter.usedMinutes,counter.allowedMinutes",counter.usedMinutes,counter.allowedMinutes)
       if (counter.usedMinutes > counter.allowedMinutes) {
         messagesToUser.push(
           `"you have used all the ${configItem.allowedMinutes} allowed minutes for ${configItem.appid}"`,
@@ -163,6 +172,7 @@ function process_notifications(
   const dayLimitConfig = config.getCurrentDayLimitConfig(
     counters.dayLimit.date,
   );
+  console.log("process_notifications:: counters.dayLimit.total > counters.dayLimit.totalAllowed",counters.dayLimit.total,counters.dayLimit.totalAllowed)
   if (counters.dayLimit.total > counters.dayLimit.totalAllowed) {
     messagesToUser.push(
       `"you have used ${counters.dayLimit.total} out of the ${dayLimitConfig.totalAllowed} allowed minutes this system, shutdown in 59 seconds."`,
@@ -185,10 +195,12 @@ function process_notifications(
     Number.parseInt(counters.dayLimit.startHourMinute, 10),
     Number.parseInt(counters.dayLimit.endHourMinute, 10),
   ];
+  console.log("process_notifications:: [current, min, max]",[current, min, max])
   if (current < min || current > max) {
     messagesToUser.push(
       `"It is ${hourMinute}. You are not allowed to use the computer outside the working hours ${counters.dayLimit.startHourMinute} to ${counters.dayLimit.endHourMinute}"`,
     );
+    console.log("something");;
   } else if (max - current == 5) {
     notificationsToUser.push(
       `"It's almost time to shutdown, you have 5 minutes left."`,
@@ -210,5 +222,6 @@ function process_notifications(
     );
     return notificationResult;
   });
+  console.log("2.====== done ======================================================================")
   return { counters, config, hourMinute };
 }

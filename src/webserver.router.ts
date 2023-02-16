@@ -1,5 +1,7 @@
 
+import { Reflect as RM } from "https://deno.land/x/reflect_metadata@v0.1.12/mod.ts";
 export declare type HttpMethod = "GET"|"POST"|"PUT"|"DELETE"|"OPTIONS"|"TRACE"|null;
+
 export class HttpRequest{
 
     url?: URL;
@@ -74,19 +76,33 @@ export interface HttpResponse{
     headers:{[name:string]:string}
 }
 export declare type RequestHandler = (requestEvent:HttpRequest) => Promise<Response>
+export class Handler<T,R>{
+    constructor(
+        public method:string,
+        public path:string,
+        public input:T,
+        public output:R,
+        public handler:RequestHandler
+    ){}
+}
 export declare type MiddlewareHandler = (requestEvent:HttpRequest) => HttpRequest
+
 export class Router{
     routeHandlers:{[methodPath:string]:RequestHandler}={};
     middleware:MiddlewareHandler[]=[];
-    add(method:string,path:string,handler:RequestHandler){
+    add(method:string,path:string,handler:RequestHandler,bodyTypeName:string,returnTypeName:string){
+        RM.defineMetadata("router:handlers", method, handler, "method");
+        RM.defineMetadata("router:handlers", path, handler, "path");
+        RM.defineMetadata("router:handlers", bodyTypeName, handler, "bodyType");
+        RM.defineMetadata("router:handlers", returnTypeName, handler, "returnType");
         this.routeHandlers[`${method.toUpperCase()}|${path}`]=handler;
     }
-    get(path:string,handler:RequestHandler):this{ this.add("get",path,handler);return this; }
-    post(path:string,handler:RequestHandler):this{ this.add("post",path,handler);return this; }
-    put(path:string,handler:RequestHandler):this{ this.add("put",path,handler);return this; }
-    delete(path:string,handler:RequestHandler):this{ this.add("delete",path,handler);return this; }
-    options(path:string,handler:RequestHandler):this{ this.add("options",path,handler);return this; }
-    trace(path:string,handler:RequestHandler):this{ this.add("trace",path,handler);return this; }
+    get(path:string,handler:RequestHandler,bodyTypeName:string,returnTypeName:string):this{ this.add("get",path,handler,bodyTypeName,returnTypeName);return this; }
+    post(path:string,handler:RequestHandler,bodyTypeName:string,returnTypeName:string):this{ this.add("post",path,handler,bodyTypeName,returnTypeName);return this; }
+    put(path:string,handler:RequestHandler,bodyTypeName:string,returnTypeName:string):this{ this.add("put",path,handler,bodyTypeName,returnTypeName);return this; }
+    delete(path:string,handler:RequestHandler,bodyTypeName:string,returnTypeName:string):this{ this.add("delete",path,handler,bodyTypeName,returnTypeName);return this; }
+    options(path:string,handler:RequestHandler,bodyTypeName:string,returnTypeName:string):this{ this.add("options",path,handler,bodyTypeName,returnTypeName);return this; }
+    trace(path:string,handler:RequestHandler,bodyTypeName:string,returnTypeName:string):this{ this.add("trace",path,handler,bodyTypeName,returnTypeName);return this; }
     async handle(req: HttpRequest) {
         let nomatch=true
         let error:Error|null = null;

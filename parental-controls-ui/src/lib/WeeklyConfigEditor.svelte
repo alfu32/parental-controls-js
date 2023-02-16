@@ -2,15 +2,16 @@
     import type { Config } from "../../../src/classes";
 
 
-export let config:Config
+export let config:Config|null=null
     const days="Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday".split(",")
     import { createEventDispatcher } from "svelte";
     import { TextInput,Button } from "@svelteuidev/core";
     const dispatch = createEventDispatcher();
     function change(index) {
-        dispatch("saveLimits", config);
+        dispatch("save", config);
     }
 </script>
+<pre>{config}</pre>
     <tr>
         <th>Weekday</th>
         <th>Time Start</th>

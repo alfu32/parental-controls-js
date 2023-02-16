@@ -3,43 +3,43 @@
     {
       "startHourMinute": "0300",
       "endHourMinute": "2300",
-      "totalAllowed": 120,
+      "totalAllowed": 111,
       "total": 0
     },
     {
       "startHourMinute": "0300",
       "endHourMinute": "2300",
-      "totalAllowed": 120,
+      "totalAllowed": 11,
       "total": 0
     },
     {
       "startHourMinute": "0300",
       "endHourMinute": "2300",
-      "totalAllowed": 120,
+      "totalAllowed": 22,
       "total": 0
     },
     {
       "startHourMinute": "0300",
       "endHourMinute": "2300",
-      "totalAllowed": 120,
+      "totalAllowed": 33,
       "total": 0
     },
     {
       "startHourMinute": "0300",
       "endHourMinute": "2300",
-      "totalAllowed": 120,
+      "totalAllowed": 44,
       "total": 0
     },
     {
       "startHourMinute": "0300",
       "endHourMinute": "2300",
-      "totalAllowed": 120,
+      "totalAllowed": 55,
       "total": 0
     },
     {
       "startHourMinute": "0300",
       "endHourMinute": "2300",
-      "totalAllowed": 120,
+      "totalAllowed": 66,
       "total": 0
     }
   ],
@@ -47,7 +47,7 @@
     {
       "appid": "busyloop",
       "processregex": "busyloop",
-      "allowedMinutes": 360,
+      "allowedMinutes": "36",
       "usedMinutes": 10
     },
     {

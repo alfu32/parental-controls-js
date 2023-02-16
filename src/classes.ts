@@ -19,12 +19,22 @@ export interface IConfigurationRecord{
     usedMinutes:number;
 }
 export class ConfigurationRecord implements IConfigurationRecord{
+
+    static ctor():string {
+        return `{
+            isOn:boolean;
+            appid:string;
+            processregex:string;
+            allowedMinutes:number;
+            usedMinutes:number;
+        }`
+    }
     isOn=false;
     appid="";
     processregex="";
     allowedMinutes=120;
     usedMinutes=0;
-    static from(cr:IConfigurationRecord):ConfigurationRecord{
+    static fromJson(cr:IConfigurationRecord):ConfigurationRecord{
         const r=new ConfigurationRecord()
         r.isOn=cr.isOn
         r.appid=cr.appid
@@ -32,6 +42,9 @@ export class ConfigurationRecord implements IConfigurationRecord{
         r.allowedMinutes=cr.allowedMinutes
         r.usedMinutes=cr.usedMinutes
         return r;
+    }
+    static from(cr:IConfigurationRecord):ConfigurationRecord{
+        return ConfigurationRecord.fromJson(cr);
     }
     copy():ConfigurationRecord{
         return ConfigurationRecord.from(this)
@@ -44,12 +57,28 @@ export interface IDailyLimitConfig{
     total:number;
 }
 export class DailyLimitConfig implements IDailyLimitConfig{
+
+    static ctor():string {
+        return `{
+            startHourMinute:string;
+            endHourMinute:string;
+            totalAllowed:number;
+            total:number;
+        }`
+    }
     static fromJson(json:IDailyLimitConfig):DailyLimitConfig{
         const r = new DailyLimitConfig()
         r.startHourMinute=json.startHourMinute
         r.endHourMinute=json.endHourMinute
-        r.totalAllowed=json.totalAllowed
+        r.totalAllowed=parseInt(json.totalAllowed.toString())
         return r;
+    }
+    static from(r:IDailyLimitConfig):DailyLimitConfig{
+        return DailyLimitConfig.fromJson(r);
+    }
+    copy():DailyLimitConfig{
+        const r = new DailyLimitConfig()
+        return DailyLimitConfig.from(this);
     }
     startHourMinute="1000"
     endHourMinute="1800"
@@ -58,14 +87,25 @@ export class DailyLimitConfig implements IDailyLimitConfig{
 }
 export declare type DayNumber = number; //  & (0|1|2|3|4|5|6);
 export interface IDailyLimit{
+    date:Date;
+    dayNumber:DayNumber;
     startHourMinute:string;
     endHourMinute:string;
     totalAllowed:number;
     total:number;
-    date:Date;
-    dayNumber:DayNumber;
 }
 export class DailyLimit implements IDailyLimit{
+
+    static ctor():string {
+        return `{
+            date:Date;
+            dayNumber:DayNumber;
+            startHourMinute:string;
+            endHourMinute:string;
+            totalAllowed:number;
+            total:number;
+        }`
+    }
     static fromJson(json:IDailyLimit):DailyLimit{
         const r = new DailyLimit()
         r.startHourMinute=json.startHourMinute
@@ -99,8 +139,11 @@ export interface IConfig{
     applications:ConfigurationRecord[];
 }
 export class Config {
-    copy() {
-        return Config.fromJson(JSON.parse(JSON.stringify(this)));
+    static ctor():string{
+        return `{
+            dailyLimits: DailyLimitConfig[],
+            applications: ConfigurationRecord[],
+        }`
     }
     static async fromFile(filename: string):Promise<Config> {
         const content = await fs.promises.readFile(filename)
@@ -108,8 +151,14 @@ export class Config {
     }
     static fromJson(json:IConfig):Config{
         const r = new Config()
-        r.dailyLimits=json.dailyLimits;
+        r.dailyLimits=json.dailyLimits.map( DailyLimitConfig.fromJson );
         r.applications=json.applications.map(ConfigurationRecord.from);
+        return r;
+    }
+    copy() {
+        const r = new Config()
+        r.dailyLimits=this.dailyLimits.map( DailyLimitConfig.fromJson );
+        r.applications=this.applications.map(ConfigurationRecord.from);
         return r;
     }
     dailyLimits=[
@@ -132,6 +181,12 @@ export interface ICounters{
     applications:ConfigurationRecord[]
 }
 export class Counters {
+    static ctor():string {
+        return `{
+            dayLimit:DailyLimit;
+            applications:ConfigurationRecord[];
+        }`
+    }
     copy() {
         return Counters.fromJson(JSON.parse(JSON.stringify(this)));
     }
@@ -172,6 +227,21 @@ export interface IProcess{
     COMMAND:string;
 }
 export class Process implements IProcess {
+    static ctor():string {
+        return `{
+            USER:string;
+            PID:string;
+            CPU:string;
+            MEM:string;
+            VSZ:string;
+            RSS:string;
+            TTY:string;
+            STAT:string;
+            START:string;
+            TIME:string;
+            COMMAND:string;
+        }`
+    }
     USER="";
     PID="";
     CPU="";
