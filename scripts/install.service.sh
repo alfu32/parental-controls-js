@@ -1,8 +1,10 @@
 #!/bin/bash
 
 CWD=`pwd`
-TARGET_USER=$1
-arch=$2
+
+ADMIN_USER=$1
+TARGET_USER=$2
+arch=$3
 
 
 cat > build/parentalcontrols.service << SERVICEDEF
@@ -10,7 +12,7 @@ cat > build/parentalcontrols.service << SERVICEDEF
 Description=Parental Controls
 
 [Service]
-ExecStart=$CWD/build/parentalcontrols.service.run
+ExecStart=/home/$ADMIN_USER/parental-controls/parentalcontrols.service.run
 
 [Install]
 WantedBy=multi-user.target
@@ -20,7 +22,7 @@ SERVICEDEF
 cat << SERVICEDEF
 #!/bin/bash
 
-SUPER_HOME=$CWD/build
+SUPER_HOME=/home/$ADMIN_USER/parental-controls
 CDIR=\`pwd\`
 
 ####################### copying environment of $TARGET_USER
