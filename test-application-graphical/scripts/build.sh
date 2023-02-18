@@ -8,7 +8,7 @@ make
     echo "BUILD_DATE=$DS"
     echo "COMMIT_ID=$(git rev-parse HEAD)"
     echo "BRANCH=$(git rev-parse --abbrev-ref HEAD)"
-    echo "TAG=$(git rev-parse --abbrev-ref HEAD)"
+    echo "TAG=$(git describe --tags)"
 } > build
 cd ..
 
