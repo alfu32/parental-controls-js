@@ -40,3 +40,4 @@ for commit_title in `git log --all | tac | egrep -oh "(feat|feature|refactoring|
 done
 export SEMVER="$SEMVER_MAJOR.$SEMVER_MINOR.$SEMVER_PATCH"
 git tag "$SEMVER"
+git push origin "$SEMVER"
