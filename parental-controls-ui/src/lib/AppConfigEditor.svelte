@@ -2,29 +2,28 @@
     import { Button,TextInput,Card,Group,Text,Image,Badge } from '@svelteuidev/core';
     import { ConfigurationRecord,Config } from '../../../src/classes';
     export let config: Config;
-    $:copy=config?.copy();
     let newAppConfig: ConfigurationRecord = new ConfigurationRecord()
     import { createEventDispatcher } from "svelte";
     const dispatch = createEventDispatcher();
     function change() {
-        dispatch("save", copy);
+        dispatch("save", config);
     }
     function deleteItem(item) {
-        copy.applications=copy.applications.filter(i => i !== item)
-        dispatch("save", copy);
+      config.applications=config.applications.filter(i => i !== item)
+        dispatch("save", config);
     }
     function create() {
         dispatch("create", newAppConfig.copy());
         newAppConfig = new ConfigurationRecord()
     }
     function resetItemAtIndex(index:number) {
-      copy.applications[index].allowedMinutes=config.applications[index].allowedMinutes
-      copy.applications[index].appid=config.applications[index].appid
-      copy.applications[index].processregex=config.applications[index].processregex
-      copy.applications[index].usedMinutes=config.applications[index].usedMinutes
+      config.applications[index].allowedMinutes=config.applications[index].allowedMinutes
+      config.applications[index].appid=config.applications[index].appid
+      config.applications[index].processregex=config.applications[index].processregex
+      config.applications[index].usedMinutes=config.applications[index].usedMinutes
     }
   </script>
-  <slot name="title"><h2>Per-Application Configuration</h2></slot>
+  <slot><h2>Per-Application Configuration</h2></slot>
   <table>
   <tr>
     <th></th>
@@ -33,8 +32,8 @@
     <!--th>Used Minutes</th-->
     <th>Allowed Minutes</th>
   </tr>
-  {#if copy != null}
-  {#each copy.applications as appConfig,index }
+  {#if config != null}
+  {#each config.applications as appConfig,index }
     <tr>
       <td>{index + 1}</td>
       <td><TextInput bind:value={appConfig.appid}/></td>

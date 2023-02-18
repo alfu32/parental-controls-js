@@ -11,7 +11,7 @@ export let config:Config|null=null
         dispatch("save", config);
     }
 </script>
-<pre>{config}</pre>
+<!--pre>{config}</pre-->
     <tr>
         <th>Weekday</th>
         <th>Time Start</th>
