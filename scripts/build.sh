@@ -5,6 +5,7 @@ CWD=`pwd`
 ADMIN_USER=$1
 TARGET_USER=$2
 arch=$3
+DS=`date +'%Y%m%d%H%M%S'`
 
 . "./scripts/semver.sh"
 
