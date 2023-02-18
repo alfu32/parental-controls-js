@@ -6,12 +6,11 @@
     import AppStatusCard from './AppStatusCard.svelte';
     const dispatch = createEventDispatcher();
     function change() {
-        dispatch("save", counters.copy());
+        dispatch("save", counters);
     }
     function deleteItem(item) {
-      const newCounters = counters.copy()
-      newCounters.applications=newCounters.applications.filter(i => i !== item)
-        dispatch("save", newCounters);
+      counters.applications=counters.applications.filter(i => i !== item)
+        dispatch("save", counters);
     }
     function terminateapp(appCounter:ConfigurationRecord) {
         dispatch("terminateapprequest", appCounter);
@@ -33,9 +32,10 @@
     <tr>
     <td>{appCounter.appid}</td>
     <td>{appCounter.usedMinutes}</td>
-    <td>{appCounter.allowedMinutes}</td>
-    <td><Button fullSize variant="outline" compact ripple size="sm" on:click={e => terminateapp(appCounter)}>close all instances</Button></td>
-    <td><Button fullSize variant="outline" compact ripple size="sm" on:click={e => change()}>close all instances</Button></td>
+    <td><TextInput bind:value={appCounter.allowedMinutes}/></td>
+    <td><Button fullSize variant="outline" color="red" compact ripple size="sm" on:click={e => deleteItem(appCounter)}>delete</Button></td>
+    <td><Button fullSize variant="outline" compact ripple size="sm" on:click={e => terminateapp(appCounter)}>close</Button></td>
+    <td><Button fullSize variant="outline" compact ripple size="sm" on:click={e => change()}>save</Button></td>
     </tr>
     {/each}
   {:else}

@@ -36,10 +36,12 @@
   let gapi=new ParentalControlsApi(`${host.address}:8080`)
   let error=null;
 
+  let to:NodeJS.Timeout;
   async function selectHost(index){
     console.log("selecting host",hosts[index])
     host = hosts[index]
     gapi=new ParentalControlsApi(`${host.address}:8080`)
+    clearTimeout(to)
     await fetchConfig()
     await fetchCounters()
   }
@@ -56,7 +58,6 @@
       config=null;
     }
   }
-  let to:NodeJS.Timeout;
   async function fetchCounters(){
     clearTimeout(to)
     try{
@@ -73,6 +74,10 @@
     to=setTimeout(fetchCounters,10000)
   }
   onMount(async ()=>{
+    const to1=setTimeout(()=>{},10000) as unknown as number;
+    for(let i=to1;i>to1-10000;i--){
+      clearTimeout(i)
+    }
     await fetchConfig();
     await fetchCounters();
   })
@@ -144,7 +149,7 @@
 <AppShell>
 
 	<slot>
-    <pre>{JSON.stringify(config,null," ")}</pre>
+    <!--pre>{JSON.stringify(config,null," ")}</pre-->
     <Grid>
       <Grid.Col span={2}>
         <h4>Managing  {host.label}</h4>
@@ -163,7 +168,7 @@
           <Tabs.Tab label='{host.label} Status'>
               <CountersEditor counters={counters} on:save={saveCounters}></CountersEditor>
               <AppCountersList counters={counters} on:save={saveCounters} on:create={createAppCounter} on:terminateapprequest={pkillall}>
-                <h2 slot="title">Current Application Limits and Counters</h2>
+                <h2>Current Application Limits and Counters</h2>
               </AppCountersList>
           </Tabs.Tab>
           <Tabs.Tab label='{host.label} Configuration'>

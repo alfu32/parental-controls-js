@@ -1,4 +1,4 @@
-import fs from "node:fs";
+import fs, { readFile, readFileSync } from "node:fs";
 import { Router } from "./webserver.router.ts";
 import {
   Config,
@@ -15,6 +15,12 @@ const NOTIFIER:INotifier = NotifySend;
 
 export const router: Router = new Router();
 // deno-lint-ignore require-await
+router.add("GET", "/release.info.json", async function(requestEvent: HttpRequest) {
+  const releaseInfo = readFileSync('release.info.json').toString("utf-8")
+  return requestEvent.respondWithJson(releaseInfo);
+},"void","ReleaseInfo");
+
+// deno-lint-ignore require-await
 router.add("GET", "/api.json", async function(requestEvent: HttpRequest) {
   return requestEvent.respondWithJson({
     routes:Object.keys(router.routeHandlers).map(
@@ -28,7 +34,7 @@ router.add("GET", "/api.json", async function(requestEvent: HttpRequest) {
       }
     )
   });
-},"void","Object");
+},"void","RouterInfo");
 router.add("PUT", "/config", async function(requestEvent: HttpRequest) {
   // The native HTTP server uses the web standard `Request` and `Response`
   // objects.
