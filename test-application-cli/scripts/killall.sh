@@ -3,6 +3,6 @@
 
 INDEX=0
 for fake in $LIST;do
-echo killing $fake
-pkill -SIGTERM $fake
+echo "killing $fake-cli"
+pkill -SIGTERM "$fake-cli"
 done

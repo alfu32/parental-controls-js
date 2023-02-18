@@ -9,3 +9,7 @@ node_modules
 logs
 counters
 build
+test-application-graphical/CMakeFiles
+test-application-graphical/cmake_install.cmake
+.gitignore
+test-application-graphical/CMakeCache.txt
