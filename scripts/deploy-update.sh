@@ -19,14 +19,15 @@ echo ""
 SSH_TARGET=$SSH_CONNECTION:/home/$ADMIN_USER/parental-controls
 
 ssh $SSH_CONNECTION 'systemctl --user stop parentalcontrols'
-ssh $SSH_CONNECTION 'systemctl status parentalcontrols'
+ssh $SSH_CONNECTION 'systemctl --user status parentalcontrols'
 ssh $SSH_CONNECTION "mkdir '/home/$ADMIN_USER/parental-controls'"
 scp "./build/parental-controls-$arch.bin" $SSH_TARGET
 # scp ./config.json $SSH_TARGET
 scp "./build/parentalcontrols.service.run" $SSH_TARGET
 scp "./build/parentalcontrols.service" $SSH_TARGET
 scp "./build/parentalcontrols.service.install" $SSH_TARGET
+scp "./build/parentalcontrols.userservice.install" $SSH_TARGET
 scp "./build/release.info.json" $SSH_TARGET
 ssh $SSH_CONNECTION 'systemctl --user start parentalcontrols'
 # ssh -S $SSH_CONNECTION 'systemctl --user start parentalcontrols'
-ssh $SSH_CONNECTION 'systemctl status parentalcontrols'
+ssh $SSH_CONNECTION 'systemctl --user status parentalcontrols'

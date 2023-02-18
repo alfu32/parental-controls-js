@@ -61,6 +61,7 @@ systemctl --user start parentalcontrols
 systemctl --user enable parentalcontrols
 journalctl -fu parentalcontrols.service -b
 SRVINS
+chmod +x build/parentalcontrols.userservice.install
 
 cat > build/parentalcontrols.service << SERVICEDEF
 [Unit]
