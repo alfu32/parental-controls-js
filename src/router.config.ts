@@ -11,6 +11,7 @@ import { HttpRequest } from "./webserver.router.ts";
 import { getTransientConfig } from "./getTransientConfig.ts";
 import { NotifySend, INotifier } from "./desktop-notifications.ts";
 import { Reflect } from "https://deno.land/x/reflect_metadata@v0.1.12/mod.ts";
+import process from "node:process";
 const NOTIFIER:INotifier = NotifySend;
 
 export const router: Router = new Router();
@@ -20,6 +21,10 @@ router.add("GET", "/release.info.json", async function(requestEvent: HttpRequest
   return requestEvent.respondWithJson(releaseInfo);
 },"void","ReleaseInfo");
 
+// deno-lint-ignore require-await
+router.add("GET", "/env", async function(requestEvent: HttpRequest) {
+  return requestEvent.respondWithJson(process.env);
+},"void","NodeJS.ProcessEnv");
 // deno-lint-ignore require-await
 router.add("GET", "/api.json", async function(requestEvent: HttpRequest) {
   return requestEvent.respondWithJson({
