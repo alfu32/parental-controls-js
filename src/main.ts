@@ -16,7 +16,6 @@ import { rateLimited } from "./functions.ts";
 import { getTransientConfig } from "./getTransientConfig.ts";
 import { router } from "./router.config.ts";
 import { HttpRequest } from "./webserver.router.ts";
-process.env;
 
 let io = {
   sig: true,
