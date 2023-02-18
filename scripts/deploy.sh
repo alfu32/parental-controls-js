@@ -1,9 +1,9 @@
 
 SSH_HOST=$1
 
-SSH_USER=$1
-TARGET_USER=$2
-arch=$3
+SSH_USER=$2
+TARGET_USER=$3
+arch=$4
 
 #echo -n SSH Password :
 #read -s SSH_PWD

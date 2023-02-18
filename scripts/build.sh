@@ -68,12 +68,11 @@ CDIR=\`pwd\`
 
 ####################### copying environment of $TARGET_USER
 SERVICEDEF
-
-for procid in `pgrep -u $TARGET_USER gnome-session`;do
-    echo "export \"$(cat /proc/$procid/environ | egrep -z DBUS_SESSION_BUS_ADDRESS)\""
-    echo ""
+echo "
+for procid in \$(pgrep -u $TARGET_USER gnome-session);do"
+echo '    export "$(cat /proc/$procid/environ | egrep -z DBUS_SESSION_BUS_ADDRESS)"
 done
-
+'
 echo ""
 ID=`id -u`
 echo 'export XDG_RUNTIME_DIR=/run/user/$(id -u $TARGET_USER)'
