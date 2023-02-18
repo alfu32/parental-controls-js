@@ -16,7 +16,7 @@ arch=$3
     echo "    \"TAG\":\"$(git describe --tags)\","
     echo "    \"SEMVER\":\"$SEMVER\""
     echo "}"
-} > build/build.json
+} > build/release.info.json
 ### for arch in x86_64-unknown-linux-gnu x86_64-pc-windows-msvc x86_64-apple-darwin aarch64-apple-darwin; do
 ### done
     echo "ARCHITECTURE [$arch]"
@@ -38,15 +38,28 @@ cat > build/parentalcontrols.service.install << SRVINS
 
 sudo systemctl disable parentalcontrols
 sudo systemctl stop parentalcontrols
-sudo mkdir -p /home/$ADMIN_USER/.config/systemd/user
+sudo rm /lib/systemd/system/parentalcontrols.service
 sudo cp parentalcontrols.service /lib/systemd/system/
-sudo cp parentalcontrols.service.run /usr/bin
 sudo systemctl daemon-reload
 sudo systemctl start parentalcontrols
 sudo systemctl enable parentalcontrols
 journalctl -fu parentalcontrols.service -b
 SRVINS
 chmod +x build/parentalcontrols.service.install
+
+cat > build/parentalcontrols.userservice.install << SRVINS
+#!/bin/bash
+# ~/.config/systemd/user/
+
+systemctl --user disable parentalcontrols
+systemctl --user stop parentalcontrols
+mkdir -p /home/$ADMIN_USER/.config/systemd/user
+cp parentalcontrols.service home/$ADMIN_USER/.config/systemd/user/
+systemctl --user daemon-reload
+systemctl --user start parentalcontrols
+systemctl --user enable parentalcontrols
+journalctl -fu parentalcontrols.service -b
+SRVINS
 
 cat > build/parentalcontrols.service << SERVICEDEF
 [Unit]

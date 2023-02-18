@@ -16,7 +16,7 @@ const NOTIFIER:INotifier = NotifySend;
 export const router: Router = new Router();
 // deno-lint-ignore require-await
 router.add("GET", "/release.info.json", async function(requestEvent: HttpRequest) {
-  const releaseInfo = readFileSync('release.info.json').toString("utf-8")
+  const releaseInfo = JSON.parse(readFileSync('release.info.json').toString("utf-8"))
   return requestEvent.respondWithJson(releaseInfo);
 },"void","ReleaseInfo");
 
