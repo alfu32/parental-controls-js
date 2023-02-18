@@ -41,3 +41,4 @@ done
 export SEMVER="$SEMVER_MAJOR.$SEMVER_MINOR.$SEMVER_PATCH"
 git tag "$SEMVER"
 git push origin "$SEMVER"
+git push origin "$(git rev-parse --abbrev-ref HEAD)"

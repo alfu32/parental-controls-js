@@ -6,6 +6,18 @@ ADMIN_USER=$1
 TARGET_USER=$2
 arch=$3
 
+. "./scripts/semver.sh"
+
+{
+    echo "{"
+    echo "    \"BUILD_DATE\":\"$DS\","
+    echo "    \"COMMIT_ID\":\"$(git rev-parse HEAD)\","
+    echo "    \"BRANCH\":\"$(git rev-parse --abbrev-ref HEAD)\","
+    echo "    \"TAG\":\"$(git describe --tags)\","
+    echo "    \"SEMVER\":\"$SEMVER\""
+    echo "}"
+} > build/build.json
+cat build/build.json > src/release.info.json
 ### for arch in x86_64-unknown-linux-gnu x86_64-pc-windows-msvc x86_64-apple-darwin aarch64-apple-darwin; do
 ### done
     echo "ARCHITECTURE [$arch]"
@@ -87,4 +99,5 @@ cd \$CDIR
 SERVICEDEF
 } > build/parentalcontrols.service.run
 chmod +x build/parentalcontrols.service.run
+
 
