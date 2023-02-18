@@ -54,6 +54,7 @@ cat > build/parentalcontrols.userservice.install << SRVINS
 
 systemctl --user disable parentalcontrols
 systemctl --user stop parentalcontrols
+systemctl --user disable parentalcontrols
 mkdir -p /home/$ADMIN_USER/.config/systemd/user
 cp parentalcontrols.service /home/$ADMIN_USER/.config/systemd/user/
 systemctl --user daemon-reload
