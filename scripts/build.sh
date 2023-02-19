@@ -96,7 +96,7 @@ cat << SERVICEDEF
 ####################### done copying environment of $TARGET_USER
 
 #### export XDG_RUNTIME_DIR=/run/user/\$(id -u $TARGET_USER)
-#### export DISPLAY=:0
+export DISPLAY=:0
 #### export XAUTHORITY=/home/$TARGET_USER/.Xauthority
 #### export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/\$(id -u $TARGET_USER)/bus
 #### eval \"export \\$\(egrep -z DBUS_SESSION_BUS_ADDRESS \\"/proc/\\$\(pgrep -u $TARGET_USER gnome-session)/environ\)\\"\)\"
@@ -113,5 +113,7 @@ cd \$CDIR
 SERVICEDEF
 } > build/parentalcontrols.service.run
 chmod +x build/parentalcontrols.service.run
+
+cp scripts/notify-send-all build/ 
 
 
