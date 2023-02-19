@@ -151,19 +151,19 @@ function process_notifications(
       console.log("process_notifications:: counter.usedMinutes,counter.allowedMinutes",counter.usedMinutes,counter.allowedMinutes)
       if (counter.usedMinutes > counter.allowedMinutes) {
         messagesToUser.push(
-          `"you have used all the ${configItem.allowedMinutes} allowed minutes for ${configItem.appid}"`,
+        `you have used all the ${configItem.allowedMinutes} allowed minutes for ${configItem.appid}`,
         );
       } else if (counter.allowedMinutes - counter.usedMinutes == 5) {
         notificationsToUser.push(
-          `"time is running out on application ${configItem.appid}, you have 5 minutes left."`,
+          `time is running out on application ${configItem.appid}, you have 5 minutes left.`,
         );
       } else if (counter.allowedMinutes - counter.usedMinutes == 1) {
         notificationsToUser.push(
-          `"time is running out on application ${configItem.appid}, you have 1 minute left."`,
+          `time is running out on application ${configItem.appid}, you have 1 minute left.`,
         );
       } else if (counter.allowedMinutes - counter.usedMinutes == 0) {
         notificationsToUser.push(
-          `"time is up on application ${configItem.appid}"`,
+          `time is up on application ${configItem.appid}`,
         );
       }
     },
@@ -174,19 +174,19 @@ function process_notifications(
   console.log("process_notifications:: counters.dayLimit.total > counters.dayLimit.totalAllowed",counters.dayLimit.total,counters.dayLimit.totalAllowed)
   if (counters.dayLimit.total > counters.dayLimit.totalAllowed) {
     messagesToUser.push(
-      `"you have used ${counters.dayLimit.total} out of the ${dayLimitConfig.totalAllowed} allowed minutes this system, shutdown in 59 seconds."`,
+      `you have used ${counters.dayLimit.total} out of the ${dayLimitConfig.totalAllowed} allowed minutes this system, shutdown in 59 seconds.`,
     );
   } else if (counters.dayLimit.total - counters.dayLimit.totalAllowed == 5) {
     notificationsToUser.push(
-      `"Your allowed time for today is running out, you have 5 minutes left."`,
+      `Your allowed time for today is running out, you have 5 minutes left.`,
     );
   } else if (counters.dayLimit.total - counters.dayLimit.totalAllowed == 1) {
     notificationsToUser.push(
-      `"Your allowed time for today is running out, you have 1 minute left."`,
+      `Your allowed time for today is running out, you have 1 minute left.`,
     );
   } else if (counters.dayLimit.total - counters.dayLimit.totalAllowed == 0) {
     notificationsToUser.push(
-      `"Your allowed time for today is up. Computer $HOSTNAME will shut down shortly"`,
+      `Your allowed time for today is up. Computer $HOSTNAME will shut down shortly`,
     );
   }
   const [current, min, max] = [
@@ -197,15 +197,15 @@ function process_notifications(
   console.log("process_notifications:: [current, min, max]",[current, min, max])
   if (current < min || current > max) {
     messagesToUser.push(
-      `"It is ${hourMinute}. You are not allowed to use the computer outside the working hours ${counters.dayLimit.startHourMinute} to ${counters.dayLimit.endHourMinute}"`,
+      `It is ${hourMinute}. You are not allowed to use the computer outside the working hours ${counters.dayLimit.startHourMinute} to ${counters.dayLimit.endHourMinute}`,
     );
     console.log("something");;
   } else if (max - current == 5) {
     notificationsToUser.push(
-      `"It's almost time to shutdown, you have 5 minutes left."`,
+      `It's almost time to shutdown, you have 5 minutes left.`,
     );
   } else if (max - current == 1) {
-    notificationsToUser.push(`"Time to shutdown, you have 1 minute left."`);
+    notificationsToUser.push(`Time to shutdown, you have 1 minute left.`);
   }
   messagesToUser.map((message) => {
     const notificationResult = NOTIFIER.info(

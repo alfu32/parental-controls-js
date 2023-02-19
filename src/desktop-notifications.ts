@@ -141,8 +141,8 @@ class NotifySendData{
                 "--expire-time",this._expireTimeMillis.toString(10),
                 "--icon",this._icon,
                 "--category",this._category,
-                this._summary,
-                this._body,
+                this._summary.replace(/^"+|"+$/gi,''),
+                this._body.replace(/^"+|"+$/gi,''),
             ]})
             const errbuf=new Uint8Array(2048);
             const outbuf=new Uint8Array(2048);
