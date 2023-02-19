@@ -2,7 +2,7 @@
 
 
 
-export SEMVER_MAJOR=1
+export SEMVER_MAJOR=2
 export SEMVER_MINOR=0
 export SEMVER_PATCH=0
 
