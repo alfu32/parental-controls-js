@@ -14,3 +14,4 @@ test-application-graphical/cmake_install.cmake
 .gitignore
 test-application-graphical/CMakeCache.txt
 scripts/build.sh
+env.example

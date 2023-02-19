@@ -64,6 +64,30 @@ journalctl -fu parentalcontrols.service -b
 SRVINS
 chmod +x build/parentalcontrols.userservice.install
 
+cat > build/parentalcontrols.service.uninstall << SRVUNINS
+#!/bin/bash
+
+
+sudo systemctl stop parentalcontrols
+sudo systemctl disable parentalcontrols
+sudo rm -f /lib/systemd/system/parentalcontrols.service
+sudo systemctl daemon-reload
+sudo chown -R $ADMIN_USER:$ADMIN_USER build
+SRVUNINS
+chmod +x build/parentalcontrols.service.uninstall
+
+cat > build/parentalcontrols.userservice.uninstall << SRVUNINS
+#!/bin/bash
+
+
+systemctl --user stop parentalcontrols
+systemctl --user disable parentalcontrols
+rm -f /home/$ADMIN_USER/.config/systemd/user/parentalcontrols.service
+systemctl --user daemon-reload
+chown -R $ADMIN_USER:$ADMIN_USER build
+SRVUNINS
+chmod +x build/parentalcontrols.suserervice.uninstall
+
 cat > build/parentalcontrols.service << SERVICEDEF
 [Unit]
 Description=Parental Controls
@@ -82,27 +106,7 @@ cat << SERVICEDEF
 SUPER_HOME=/home/$ADMIN_USER/parental-controls
 CDIR=\`pwd\`
 
-####################### copying environment of $TARGET_USER
-SERVICEDEF
-echo "
-for procid in \$(pgrep -u $TARGET_USER gnome-session);do"
-echo '    export "$(cat /proc/$procid/environ | egrep -z DBUS_SESSION_BUS_ADDRESS)"
-done
-'
-echo ""
-ID=`id -u`
-echo 'export XDG_RUNTIME_DIR=/run/user/$(id -u $TARGET_USER)'
-cat << SERVICEDEF
-####################### done copying environment of $TARGET_USER
-
-#### export XDG_RUNTIME_DIR=/run/user/\$(id -u $TARGET_USER)
-export DISPLAY=:0
-#### export XAUTHORITY=/home/$TARGET_USER/.Xauthority
-#### export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/\$(id -u $TARGET_USER)/bus
-#### eval \"export \\$\(egrep -z DBUS_SESSION_BUS_ADDRESS \\"/proc/\\$\(pgrep -u $TARGET_USER gnome-session)/environ\)\\"\)\"
-#### export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/\$(id -u)/bus
-export DBUS_SESSION_BUS_ADDRESS="\${DBUS_SESSION_BUS_ADDRESS:-unix:path=/run/user/\$(id -u $TARGET_USER)/bus}"
-cd \$SUPER_HOME # /home/$TARGET_USER/parental-controls/
+cd \$SUPER_HOME 
 
 DATE=\`date +'%Y/%m/%d'\`
 LOGS="logs/\$DATE"

@@ -31,6 +31,8 @@ scp "./build/parentalcontrols.service.run" $SSH_TARGET
 scp "./build/parentalcontrols.service" $SSH_TARGET
 scp "./build/parentalcontrols.service.install" $SSH_TARGET
 scp "./build/parentalcontrols.userservice.install" $SSH_TARGET
+scp "./build/parentalcontrols.service.uninstall" $SSH_TARGET
+scp "./build/parentalcontrols.userservice.uninstall" $SSH_TARGET
 scp "./build/release.info.json" $SSH_TARGET
 ssh -S $SSH_CONNECTION 'sudo systemctl enable parentalcontrols'
 ssh -S $SSH_CONNECTION 'sudo systemctl start parentalcontrols'
