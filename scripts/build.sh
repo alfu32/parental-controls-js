@@ -95,7 +95,7 @@ systemctl --user disable \$SERVICENAME
 systemctl --user stop \$SERVICENAME
 systemctl --user status \$SERVICENAME
 mkdir -p /home/$ADMIN_USER/.config/systemd/user
-rm -rf \$SERVICENAME /home/$ADMIN_USER/.config/systemd/user/
+rm -rf  /home/$ADMIN_USER/.config/systemd/user/\$SERVICENAME
 cp \$SERVICENAME /home/$ADMIN_USER/.config/systemd/user/
 systemctl --user daemon-reload
 systemctl --user start \$SERVICENAME
