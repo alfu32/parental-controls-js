@@ -29,6 +29,7 @@ scp "./build/notify-send-all" $SSH_TARGET
 # scp ./config.json $SSH_TARGET
 scp "./build/parentalcontrols.service.run" $SSH_TARGET
 scp "./build/parentalcontrols.service" $SSH_TARGET
+scp "./build/parentalcontrols-usermode.service" $SSH_TARGET
 scp "./build/parentalcontrols.service.install" $SSH_TARGET
 scp "./build/parentalcontrols.userservice.install" $SSH_TARGET
 scp "./build/parentalcontrols.service.uninstall" $SSH_TARGET
