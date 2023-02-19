@@ -86,7 +86,7 @@ rm -f /home/$ADMIN_USER/.config/systemd/user/parentalcontrols.service
 systemctl --user daemon-reload
 chown -R $ADMIN_USER:$ADMIN_USER build
 SRVUNINS
-chmod +x build/parentalcontrols.suserervice.uninstall
+chmod +x build/parentalcontrols.userservice.uninstall
 
 cat > build/parentalcontrols.service << SERVICEDEF
 [Unit]
