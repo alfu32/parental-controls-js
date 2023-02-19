@@ -33,62 +33,6 @@ DS=`date +'%Y%m%d%H%M%S'`
     deno compile --unstable --node-modules-dir --allow-all --target "$arch" -o "$OUT" src/main.ts
 
 
-cat > build/parentalcontrols.service.install << SRVINS
-#!/bin/bash
-# ~/.config/systemd/user/
-sudo cp notify-send-all /usr/bin/
-sudo systemctl disable parentalcontrols
-sudo systemctl stop parentalcontrols
-sudo rm /lib/systemd/system/parentalcontrols.service
-sudo cp parentalcontrols.service /lib/systemd/system/
-sudo systemctl daemon-reload
-sudo systemctl start parentalcontrols
-sudo systemctl enable parentalcontrols
-journalctl -fu parentalcontrols.service -b
-SRVINS
-chmod +x build/parentalcontrols.service.install
-
-cat > build/parentalcontrols.userservice.install << SRVINS
-#!/bin/bash
-# ~/.config/systemd/user/
-
-sudo cp notify-send-all /usr/bin/
-systemctl --user disable parentalcontrols
-systemctl --user stop parentalcontrols
-systemctl --user disable parentalcontrols
-mkdir -p /home/$ADMIN_USER/.config/systemd/user
-cp parentalcontrols.service /home/$ADMIN_USER/.config/systemd/user/
-systemctl --user daemon-reload
-systemctl --user start parentalcontrols
-systemctl --user enable parentalcontrols
-journalctl -fu parentalcontrols.service -b
-SRVINS
-chmod +x build/parentalcontrols.userservice.install
-
-cat > build/parentalcontrols.service.uninstall << SRVUNINS
-#!/bin/bash
-
-
-sudo systemctl stop parentalcontrols
-sudo systemctl disable parentalcontrols
-sudo rm -f /lib/systemd/system/parentalcontrols.service
-sudo systemctl daemon-reload
-sudo chown -R $ADMIN_USER:$ADMIN_USER /home/$ADMIN_USER/parental-controls
-SRVUNINS
-chmod +x build/parentalcontrols.service.uninstall
-
-cat > build/parentalcontrols.userservice.uninstall << SRVUNINS
-#!/bin/bash
-
-
-systemctl --user stop parentalcontrols
-systemctl --user disable parentalcontrols
-rm -f /home/$ADMIN_USER/.config/systemd/user/parentalcontrols.service
-systemctl --user daemon-reload
-sudo chown -R $ADMIN_USER:$ADMIN_USER /home/$ADMIN_USER/parental-controls
-SRVUNINS
-chmod +x build/parentalcontrols.userservice.uninstall
-
 cat > build/parentalcontrols.service << SERVICEDEF
 [Unit]
 Description=Parental Controls
@@ -100,8 +44,79 @@ ExecStart=/home/$ADMIN_USER/parental-controls/parentalcontrols.service.run
 WantedBy=multi-user.target
 SERVICEDEF
 
-{
-cat << SERVICEDEF
+cat > build/parentalcontrols.service.install << SRVINS
+#!/bin/bash
+# ~/.config/systemd/user/
+SERVICENAME=parentalcontrols.service
+
+sudo cp notify-send-all /usr/bin/
+sudo systemctl disable \$SERVICENAME
+sudo systemctl stop \$SERVICENAME
+sudo rm /lib/systemd/system/\$SERVICENAME
+sudo cp \$SERVICENAME /lib/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl start \$SERVICENAME
+sudo systemctl enable \$SERVICENAME
+journalctl -fu \$SERVICENAME -b
+SRVINS
+chmod +x build/parentalcontrols.service.install
+
+cat > build/parentalcontrols.service.uninstall << SRVUNINS
+#!/bin/bash
+SERVICENAME=parentalcontrols.service
+
+
+sudo systemctl stop \$SERVICENAME
+sudo systemctl disable \$SERVICENAME
+sudo rm -f /lib/systemd/system/\$SERVICENAME
+sudo systemctl daemon-reload
+sudo chown -R $ADMIN_USER:$ADMIN_USER /home/$ADMIN_USER/parental-controls
+SRVUNINS
+chmod +x build/parentalcontrols.service.uninstall
+
+cat > build/parentalcontrols-usermode.service << SERVICEDEF
+[Unit]
+Description=Parental Controls
+
+[Service]
+ExecStart=/home/$ADMIN_USER/parental-controls/parentalcontrols.service.run
+
+[Install]
+WantedBy=default.target
+SERVICEDEF
+
+cat > build/parentalcontrols.userservice.install << SRVINS
+#!/bin/bash
+# ~/.config/systemd/user/
+SERVICENAME=parentalcontrols-usermode.service
+
+sudo cp notify-send-all /usr/bin/
+systemctl --user disable \$SERVICENAME
+systemctl --user stop \$SERVICENAME
+systemctl --user status \$SERVICENAME
+mkdir -p /home/$ADMIN_USER/.config/systemd/user
+rm -rf \$SERVICENAME /home/$ADMIN_USER/.config/systemd/user/
+cp \$SERVICENAME /home/$ADMIN_USER/.config/systemd/user/
+systemctl --user daemon-reload
+systemctl --user start \$SERVICENAME
+systemctl --user enable \$SERVICENAME
+journalctl -fu \$SERVICENAME -b
+SRVINS
+chmod +x build/parentalcontrols.userservice.install
+
+cat > build/parentalcontrols.userservice.uninstall << SRVUNINS
+#!/bin/bash
+SERVICENAME=parentalcontrols-usermode.service
+
+systemctl --user stop \$SERVICENAME
+systemctl --user disable \$SERVICENAME
+rm -f /home/$ADMIN_USER/.config/systemd/user/\$SERVICENAME
+systemctl --user daemon-reload
+sudo chown -R $ADMIN_USER:$ADMIN_USER /home/$ADMIN_USER/parental-controls
+SRVUNINS
+chmod +x build/parentalcontrols.userservice.uninstall
+
+cat > build/parentalcontrols.service.run << SERVICEDEF
 #!/bin/bash
 
 SUPER_HOME=/home/$ADMIN_USER/parental-controls
@@ -116,7 +131,6 @@ LOGS="logs/\$DATE"
 
 cd \$CDIR
 SERVICEDEF
-} > build/parentalcontrols.service.run
 chmod +x build/parentalcontrols.service.run
 
 cp scripts/notify-send-all build/ 
