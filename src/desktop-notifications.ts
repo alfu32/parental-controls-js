@@ -24,6 +24,7 @@ export const NotifySend:INotifier = {
     }
 }
 export function splitBodyText(text:string,maxCharsPerLine:number){
+    return text
     return text.split(" ").reduce(
         (lines:string[][],word:string) => {
             let currentLine = lines[lines.length-1]
