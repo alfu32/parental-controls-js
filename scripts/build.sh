@@ -100,7 +100,7 @@ cp \$SERVICENAME /home/$ADMIN_USER/.config/systemd/user/
 systemctl --user daemon-reload
 systemctl --user start \$SERVICENAME
 systemctl --user enable \$SERVICENAME
-journalctl -fu \$SERVICENAME -b
+journalctl --user -fu \$SERVICENAME -b
 SRVINS
 chmod +x build/parentalcontrols.userservice.install
 
