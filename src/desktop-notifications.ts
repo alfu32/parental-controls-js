@@ -116,6 +116,7 @@ class NotifySendData{
             _category:${this._category},
             _summary:${this._summary},
             _body:${this._body},
+            _command:${this.command()}
         }`
     }
     command(){
