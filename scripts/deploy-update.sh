@@ -7,6 +7,7 @@ ADMIN_USER=$2
 TARGET_USER=$3
 arch=$4
 DS=`date +'%Y%m%d%H%M%S'`
+SERVICENAME=parentalcontrols-usermode.service
 
 #echo -n SSH Password :
 #read -s SSH_PWD
@@ -18,8 +19,8 @@ echo $SSH_CONNECTION
 echo ""
 SSH_TARGET=$SSH_CONNECTION:/home/$ADMIN_USER/parental-controls
 
-ssh $SSH_CONNECTION 'systemctl --user stop parentalcontrols'
-ssh $SSH_CONNECTION 'systemctl --user status parentalcontrols'
+ssh $SSH_CONNECTION "systemctl --user stop $SERVICENAME"
+ssh $SSH_CONNECTION "systemctl --user status $SERVICENAME"
 ssh $SSH_CONNECTION "mkdir '/home/$ADMIN_USER/parental-controls'"
 scp "./build/parental-controls-$arch.bin" $SSH_TARGET
 scp "./build/notify-send-all" $SSH_TARGET
@@ -32,6 +33,6 @@ scp "./build/parentalcontrols.userservice.install" $SSH_TARGET
 scp "./build/parentalcontrols.service.uninstall" $SSH_TARGET
 scp "./build/parentalcontrols.userservice.uninstall" $SSH_TARGET
 scp "./build/release.info.json" $SSH_TARGET
-ssh $SSH_CONNECTION 'systemctl --user start parentalcontrols'
+ssh $SSH_CONNECTION "systemctl --user start $SERVICENAME"
 # ssh -S $SSH_CONNECTION 'systemctl --user start parentalcontrols'
-ssh $SSH_CONNECTION 'systemctl --user status parentalcontrols'
+ssh $SSH_CONNECTION "systemctl --user status $SERVICENAME"
