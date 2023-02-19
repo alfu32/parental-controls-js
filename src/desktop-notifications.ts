@@ -134,7 +134,7 @@ class NotifySendData{
         let error:any;
         try{
             const proc = await Deno.run({cmd:[
-                'notify-send',
+                'notify-send-all',
                 "--urgency",this._urgency,
                 "--expire-time",this._expireTimeMillis.toString(10),
                 "--icon",this._icon,
