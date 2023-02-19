@@ -11,7 +11,7 @@ for commit_title in `git log --all | tac | egrep -oh "(feat|feature|refactoring|
     commit_type="$(egrep -oh "^(milestone|feat|feature|refactoring|refactor|fix|hotfix|config)" <<< $commit_title)"
     description="$(egrep -oh "\(.*?\)$" <<< $commit_title)"
     if [[ "$commit_type" == "milestone" ]]; then
-        #echo "This is a new major release."
+        echo "This is a new major release."
         SEMVER_MAJOR=$(($SEMVER_MAJOR + 1))
         SEMVER_MINOR=0
         SEMVER_PATCH=0
