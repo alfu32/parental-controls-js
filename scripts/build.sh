@@ -36,7 +36,7 @@ DS=`date +'%Y%m%d%H%M%S'`
 cat > build/parentalcontrols.service.install << SRVINS
 #!/bin/bash
 # ~/.config/systemd/user/
-
+sudo cp notify-send-all /usr/bin/
 sudo systemctl disable parentalcontrols
 sudo systemctl stop parentalcontrols
 sudo rm /lib/systemd/system/parentalcontrols.service
@@ -52,6 +52,7 @@ cat > build/parentalcontrols.userservice.install << SRVINS
 #!/bin/bash
 # ~/.config/systemd/user/
 
+sudo cp notify-send-all /usr/bin/
 systemctl --user disable parentalcontrols
 systemctl --user stop parentalcontrols
 systemctl --user disable parentalcontrols
