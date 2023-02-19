@@ -69,7 +69,8 @@ export async function sendNotifySendNotification(type:NotificationCategory,title
         .icon(icons_mapping[type])
         .summary(title)
         .body(body)
-        .send());
+        .senddeno());
+        //.send());
         return spr;
     }catch(err){
         console.error("ERROR.sendNotifySendNotification",err)
@@ -120,7 +121,7 @@ class NotifySendData{
         }`
     }
     command(){
-        return `notify-send --urgency ${this._urgency} --expire-time ${this._expireTimeMillis} --icon ${this._icon} --category ${this._category} "${this._summary}" "${this._body.replace(/\n/gi,"\\n")}"`
+        return `notify-send-all --urgency ${this._urgency} --expire-time ${this._expireTimeMillis} --icon ${this._icon} --category ${this._category} "${this._summary}" "${this._body.replace(/\n/gi,"\\n")}"`
     }
     async senddeno():Promise<SpawnProcessResult>{
         console.log("NOTIFYSEND.spawnprocess",this.toString())
