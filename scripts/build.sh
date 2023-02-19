@@ -73,7 +73,7 @@ sudo systemctl stop parentalcontrols
 sudo systemctl disable parentalcontrols
 sudo rm -f /lib/systemd/system/parentalcontrols.service
 sudo systemctl daemon-reload
-sudo chown -R $ADMIN_USER:$ADMIN_USER build
+sudo chown -R $ADMIN_USER:$ADMIN_USER /home/$ADMIN_USER/parental-controls
 SRVUNINS
 chmod +x build/parentalcontrols.service.uninstall
 
@@ -85,7 +85,7 @@ systemctl --user stop parentalcontrols
 systemctl --user disable parentalcontrols
 rm -f /home/$ADMIN_USER/.config/systemd/user/parentalcontrols.service
 systemctl --user daemon-reload
-chown -R $ADMIN_USER:$ADMIN_USER build
+sudo chown -R $ADMIN_USER:$ADMIN_USER /home/$ADMIN_USER/parental-controls
 SRVUNINS
 chmod +x build/parentalcontrols.userservice.uninstall
 
