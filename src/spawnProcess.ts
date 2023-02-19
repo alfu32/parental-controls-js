@@ -8,7 +8,7 @@ export function spawnProcess(
   args: string[],
   options: { [key: string]: any; } = { cwd: undefined, env: process.env }): Promise<SpawnProcessResult> {
   return new Promise((resolve, reject) => {
-    const cmd = spawn(command, args.map(a =>`"${a}"`), options);
+    const cmd = spawn(command, args, options);
     let error = "";
     let out = "";
     cmd.stdout.on('data', (data) => {

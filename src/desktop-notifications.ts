@@ -24,7 +24,6 @@ export const NotifySend:INotifier = {
     }
 }
 export function splitBodyText(text:string,maxCharsPerLine:number){
-    return text
     return text.split(" ").reduce(
         (lines:string[][],word:string) => {
             let currentLine = lines[lines.length-1]
@@ -135,25 +134,26 @@ class NotifySendData{
         let out="";
         // deno-lint-ignore no-explicit-any
         let error:any;
-        const cmd=[
-            'notify-send-all',
-            "--urgency",this._urgency,
-            "--expire-time",this._expireTimeMillis.toString(10),
-            "--icon",this._icon,
-            "--category",this._category,
-            this._summary.replace(/\n|\r/,' '),//.replace(/^"+|"+$/gi,''),
-            this._body.replace(/\n|\r/,' '),//.replace(/^"+|"+$/gi,''),
-        ]
         try{
-            // const proc = await Deno.run({cmd})
-            const {out,error} = await spawnProcess(cmd[0],cmd.slice(1))
-            return {out,error}
+            const proc = await Deno.run({cmd:[
+                'notify-send-all',
+                "--urgency",this._urgency,
+                "--expire-time",this._expireTimeMillis.toString(10),
+                "--icon",this._icon,
+                "--category",this._category,
+                this._summary,
+                this._body,
+            ]})
+            const errbuf=new Uint8Array(2048);
+            const outbuf=new Uint8Array(2048);
+            await proc.stdout?.read(outbuf);
+            await proc.stderr?.read(errbuf);
+            out=new TextDecoder().decode(outbuf);
+            error=new TextDecoder().decode(errbuf);
         }catch(err){
             error=err
-            console.log("error sending deno notification",cmd)
-            console.log("error sending deno notification",err)
-            return {out:"",error}
         }
+        return {out,error}
     }
     async send():Promise<SpawnProcessResult>{
         console.log("NOTIFYSEND.spawnprocess",this.toString())
