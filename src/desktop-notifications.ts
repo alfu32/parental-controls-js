@@ -140,8 +140,8 @@ class NotifySendData{
             "--expire-time",this._expireTimeMillis.toString(10),
             "--icon",this._icon,
             "--category",this._category,
-            this._summary.replace(/^"+|"+$/gi,''),
-            this._body.replace(/^"+|"+$/gi,''),
+            this._summary,//.replace(/^"+|"+$/gi,''),
+            this._body,//.replace(/^"+|"+$/gi,''),
         ]
         try{
             // const proc = await Deno.run({cmd})
