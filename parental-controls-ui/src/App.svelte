@@ -18,7 +18,7 @@
 	import { Tabs } from '@svelteuidev/core';
 
   import {ParentalControlsApi,Result,} from './client-api';
-  import type { Config, ConfigurationRecord, Counters, DailyLimitConfig, Process } from '../../src/classes';
+  import type { Config, ConfigurationRecord, Counters, DailyLimitConfig, Process, WindowData } from '../../src/classes';
   import CountersEditor from './lib/CountersEditor.svelte';
   import AppCountersList from './lib/AppCounters.svelte';
     import AppConfigEditor from './lib/AppConfigEditor.svelte';
@@ -36,6 +36,7 @@
   let counters:Counters=null;
   let config:Config=null;
   let processes:Process[]=null;
+  let windows:WindowData[]=null;
   let host=hosts[0]
   let gapi=new ParentalControlsApi(`${host.address}:8080`)
   let error=null;
@@ -93,9 +94,11 @@
     }
     await fetchConfig();
     await fetchCounters();
-    const {ok,err} = await gapi.getProcessList()
-    error=err
-    processes=ok
+    var plist = await gapi.getProcessList()
+    processes=plist.ok
+    var wlist = await gapi.getWindowList()
+    error=plist.err||wlist.err
+    windows=wlist.ok
   })
   async function saveConfig(newConfigLimits:CustomEvent<Config>){
     const newConfig = config.copy()
@@ -198,6 +201,20 @@
               <Button on:click={e => sendShutdown()}>shutdown computer</Button>
               <Button variant="outline" on:click={e => sendAbortShutdown()}>abort shutdown</Button>
             </SimpleGrid>
+            <WTable data={windows} config={[
+              { key:"windowId",label:"window id",renderer:WTableCell,rendererConfig:{}},
+              { key:"pid",label:"process id",renderer:WTableCell,rendererConfig:{}},
+              { key:"machineName",label:"machine name",renderer:WTableCell,rendererConfig:{}},
+              { key:"title",label:"window title",renderer:WTableCell,rendererConfig:{}},
+            ]}>
+              <div slot="row-operations" let:record>
+                <Button on:click={(ev) =>{
+                  console.log(ev)
+                  console.log(record);
+                  alert(JSON.stringify(record,null," "))
+                }}>close window</Button>
+              </div>
+            </WTable>
             <WTable data={processes} config={[
               { key:"USER",label:"USER",renderer:WTableCell,rendererConfig:{}},
               { key:"PID",label:"PID",renderer:WTableCell,rendererConfig:{}},
@@ -208,7 +225,7 @@
                   console.log(ev)
                   console.log(record);
                   alert(JSON.stringify(record,null," "))
-                }}>operate</Button>
+                }}>SIGTERM</Button>
               </div>
             </WTable>
           </Tabs.Tab>

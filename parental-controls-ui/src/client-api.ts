@@ -1,5 +1,5 @@
 
-import { Config, ConfigurationRecord, Counters,Process } from "../../src/classes";
+import { Config, ConfigurationRecord, Counters,Process, WindowData } from "../../src/classes";
 export class Result<T, E>{
   constructor(public ok:T,public err:E){}
   unwrap():T{
@@ -161,6 +161,19 @@ export class ParentalControlsApi {
       });
       const json = await response.json();
       return new Ok<Process[]>(json.lines.map(Process.fromJson));
+    } catch (err) {
+      return new Err<Error>(err as Error);
+    }
+  }
+  async getWindowList(): Promise<Result<WindowData[], Error>> {
+    try {
+      console.log("API.sendMessage",{url:`http://${this.host}/windows`})
+      const response = await fetch(`http://${this.host}/windows`, {
+        method: "GET",
+        redirect: "follow",
+      });
+      const json = await response.json();
+      return new Ok<WindowData[]>(json.windows.map(WindowData.fromJson));
     } catch (err) {
       return new Err<Error>(err as Error);
     }
