@@ -18,11 +18,14 @@
 	import { Tabs } from '@svelteuidev/core';
 
   import {ParentalControlsApi,Result,} from './client-api';
-  import type { Config, ConfigurationRecord, Counters, DailyLimitConfig } from '../../src/classes';
+  import type { Config, ConfigurationRecord, Counters, DailyLimitConfig, Process } from '../../src/classes';
   import CountersEditor from './lib/CountersEditor.svelte';
   import AppCountersList from './lib/AppCounters.svelte';
     import AppConfigEditor from './lib/AppConfigEditor.svelte';
     import WeeklyConfigEditor from './lib/WeeklyConfigEditor.svelte';
+    import WTable from './lib/WTable.svelte';
+    import WTableCell from './lib/WTableCell.svelte';
+    import WTableEditableCell from './lib/WTableEditableCell.svelte';
     let hosts=[
       {address:"localhost",label:"local"},
       {address:"hefaistos.local",label:"mihai"},
@@ -32,6 +35,7 @@
     ]
   let counters:Counters=null;
   let config:Config=null;
+  let processes:Process[]=null;
   let host=hosts[0]
   let gapi=new ParentalControlsApi(`${host.address}:8080`)
   let error=null;
@@ -44,6 +48,15 @@
     clearTimeout(to)
     await fetchConfig()
     await fetchCounters()
+    console.log({
+      CountersEditor,
+      AppCountersList,
+      AppConfigEditor,
+      WeeklyConfigEditor,
+      WTable,
+      WTableCell,
+      WTableEditableCell,
+    })
   }
   async function fetchConfig(){
     try{
@@ -80,6 +93,9 @@
     }
     await fetchConfig();
     await fetchCounters();
+    const {ok,err} = await gapi.getProcessList()
+    error=err
+    processes=ok
   })
   async function saveConfig(newConfigLimits:CustomEvent<Config>){
     const newConfig = config.copy()
@@ -182,7 +198,19 @@
               <Button on:click={e => sendShutdown()}>shutdown computer</Button>
               <Button variant="outline" on:click={e => sendAbortShutdown()}>abort shutdown</Button>
             </SimpleGrid>
-              <pre>{JSON.stringify(config,null,"  ")}</pre>
+            <WTable data={processes} config={[
+              { key:"USER",label:"USER",renderer:WTableCell,rendererConfig:{}},
+              { key:"PID",label:"PID",renderer:WTableCell,rendererConfig:{}},
+              { key:"COMMAND",label:"COMMAND",renderer:WTableCell,rendererConfig:{}},
+            ]}>
+              <div slot="row-operations" let:record>
+                <Button on:click={(ev) =>{
+                  console.log(ev)
+                  console.log(record);
+                  alert(JSON.stringify(record,null," "))
+                }}>operate</Button>
+              </div>
+            </WTable>
           </Tabs.Tab>
           <Tabs.Tab label='Notifications' color='pink'>
           </Tabs.Tab>

@@ -1,32 +1,25 @@
-import { Config, ConfigurationRecord, Counters } from "../../src/classes.ts";
 
-export interface Ok<T> {
-  _tag: "Ok";
-  ok: T;
-  unwrap: () => T;
+import { Config, ConfigurationRecord, Counters,Process } from "../../src/classes";
+export class Result<T, E>{
+  constructor(public ok:T,public err:E){}
+  unwrap():T{
+    if(this.err !== null){
+      throw this.err
+    }else {
+      return this.ok
+    }
+  }
+};
+export class Ok<T> extends Result<T,any> {
+  constructor(ok:T){
+    super(ok,null)
+  }
 }
-export interface Err<E> {
-  _tag: "Err";
-  err: E;
-  unwrap: <T>() => T;
+export class Err<E> extends Result<any,E> {
+  constructor(err:E){
+    super(null,err)
+  }
 }
-export type Result<T, E> = Ok<T> | Err<E>;
-export const Ok = <T, E>(ok: T): Result<T, E> => ({
-  _tag: "Ok",
-  ok,
-  unwrap(): T {
-    return this.ok;
-  },
-});
-export const Err = <T, E>(err: E): Result<T, E> => ({
-  _tag: "Err",
-  err,
-  unwrap<T>(): T {
-    throw this.err;
-    return null as T;
-  },
-});
-export const Result = Object.freeze({ Ok, Err });
 
 export type Some<T> = { _tag: "Some"; some: T };
 export type None = { _tag: "None" };
@@ -55,9 +48,9 @@ export class ParentalControlsApi {
         redirect: "follow",
       });
       const json = await response.json();
-      return Ok<Counters, Error>(Counters.fromJson(json));
+      return new Ok<Counters>(Counters.fromJson(json));
     } catch (err) {
-      return Err<Counters, Error>(err);
+      return new Err<Error>(err as Error);
     }
   }
   async updateCounters(counters: Counters): Promise<Result<Counters, Error>> {
@@ -69,9 +62,9 @@ export class ParentalControlsApi {
         body: JSON.stringify(counters, null, "  "),
       });
       const json = await response.json();
-      return Ok<Counters, Error>(Counters.fromJson(json));
+      return new Ok<Counters>(Counters.fromJson(json));
     } catch (err) {
-      return Err<Counters, Error>(err);
+      return new Err<Error>(err as Error);
     }
   }
   async getConfig(): Promise<Result<Config, Error>> {
@@ -82,9 +75,9 @@ export class ParentalControlsApi {
         redirect: "follow",
       });
       const json = await response.json();
-      return Ok<Config, Error>(Config.fromJson(json));
+      return new Ok<Config>(Config.fromJson(json));
     } catch (err) {
-      return Err<Config, Error>(err);
+      return new Err<Error>(err as Error);
     }
   }
   async updateConfig(config: Config): Promise<Result<Config, Error>> {
@@ -100,9 +93,9 @@ export class ParentalControlsApi {
         redirect: "follow",
       });
       const json = await response.json();
-      return Ok<Config, Error>(Config.fromJson(json));
+      return new Ok<Config>(Config.fromJson(json));
     } catch (err) {
-      return Err<Config, Error>(err);
+      return new Err<Error>(err as Error);
     }
   }
   async shutdown(): Promise<Result<ShutdownResult, Error>> {
@@ -113,9 +106,9 @@ export class ParentalControlsApi {
         redirect: "follow",
       });
       const json = await response.json();
-      return Ok<ShutdownResult, Error>(json as ShutdownResult);
+      return new Ok<ShutdownResult>(json as ShutdownResult);
     } catch (err) {
-      return Err<ShutdownResult, Error>(err);
+      return new Err<Error>(err as Error);
     }
   }
   async abortShutdown(): Promise<Result<ShutdownResult, Error>> {
@@ -126,9 +119,9 @@ export class ParentalControlsApi {
         redirect: "follow",
       });
       const json = await response.json();
-      return Ok<ShutdownResult, Error>(json as ShutdownResult);
+      return new Ok<ShutdownResult>(json as ShutdownResult);
     } catch (err) {
-      return Err<ShutdownResult, Error>(err);
+      return new Err<Error>(err as Error);
     }
   }
   async sendMessage(message: string): Promise<Result<any, Error>> {
@@ -140,9 +133,9 @@ export class ParentalControlsApi {
         body: message,
       });
       const json = await response.json();
-      return Ok<ShutdownResult, Error>(json as ShutdownResult);
+      return new Ok<ShutdownResult>(json as ShutdownResult);
     } catch (err) {
-      return Err<ShutdownResult, Error>(err);
+      return new Err<Error>(err as Error);
     }
   }
   async killAllInstancesOf(conf: ConfigurationRecord): Promise<Result<any, Error>> {
@@ -154,9 +147,22 @@ export class ParentalControlsApi {
         body: JSON.stringify(conf,null," "),
       });
       const json = await response.json();
-      return Ok<ShutdownResult, Error>(json as ShutdownResult);
+      return new Ok<ShutdownResult>(json as ShutdownResult);
     } catch (err) {
-      return Err<ShutdownResult, Error>(err);
+      return new Err<Error>(err as Error);
+    }
+  }
+  async getProcessList(): Promise<Result<Process[], Error>> {
+    try {
+      console.log("API.sendMessage",{url:`http://${this.host}/processes`})
+      const response = await fetch(`http://${this.host}/processes`, {
+        method: "GET",
+        redirect: "follow",
+      });
+      const json = await response.json();
+      return new Ok<Process[]>(json.lines.map(Process.fromJson));
+    } catch (err) {
+      return new Err<Error>(err as Error);
     }
   }
 }
