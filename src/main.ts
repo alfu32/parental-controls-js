@@ -110,12 +110,14 @@ function backend_worker_synchro_iteration( params: { counters: Counters; config:
         counter = configItem.copy();
         counters.applications.push(counter);
       }
-      const output = execSync(`ps -aux | grep "${configItem.processregex}"`)
+      const processes = execSync(`ps -aux | grep "${configItem.processregex}"`)
         .toString("utf8").split("\n").filter((l) => l !== "");
-      //console.log(output);
-      const count = output.length;
+      const windows = execSync(`wmctrl-all -lp | grep "${configItem.processregex}"`)
+          .toString("utf8").split("\n").filter((l) => l !== "");
+      //console.log(processes);
+      const count = processes.length + windows.length;
       //console.log(counter, count);
-      if (count > 2) {
+      if (count > 4) {
         counter.usedMinutes += 1 / frequencyPerTimeUnit;
         addToTotal = true;
         counter.isOn = true;
