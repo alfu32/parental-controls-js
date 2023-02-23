@@ -39,7 +39,7 @@ if (import.meta.main) {
       })(),
       (async () => {
         for await (const iResult of mainLoop()) {
-          console.log({ iResult });
+          // console.log({ iResult });
         }
       })(),
     ],
@@ -50,7 +50,7 @@ async function* mainLoop() {
     fs.writeFileSync("config.json", JSON.stringify(new Config(), null, "  "));
   }
   const rl_process_notifications = rateLimited(process_notifications,60000)
-  console.log(rl_process_notifications.toString())
+  // console.log(rl_process_notifications.toString())
   while (io.sig) {
     const config = await Config.fromFile("config.json");
     const {
@@ -112,9 +112,9 @@ function backend_worker_synchro_iteration( params: { counters: Counters; config:
       }
       const output = execSync(`ps -aux | grep "${configItem.processregex}"`)
         .toString("utf8").split("\n").filter((l) => l !== "");
-      console.log(output);
+      //console.log(output);
       const count = output.length;
-      console.log(counter, count);
+      //console.log(counter, count);
       if (count > 2) {
         counter.usedMinutes += 1 / frequencyPerTimeUnit;
         addToTotal = true;
@@ -124,7 +124,7 @@ function backend_worker_synchro_iteration( params: { counters: Counters; config:
       }
     },
   );
-  console.log("addToTotal", addToTotal);
+  //console.log("addToTotal", addToTotal);
   if (addToTotal) {
     counters.dayLimit.total += 1 / frequencyPerTimeUnit;
     addToTotal = false;
@@ -137,7 +137,7 @@ function process_notifications(
   const { counters, config, hourMinute } = params;
   const messagesToUser: string[] = [];
   const notificationsToUser: string[] = [];
-  console.log("2.====== processing notifications ==================================================")
+  //console.log("2.====== processing notifications ==================================================")
   config.applications.forEach(
     (configItem) => {
       let counter = counters.applications.find((cntItem) =>
@@ -145,10 +145,10 @@ function process_notifications(
       );
       if (!counter) {
         counter = configItem.copy();
-        console.log("process_notifications.!counter",counter)
+        //console.log("process_notifications.!counter",counter)
       }
 
-      console.log("process_notifications:: counter.usedMinutes,counter.allowedMinutes",counter.usedMinutes,counter.allowedMinutes)
+      //console.log("process_notifications:: counter.usedMinutes,counter.allowedMinutes",counter.usedMinutes,counter.allowedMinutes)
       if (counter.usedMinutes > counter.allowedMinutes) {
         messagesToUser.push(
         `you have used all the ${configItem.allowedMinutes} allowed minutes for ${configItem.appid}`,
@@ -171,7 +171,7 @@ function process_notifications(
   const dayLimitConfig = config.getCurrentDayLimitConfig(
     counters.dayLimit.date,
   );
-  console.log("process_notifications:: counters.dayLimit.total > counters.dayLimit.totalAllowed",counters.dayLimit.total,counters.dayLimit.totalAllowed)
+  // console.log("process_notifications:: counters.dayLimit.total > counters.dayLimit.totalAllowed",counters.dayLimit.total,counters.dayLimit.totalAllowed)
   if (counters.dayLimit.total > counters.dayLimit.totalAllowed) {
     messagesToUser.push(
       `you have used ${counters.dayLimit.total} out of the ${dayLimitConfig.totalAllowed} allowed minutes this system, shutdown in 59 seconds.`,
@@ -194,7 +194,7 @@ function process_notifications(
     Number.parseInt(counters.dayLimit.startHourMinute, 10),
     Number.parseInt(counters.dayLimit.endHourMinute, 10),
   ];
-  console.log("process_notifications:: [current, min, max]",[current, min, max])
+  // console.log("process_notifications:: [current, min, max]",[current, min, max])
   if (current < min || current > max) {
     messagesToUser.push(
       `It is ${hourMinute}. You are not allowed to use the computer outside the working hours ${counters.dayLimit.startHourMinute} to ${counters.dayLimit.endHourMinute}`,

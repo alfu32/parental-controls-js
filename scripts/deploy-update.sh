@@ -24,6 +24,7 @@ ssh $SSH_CONNECTION "systemctl --user status $SERVICENAME"
 ssh $SSH_CONNECTION "mkdir '/home/$ADMIN_USER/parental-controls'"
 scp "./build/parental-controls-$arch.bin" $SSH_TARGET
 scp "./build/notify-send-all" $SSH_TARGET
+scp "./build/wmctrl-all" $SSH_TARGET
 # scp ./config.json $SSH_TARGET
 scp "./build/parentalcontrols.service.run" $SSH_TARGET
 scp "./build/parentalcontrols.service" $SSH_TARGET

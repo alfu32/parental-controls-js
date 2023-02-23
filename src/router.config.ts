@@ -4,7 +4,8 @@ import {
   Config,
   ConfigurationRecord,
   Counters, Process,
-  sleep
+  sleep,
+WindowData
 } from "./classes.ts";
 import { spawnProcess } from "./spawnProcess.ts";
 import { HttpRequest } from "./webserver.router.ts";
@@ -12,6 +13,12 @@ import { getTransientConfig } from "./getTransientConfig.ts";
 import { NotifySend, INotifier } from "./desktop-notifications.ts";
 import { Reflect } from "https://deno.land/x/reflect_metadata@v0.1.12/mod.ts";
 import process from "node:process";
+
+/// import { createRequire } from "https://deno.land/std/node/module.ts";
+/// 
+/// const require = createRequire(import.meta.url);
+/// const notifier = require("node-notifier");
+
 const NOTIFIER:INotifier = NotifySend;
 
 export const router: Router = new Router();
@@ -195,6 +202,33 @@ router.add("POST", "/pkillall", async function(requestEvent: HttpRequest) {
     notificationResult,
   });
 },"regex:string","{ pkillResult:Process[], configurationRecord:ConfigurationRecord,notificationResult:ProcessResult }");
+
+router.add("GET", "/windows", async function(requestEvent: HttpRequest) {
+  // The native HTTP server uses the web standard `Request` and `Response`
+  // objects.
+
+// String
+//notifier.notify('Message');
+
+// Object
+// notifier.notify({
+//   title: 'My notification',
+//   message: 'Hello, there!'
+// });
+  try{
+    let winListResult = await spawnProcess("wmctrl-all", [`-lp`]);
+    console.log("GET", "/windows",winListResult)
+    return requestEvent.respondWithJson({
+      windows: WindowData.decodeWmctrlOutput(winListResult.out),
+      error: winListResult.error,
+    });
+  }catch(err){
+    return requestEvent.respondWithJson({
+      windows: WindowData.decodeWmctrlOutput(err.out),
+      error: err,
+    });
+  }
+},"void","{ lines:WindowData[], error:Error }");
 router.add("POST", "/message", async function(requestEvent: HttpRequest) {
   // The native HTTP server uses the web standard `Request` and `Response`
   // objects.

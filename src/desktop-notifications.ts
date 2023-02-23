@@ -3,6 +3,11 @@ import { mkdirp } from './classes.ts';
 import {spawnProcess, SpawnProcessResult} from './spawnProcess.ts';
 export declare type NotificationCategory = "error"|"warning"|"notification"|"info";
 
+import { createRequire } from "https://deno.land/std/node/module.ts";
+
+const require = createRequire(import.meta.url);
+const notifier = require("node-notifier");
+
 export interface INotifier{
     info(title:string,detail:string):Promise<SpawnProcessResult>
     warning(title:string,detail:string):Promise<SpawnProcessResult>
@@ -24,6 +29,7 @@ export const NotifySend:INotifier = {
     }
 }
 export function splitBodyText(text:string,maxCharsPerLine:number){
+    return text;
     return text.split(" ").reduce(
         (lines:string[][],word:string) => {
             let currentLine = lines[lines.length-1]

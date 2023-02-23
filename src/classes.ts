@@ -172,7 +172,7 @@ export class Config {
     ].map(DailyLimitConfig.fromJson)
     applications:ConfigurationRecord[]=[];
       getCurrentDayLimitConfig(d:Date):DailyLimitConfig{
-        console.log("dailyLimitStatus",d);
+        // console.log("dailyLimitStatus",d);
         return this.dailyLimits[d.getDay()];
       }
 }
@@ -284,4 +284,46 @@ export class Process implements IProcess {
         p.COMMAND = json.COMMAND;
         return p
     }
+}
+
+export class WindowData{
+    public constructor(
+        public windowId:string,
+        public desktop:string,
+        public pid:string,
+        public machineName:string,
+        public title:string,
+    ){
+        this.windowId = windowId;
+        this.desktop = desktop;
+        this.pid = pid;
+        this.machineName = machineName;
+        this.title = title;
+    }
+    static fromJson(json: any):WindowData{
+        return new WindowData (
+            json.windowId,
+            json.desktop,
+            json.pid,
+            json.machineName,
+            json.title,
+        )
+    }
+    static decodeWmctrlOutput(output: string): WindowData[] {
+        const data:WindowData[] = [];
+        const lines = output.trim().split('\n');
+      
+        for (const line of lines) {
+          const windowId = line.substring(0, 10).trim();
+          const desktop = line.substring(11, 12);
+          const pid = line.substring(13, 18);
+          const machineName = (line.substring(19).match(/[0-9a-zA-Z_\-]+/gi)??["NOT-DETECTED"])[0];
+          const title = line.substring(19).replace(new RegExp(`^${machineName}\s+`),"")
+      
+          data.push(new WindowData(windowId, desktop, pid, machineName, title));
+        }
+      
+        return data;
+      }
+      
 }

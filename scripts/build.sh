@@ -50,6 +50,7 @@ cat > build/parentalcontrols.service.install << SRVINS
 SERVICENAME=parentalcontrols.service
 
 sudo cp notify-send-all /usr/bin/
+sudo cp wmctrl-all /usr/bin/
 sudo systemctl disable \$SERVICENAME
 sudo systemctl stop \$SERVICENAME
 sudo rm /lib/systemd/system/\$SERVICENAME
@@ -91,6 +92,7 @@ cat > build/parentalcontrols.userservice.install << SRVINS
 SERVICENAME=parentalcontrols-usermode.service
 
 sudo cp notify-send-all /usr/bin/
+sudo cp wmctrl-all /usr/bin/
 systemctl --user disable \$SERVICENAME
 systemctl --user stop \$SERVICENAME
 systemctl --user status \$SERVICENAME
@@ -133,6 +135,33 @@ cd \$CDIR
 SERVICEDEF
 chmod +x build/parentalcontrols.service.run
 
-cp scripts/notify-send-all build/ 
+cat > build/notify-send-all << SERVICEDEF
+#!/bin/bash
+
+HOME="/home/$TARGET_USER"
+PATH=/usr/bin:/bin
+NAME=$TARGET_USER
+DISPLAY=:1
+DBUS_ADDRESS=unix:path=/run/user/\$(id -u \$NAME)/bus
+sudo -u "\$NAME" HOME="\$HOME" DISPLAY="\$DISPLAY" DBUS_SESSION_BUS_ADDRESS="\$DBUS_ADDRESS" PATH="\$PATH" notify-send "\$@"
+SERVICEDEF
+chmod +x build/notify-send-all
+
+cat > build/wmctrl-all << SERVICEDEF
+#!/bin/bash
+
+HOME="/home/$TARGET_USER"
+PATH=/usr/bin:/bin
+NAME=$TARGET_USER
+DISPLAY=:1
+DBUS_ADDRESS=unix:path=/run/user/\$(id -u \$NAME)/bus
+sudo -u "\$NAME" HOME="\$HOME" DISPLAY="\$DISPLAY" DBUS_SESSION_BUS_ADDRESS="\$DBUS_ADDRESS" PATH="\$PATH" wmctrl "\$@"
+
+cd \$CDIR
+SERVICEDEF
+chmod +x build/wmctrl-all
+
+#cp scripts/notify-send-all build/ 
+#cp scripts/wmctrl-all build/ 
 
 
