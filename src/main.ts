@@ -117,7 +117,7 @@ function backend_worker_synchro_iteration( params: { counters: Counters; config:
       // console.log(processes);
       // const count = processes.length + windows.length;
       // console.log(counter, count);
-      if (processes.length > 2 || windows.length > 2) {
+      if (processes.length > 2 || windows.length > 0) {
         counter.usedMinutes += 1 / frequencyPerTimeUnit;
         addToTotal = true;
         counter.isOn = true;
