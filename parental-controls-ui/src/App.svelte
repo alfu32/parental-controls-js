@@ -79,6 +79,11 @@
       const ct = await api.getCounters();
       counters = ct.unwrap()
       error=null
+      var plist = await api.getProcessList()
+      processes=plist.ok
+      var wlist = await api.getWindowList()
+      error=plist.err||wlist.err
+      windows=wlist.ok
     }catch(err){
       console.warn(err);
       error={message:err.message,stacktrace:err.stack.split("\n")}
