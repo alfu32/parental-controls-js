@@ -212,7 +212,7 @@ function process_notifications(
   const diffToCurfew = max - current
   // console.log("process_notifications:: [current, min, max]",[current, min, max])
   switch(true){
-    case (current < min || current > max):
+    case (current < min && ((min-current)%5)==0 || current > max && ((current-max)%5)==0 ):
       messagesToUser.push(
         `It is ${hourMinute}. You are not allowed to use the computer outside the working hours ${counters.dayLimit.startHourMinute} to ${counters.dayLimit.endHourMinute}`,
       );
