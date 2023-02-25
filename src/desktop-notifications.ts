@@ -86,7 +86,7 @@ export async function sendNotifySendNotification(type:NotificationCategory,title
     
 }
 class NotifySendData{
-    _urgency:NotifySendUrgency="low";
+    _urgency:NotifySendUrgency="critical";
     _expireTimeMillis=5000;
     _icon:NotifySendIcon="dialog-information";
     _category:NotifySendCategory="presence";
