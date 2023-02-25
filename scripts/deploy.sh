@@ -18,12 +18,12 @@ SSH_CONNECTION="$SSH_USER@$SSH_HOST"
 echo ""
 echo $SSH_CONNECTION
 echo ""
-SSH_TARGET=$SSH_CONNECTION:/home/$ADMIN_USER/parental-controls
+SSH_TARGET=$SSH_CONNECTION:/home/$ADMIN_USER/.parental-controls
 
 ssh -S $SSH_CONNECTION 'sudo systemctl stop parentalcontrols'
 ssh -S $SSH_CONNECTION 'sudo systemctl disable parentalcontrols'
 ssh $SSH_CONNECTION 'systemctl status parentalcontrols'
-ssh $SSH_CONNECTION 'mkdir parental-controls'
+ssh $SSH_CONNECTION "mkdir '/home/$ADMIN_USER/.parental-controls'"
 scp "./build/parental-controls-$arch.bin" $SSH_TARGET
 scp "./build/notify-send-all" $SSH_TARGET
 scp "./build/wmctrl-all" $SSH_TARGET

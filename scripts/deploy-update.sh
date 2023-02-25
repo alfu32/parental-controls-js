@@ -17,11 +17,11 @@ SSH_CONNECTION="$SSH_USER@$SSH_HOST"
 echo ""
 echo $SSH_CONNECTION
 echo ""
-SSH_TARGET=$SSH_CONNECTION:/home/$ADMIN_USER/parental-controls
+SSH_TARGET=$SSH_CONNECTION:/home/$ADMIN_USER/.parental-controls
 
 ssh $SSH_CONNECTION "systemctl --user stop $SERVICENAME"
 ssh $SSH_CONNECTION "systemctl --user status $SERVICENAME"
-ssh $SSH_CONNECTION "mkdir '/home/$ADMIN_USER/parental-controls'"
+ssh $SSH_CONNECTION "mkdir '/home/$ADMIN_USER/.parental-controls'"
 scp "./build/parental-controls-$arch.bin" $SSH_TARGET
 scp "./build/notify-send-all" $SSH_TARGET
 scp "./build/wmctrl-all" $SSH_TARGET

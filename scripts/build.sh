@@ -38,7 +38,7 @@ cat > build/parentalcontrols.service << SERVICEDEF
 Description=Parental Controls
 
 [Service]
-ExecStart=/home/$ADMIN_USER/parental-controls/parentalcontrols.service.run
+ExecStart=/home/$ADMIN_USER/.parental-controls/parentalcontrols.service.run
 
 [Install]
 WantedBy=multi-user.target
@@ -71,7 +71,7 @@ sudo systemctl stop \$SERVICENAME
 sudo systemctl disable \$SERVICENAME
 sudo rm -f /lib/systemd/system/\$SERVICENAME
 sudo systemctl daemon-reload
-sudo chown -R $ADMIN_USER:$ADMIN_USER /home/$ADMIN_USER/parental-controls
+sudo chown -R $ADMIN_USER:$ADMIN_USER /home/$ADMIN_USER/.parental-controls
 SRVUNINS
 chmod +x build/parentalcontrols.service.uninstall
 
@@ -80,7 +80,7 @@ cat > build/parentalcontrols-usermode.service << SERVICEDEF
 Description=Parental Controls
 
 [Service]
-ExecStart=/home/$ADMIN_USER/parental-controls/parentalcontrols.service.run
+ExecStart=/home/$ADMIN_USER/.parental-controls/parentalcontrols.service.run
 
 [Install]
 WantedBy=default.target
@@ -114,14 +114,14 @@ systemctl --user stop \$SERVICENAME
 systemctl --user disable \$SERVICENAME
 rm -f /home/$ADMIN_USER/.config/systemd/user/\$SERVICENAME
 systemctl --user daemon-reload
-sudo chown -R $ADMIN_USER:$ADMIN_USER /home/$ADMIN_USER/parental-controls
+sudo chown -R $ADMIN_USER:$ADMIN_USER /home/$ADMIN_USER/.parental-controls
 SRVUNINS
 chmod +x build/parentalcontrols.userservice.uninstall
 
 cat > build/parentalcontrols.service.run << SERVICEDEF
 #!/bin/bash
 
-SUPER_HOME=/home/$ADMIN_USER/parental-controls
+SUPER_HOME=/home/$ADMIN_USER/.parental-controls
 CDIR=\`pwd\`
 
 cd \$SUPER_HOME 
