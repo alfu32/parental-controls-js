@@ -233,7 +233,7 @@ router.add("POST", "/message", async function(requestEvent: HttpRequest) {
   // The native HTTP server uses the web standard `Request` and `Response`
   // objects.
   const message = await requestEvent.text();
-  const notificationResult = await NOTIFIER.warning(
+  const notificationResult = await NOTIFIER.defaults(
     "From Parental Controls",
     message
   );
@@ -245,7 +245,7 @@ router.add("GET", "/notification", async function(requestEvent: HttpRequest) {
   const message = requestEvent.params.message;
   const title = requestEvent.params.title || "From Mother";
   if(message !== undefined) {
-    const notificationResult = await NOTIFIER.warning(title, message);
+    const notificationResult = await NOTIFIER.defaults(title, message);
     return requestEvent.respondWithJson(notificationResult);
   } else {
     return requestEvent.respondWithJson({ message });

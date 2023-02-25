@@ -232,14 +232,14 @@ function process_notifications(
       break;
   }
   messagesToUser.map((message) => {
-    const notificationResult = NOTIFIER.warning(
+    const notificationResult = NOTIFIER.defaults(
       "From Parental Controls",
       message,
     );
     return notificationResult;
   });
   notificationsToUser.map((message) => {
-    const notificationResult = NOTIFIER.warning(
+    const notificationResult = NOTIFIER.defaults(
       "Parental Controls",
       message,
     );
