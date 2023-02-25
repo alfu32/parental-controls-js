@@ -198,7 +198,7 @@ function process_notifications(
       );
       break;
     case diffDay==1:
-    case diffDay>0 && diffDay%5==0:
+    case diffDay>4 && diffDay%5==0:
       messagesToUser.push(
         `you have used ${counters.dayLimit.total} out of the ${dayLimitConfig.totalAllowed} allowed minutes this system, shutdown in 59 seconds.`,
       );
