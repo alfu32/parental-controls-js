@@ -141,7 +141,7 @@ cat > build/notify-send-all << SERVICEDEF
 HOME="/home/$TARGET_USER"
 PATH=/usr/bin:/bin
 NAME=$TARGET_USER
-DISPLAY=:1
+DISPLAY=:0
 DBUS_ADDRESS=unix:path=/run/user/\$(id -u \$NAME)/bus
 sudo -u "\$NAME" HOME="\$HOME" DISPLAY="\$DISPLAY" DBUS_SESSION_BUS_ADDRESS="\$DBUS_ADDRESS" PATH="\$PATH" notify-send "\$@"
 SERVICEDEF
@@ -153,7 +153,7 @@ cat > build/wmctrl-all << SERVICEDEF
 HOME="/home/$TARGET_USER"
 PATH=/usr/bin:/bin
 NAME=$TARGET_USER
-DISPLAY=:1
+DISPLAY=:0
 DBUS_ADDRESS=unix:path=/run/user/\$(id -u \$NAME)/bus
 sudo -u "\$NAME" HOME="\$HOME" DISPLAY="\$DISPLAY" DBUS_SESSION_BUS_ADDRESS="\$DBUS_ADDRESS" PATH="\$PATH" wmctrl "\$@"
 
