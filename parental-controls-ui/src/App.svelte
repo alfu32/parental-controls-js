@@ -171,6 +171,16 @@
     console.log("killall",e.detail)
     gapi.killAllInstancesOf(e.detail)
   }
+  async function sigtermWindow(e:WindowData){
+    console.log("sigterm",e)
+    alert(JSON.stringify(e,null," "))
+    gapi.sigterm(e.pid)
+  }
+  async function sigtermProcess(e:Process){
+    console.log("sigterm",e)
+    alert(JSON.stringify(e,null," "))
+    gapi.sigterm(e.PID)
+  }
 </script>
 
 <SvelteUIProvider>
@@ -219,11 +229,7 @@
               { key:"title",label:"window title",renderer:WTableCell,rendererConfig:{}},
             ]}>
               <div slot="row-operations" let:record>
-                <Button  fullSize compact ripple size="sm" on:click={(ev) =>{
-                  console.log(ev)
-                  console.log(record);
-                  alert(JSON.stringify(record,null," "))
-                }}>close window</Button>
+                <Button  fullSize compact ripple size="sm" on:click={e => sigtermWindow(record)}>close window</Button>
               </div>
             </WTable>
             <h2>Running Programs</h2>
@@ -233,11 +239,7 @@
               { key:"COMMAND",label:"COMMAND",renderer:WTableCell,rendererConfig:{tfin:a=>a.substr(0,128)}},
             ]}>
               <div slot="row-operations" let:record>
-                <Button  fullSize compact ripple size="sm" on:click={(ev) =>{
-                  console.log(ev)
-                  console.log(record);
-                  alert(JSON.stringify(record,null," "))
-                }}>SIGTERM</Button>
+                <Button  fullSize compact ripple size="sm" on:click={e => sigtermProcess(record)}>SIGTERM</Button>
               </div>
             </WTable>
           </Tabs.Tab>

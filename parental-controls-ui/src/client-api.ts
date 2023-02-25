@@ -138,6 +138,19 @@ export class ParentalControlsApi {
       return new Err<Error>(err as Error);
     }
   }
+  async sigterm(pid: string): Promise<Result<any, Error>> {
+    try {
+      console.log("API.sendMessage",{url:`http://${this.host}/sigterm?pid=${pid}`})
+      const response = await fetch(`http://${this.host}/sigterm?pid=${pid}`, {
+        method: "POST",
+        redirect: "follow",
+      });
+      const json = await response.json();
+      return new Ok<ShutdownResult>(json as ShutdownResult);
+    } catch (err) {
+      return new Err<Error>(err as Error);
+    }
+  }
   async killAllInstancesOf(conf: ConfigurationRecord): Promise<Result<any, Error>> {
     try {
       console.log("API.sendMessage",{url:`http://${this.host}/pkillall`})

@@ -47,6 +47,17 @@ router.add("GET", "/api.json", async function(requestEvent: HttpRequest) {
     )
   });
 },"void","RouterInfo");
+// deno-lint-ignore require-await
+router.add("GET", "/hosts", async function(requestEvent: HttpRequest) {
+  const hosts=[
+    {address:"localhost",label:"local"},
+    {address:"mihail-thinkpad.local",label:"mihai"},
+    {address:"gabriela-thinkpad.local",label:"gabriela"},
+    {address:"192.168.1.27",label:"mihai-IP"},
+    {address:"192.168.1.31",label:"gabriela-IP"},
+  ]
+  return requestEvent.respondWithJson(hosts);
+},"void",Config.ctor());
 router.add("PUT", "/config", async function(requestEvent: HttpRequest) {
   // The native HTTP server uses the web standard `Request` and `Response`
   // objects.
@@ -202,6 +213,22 @@ router.add("POST", "/pkillall", async function(requestEvent: HttpRequest) {
     notificationResult,
   });
 },"regex:string","{ pkillResult:Process[], configurationRecord:ConfigurationRecord,notificationResult:ProcessResult }");
+router.add("POST", "/sigterm", async function(requestEvent: HttpRequest) {
+  // The native HTTP server uses the web standard `Request` and `Response`
+  // objects.
+  const pid = requestEvent.params.pid;
+  const notificationResult = await NOTIFIER.warning(
+    "Application shutdown",
+    `The process ${pid} will be shut down in 10 seconds`
+  );
+  await sleep(10000);
+  const pkillResult = await spawnProcess("pkill", ['-SIGTERM',pid]);
+  return requestEvent.respondWithJson({
+    pkillResult,
+    pid:pid,
+    notificationResult,
+  });
+},"pid:string","{ pkillResult:Process[], configurationRecord:ConfigurationRecord,notificationResult:ProcessResult }");
 
 router.add("GET", "/windows", async function(requestEvent: HttpRequest) {
   // The native HTTP server uses the web standard `Request` and `Response`
