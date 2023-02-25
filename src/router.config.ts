@@ -152,7 +152,7 @@ router.add(
     // The native HTTP server uses the web standard `Request` and `Response`
     // objects.
     const text = await requestEvent.text();
-    const notificationResult = await NOTIFIER.notification(
+    const notificationResult = await NOTIFIER.warning(
       "Shutdown",
       "Shutting down computer aborted!"
     );
@@ -190,7 +190,7 @@ router.add("POST", "/pkillall", async function(requestEvent: HttpRequest) {
   // objects.
   const json = await requestEvent.json();
   const cr = ConfigurationRecord.from(json)
-  const notificationResult = await NOTIFIER.info(
+  const notificationResult = await NOTIFIER.warning(
     "Application shutdown",
     `The application ${cr.appid} will be shut down in 10 seconds`
   );
@@ -233,7 +233,7 @@ router.add("POST", "/message", async function(requestEvent: HttpRequest) {
   // The native HTTP server uses the web standard `Request` and `Response`
   // objects.
   const message = await requestEvent.text();
-  const notificationResult = await NOTIFIER.info(
+  const notificationResult = await NOTIFIER.warning(
     "From Parental Controls",
     message
   );
@@ -245,7 +245,7 @@ router.add("GET", "/notification", async function(requestEvent: HttpRequest) {
   const message = requestEvent.params.message;
   const title = requestEvent.params.title || "From Mother";
   if(message !== undefined) {
-    const notificationResult = await NOTIFIER.notification(title, message);
+    const notificationResult = await NOTIFIER.warning(title, message);
     return requestEvent.respondWithJson(notificationResult);
   } else {
     return requestEvent.respondWithJson({ message });
