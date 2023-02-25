@@ -168,7 +168,7 @@ function process_notifications(
           );
           break;
         case diff==1:
-        case diff>0 && diff%5==0:
+        case diff>4 && diff%5==0:
           messagesToUser.push(
           `you have used all the ${configItem.allowedMinutes} allowed minutes for ${configItem.appid}`,
           );
