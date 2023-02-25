@@ -256,16 +256,16 @@ export class Process implements IProcess {
     static fromFixedLengthText(text:string):Process{
         const p=new Process();
         const cols=text.substr(0,65).split(/\s+/gi)
-        p.USER = cols[0];
-        p.PID = cols[1];
-        p.CPU = cols[2];
-        p.MEM = cols[3];
-        p.VSZ = cols[4];
-        p.RSS = cols[5];
-        p.TTY = cols[6];
-        p.STAT = cols[7];
-        p.START = cols[8];
-        p.TIME = cols[9];
+        p.USER = cols[0].trim();
+        p.PID = cols[1].trim();
+        p.CPU = cols[2].trim();
+        p.MEM = cols[3].trim();
+        p.VSZ = cols[4].trim();
+        p.RSS = cols[5].trim();
+        p.TTY = cols[6].trim();
+        p.STAT = cols[7].trim();
+        p.START = cols[8].trim();
+        p.TIME = cols[9].trim();
         p.COMMAND = text.substring(66);
         return p
     }
@@ -315,10 +315,10 @@ export class WindowData{
       
         for (const line of lines) {
           const windowId = line.substring(0, 10).trim();
-          const desktop = line.substring(11, 12);
-          const pid = line.substring(13, 18);
-          const machineName = (line.substring(19).match(/[0-9a-zA-Z_\-]+/gi)??["NOT-DETECTED"])[0];
-          const title = line.substring(19).replace(new RegExp(`^${machineName}\s+`),"")
+          const desktop = line.substring(11, 12).trim();
+          const pid = line.substring(13, 18).trim();
+          const machineName = (line.substring(19).match(/[0-9a-zA-Z_\-]+/gi)??["NOT-DETECTED"])[0].trim();
+          const title = line.substring(19).replace(new RegExp(`^${machineName}\s+`),"").trim()
       
           data.push(new WindowData(windowId, desktop, pid, machineName, title));
         }
