@@ -105,6 +105,7 @@
     error=plist.err||wlist.err
     windows=wlist.ok
   })
+
   async function saveConfig(newConfigLimits:CustomEvent<Config>){
     const newConfig = config.copy()
     const result = await gapi.updateConfig(newConfig);
@@ -135,6 +136,7 @@
     console.log({fn:gapi.updateConfig,result})
     config=result.unwrap();
   }
+
   async function saveCounters(){
     const result = await gapi.updateCounters(counters);
     counters=result.unwrap()
@@ -150,6 +152,7 @@
     console.log({fn:gapi.updateCounters,result})
     counters=result.unwrap();
   }
+
   async function sendShutdown(){
     const response = gapi.shutdown()
     console.log({response})
@@ -158,6 +161,7 @@
     const response = gapi.abortShutdown()
     console.log({response})
   }
+
   let messageText="";
   async function message(){
     const response = await gapi.sendMessage(messageText)
@@ -202,10 +206,12 @@
               </AppConfigEditor>
           </Tabs.Tab>
           <Tabs.Tab label='Task Manager' color='pink'>
+            <h2>Computer</h2>
             <SimpleGrid  cols={5}>
               <Button on:click={e => sendShutdown()}>shutdown computer</Button>
               <Button variant="outline" on:click={e => sendAbortShutdown()}>abort shutdown</Button>
             </SimpleGrid>
+            <h2>Opened Windows</h2>
             <WTable data={windows} config={[
               { key:"windowId",label:"window id",renderer:WTableCell,rendererConfig:{}},
               { key:"pid",label:"process id",renderer:WTableCell,rendererConfig:{}},
@@ -213,20 +219,21 @@
               { key:"title",label:"window title",renderer:WTableCell,rendererConfig:{}},
             ]}>
               <div slot="row-operations" let:record>
-                <Button on:click={(ev) =>{
+                <Button  fullSize compact ripple size="sm" on:click={(ev) =>{
                   console.log(ev)
                   console.log(record);
                   alert(JSON.stringify(record,null," "))
                 }}>close window</Button>
               </div>
             </WTable>
+            <h2>Running Programs</h2>
             <WTable data={processes} config={[
               { key:"USER",label:"USER",renderer:WTableCell,rendererConfig:{}},
               { key:"PID",label:"PID",renderer:WTableCell,rendererConfig:{}},
-              { key:"COMMAND",label:"COMMAND",renderer:WTableCell,rendererConfig:{}},
+              { key:"COMMAND",label:"COMMAND",renderer:WTableCell,rendererConfig:{tfin:a=>a.substr(0,128)}},
             ]}>
               <div slot="row-operations" let:record>
-                <Button on:click={(ev) =>{
+                <Button  fullSize compact ripple size="sm" on:click={(ev) =>{
                   console.log(ev)
                   console.log(record);
                   alert(JSON.stringify(record,null," "))

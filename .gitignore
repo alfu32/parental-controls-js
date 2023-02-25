@@ -15,3 +15,4 @@ test-application-graphical/cmake_install.cmake
 test-application-graphical/CMakeCache.txt
 scripts/build.sh
 env.example
+netscan*

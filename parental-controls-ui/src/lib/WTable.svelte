@@ -26,7 +26,7 @@ import type { WTableColumnRenderer } from "./WTable";
                             <svelte:component
                                 this={renderer}
                                 key={key}
-                                value={record[key]}
+                                value={(rendererConfig.tfin || (a=>a))(record[key])}
                                 config={rendererConfig}
                             />
                         </td>
@@ -64,13 +64,13 @@ import type { WTableColumnRenderer } from "./WTable";
         top: 0; /* Don't forget this, required for the stickiness */
         box-shadow: 0px 0px 12px #000;
         padding:6px 4px 6px 6px;
-        border: 1px solid #555;
+        border-bottom: 1px solid #555;
         border-collapse: collapse;
         z-index: 9999;
     }
     td{
         padding:2px 4px 2px 6px;
-        border: 1px solid #555;
+        border-bottom: 1px dotted #555;
         border-collapse: collapse;
 
         max-width: 900px;
