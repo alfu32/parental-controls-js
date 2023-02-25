@@ -222,7 +222,7 @@ router.add("POST", "/sigterm", async function(requestEvent: HttpRequest) {
     `The process ${pid} will be shut down in 10 seconds`
   );
   await sleep(10000);
-  const pkillResult = await spawnProcess("pkill", ['-SIGTERM',pid]);
+  const pkillResult = await spawnProcess("kill", ['-SIGTERM',pid]);
   return requestEvent.respondWithJson({
     pkillResult,
     pid:pid,
