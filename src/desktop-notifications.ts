@@ -6,7 +6,7 @@ export declare type NotificationCategory = "error"|"warning"|"notification"|"inf
 import { createRequire } from "https://deno.land/std/node/module.ts";
 
 const require = createRequire(import.meta.url);
-const notifier = require("node-notifier");
+// const notifier = require("node-notifier");
 
 export interface INotifier{
     info(title:string,detail:string):Promise<SpawnProcessResult>
