@@ -9,12 +9,16 @@ const require = createRequire(import.meta.url);
 // const notifier = require("node-notifier");
 
 export interface INotifier{
+    defaults(title:string,detail:string):Promise<SpawnProcessResult>
     info(title:string,detail:string):Promise<SpawnProcessResult>
     warning(title:string,detail:string):Promise<SpawnProcessResult>
     error(title:string,detail:string):Promise<SpawnProcessResult>
     notification(title:string,detail:string):Promise<SpawnProcessResult>
 }
 export const NotifySend:INotifier = {
+    async defaults(title:string,detail:string):Promise<SpawnProcessResult>{
+        return await sendNotifySendNotification("error",title,detail)
+    },
     async info(title:string,detail:string):Promise<SpawnProcessResult>{
         return await sendNotifySendNotification("info",title,detail)
     },
@@ -88,7 +92,7 @@ export async function sendNotifySendNotification(type:NotificationCategory,title
 class NotifySendData{
     _urgency:NotifySendUrgency="critical";
     _expireTimeMillis=5000;
-    _icon:NotifySendIcon="dialog-information";
+    _icon:NotifySendIcon="dialog-error";
     _category:NotifySendCategory="presence";
     _summary="";
     _body="";
