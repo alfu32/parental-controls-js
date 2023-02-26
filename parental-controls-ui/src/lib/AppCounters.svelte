@@ -4,6 +4,7 @@
     export let counters: Counters;
     import { createEventDispatcher, onMount } from "svelte";
     import AppStatusCard from './AppStatusCard.svelte';
+    import { decimalMinutesToString } from './functions';
     const dispatch = createEventDispatcher();
     function change() {
         dispatch("save", counters);
@@ -31,7 +32,7 @@
     {#each counters.applications as appCounter}
     <tr>
     <td>{appCounter.appid}</td>
-    <td>{appCounter.usedMinutes}</td>
+    <td>{decimalMinutesToString(appCounter.usedMinutes)}</td>
     <td><TextInput bind:value={appCounter.allowedMinutes}/></td>
     <td><Button fullSize variant="outline" color="red" compact ripple size="sm" on:click={e => deleteItem(appCounter)}>delete</Button></td>
     <td><Button fullSize variant="outline" compact ripple size="sm" on:click={e => terminateapp(appCounter)}>close</Button></td>

@@ -3,6 +3,7 @@
     import type { Counters,DailyLimit } from '../../../src/classes';
     export let counters: Counters;
     import { createEventDispatcher } from "svelte";
+    import { decimalMinutesToString } from './functions';
     const dispatch = createEventDispatcher();
     function change() {
         dispatch("save", counters);
@@ -40,7 +41,7 @@
             <TextInput bind:value={counters.dayLimit.totalAllowed} />
         </td>
         <td>
-            {counters.dayLimit.total}
+            {decimalMinutesToString(counters.dayLimit.total)}
         </td>
     </tr>
   {:else}

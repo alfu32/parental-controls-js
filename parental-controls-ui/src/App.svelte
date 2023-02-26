@@ -18,14 +18,14 @@
 	import { Tabs } from '@svelteuidev/core';
 
   import {ParentalControlsApi,Result,} from './client-api';
-  import type { Config, ConfigurationRecord, Counters, DailyLimitConfig, Process, WindowData } from '../../src/classes';
+  import { Config, ConfigurationRecord, type Counters, type DailyLimitConfig, type Process, type WindowData } from '../../src/classes';
   import CountersEditor from './lib/CountersEditor.svelte';
   import AppCountersList from './lib/AppCounters.svelte';
     import AppConfigEditor from './lib/AppConfigEditor.svelte';
     import WeeklyConfigEditor from './lib/WeeklyConfigEditor.svelte';
-    import WTable from './lib/WTable.svelte';
-    import WTableCell from './lib/WTableCell.svelte';
-    import WTableEditableCell from './lib/WTableEditableCell.svelte';
+    import WTable from './lib/WTable/WTable.svelte';
+    import WTableCell from './lib/WTable/WTableCell.svelte';
+    import WTableEditableCell from './lib/WTable/WTableEditableCell.svelte';
     let hosts=[
       {address:"localhost",label:"local"},
       {address:"hefaistos.local",label:"mihai"},
@@ -111,6 +111,12 @@
     const result = await gapi.updateConfig(newConfig);
     config=result.unwrap()
     console.log({fn:"saveConfigLimits",newConfigLimits,result})
+  }
+  async function appCfgChanged(evt:CustomEvent<object[]>){
+    console.log("WTABLE::appscfg:changed",evt.detail)
+    config.applications=evt.detail.map(ConfigurationRecord.fromJson)
+    config=Config.fromJson(config)
+    console.log("WTABLE::appscfg:changed",config)
   }
   //// async function saveConfigLimits(newConfigLimits:CustomEvent<DailyLimitConfig[]>){
   ////   const newConfig = config.copy()
@@ -211,9 +217,22 @@
           </Tabs.Tab>
           <Tabs.Tab label='{host.label} Configuration'>
               <WeeklyConfigEditor config={config} on:save={saveConfig}></WeeklyConfigEditor>
-              <AppConfigEditor config={config} on:save={saveConfig} on:create={createAppConfig}>
+              <!--AppConfigEditor config={config} on:save={saveConfig} on:create={createAppConfig}>
                 <h2 slot="title">Per-Application Limits Configuration</h2>
-              </AppConfigEditor>
+              </AppConfigEditor-->
+
+            <h2>Rules</h2>
+            <WTable data={config?.applications} config={[
+              { key:"isOn",           label:"isOn",           initialValue:"", renderer:WTableCell, rendererConfig:{} },
+              { key:"appid",          label:"appid",          initialValue:"", renderer:WTableEditableCell, rendererConfig:{} },
+              { key:"processregex",   label:"processregex",   initialValue:"", renderer:WTableEditableCell, rendererConfig:{} },
+              { key:"allowedMinutes", label:"allowedMinutes", initialValue:"", renderer:WTableEditableCell, rendererConfig:{} },
+              { key:"usedMinutes",    label:"usedMinutes",    initialValue:"", renderer:WTableCell, rendererConfig:{} },
+            ]} on:change={appCfgChanged}>
+              <div slot="row-operations" let:record>
+                <Button  fullSize compact ripple size="sm" on:click={e => sigtermWindow(record)}>close window</Button>
+              </div>
+            </WTable>
           </Tabs.Tab>
           <Tabs.Tab label='Task Manager' color='pink'>
             <h2>Computer</h2>
@@ -223,10 +242,10 @@
             </SimpleGrid>
             <h2>Opened Windows</h2>
             <WTable data={windows} config={[
-              { key:"windowId",label:"window id",renderer:WTableCell,rendererConfig:{}},
-              { key:"pid",label:"process id",renderer:WTableCell,rendererConfig:{}},
-              { key:"machineName",label:"machine name",renderer:WTableCell,rendererConfig:{}},
-              { key:"title",label:"window title",renderer:WTableCell,rendererConfig:{}},
+              { key:"windowId",    label:"window id",    initialValue:"", renderer:WTableCell,rendererConfig:{}},
+              { key:"pid",         label:"process id",   initialValue:"", renderer:WTableCell,rendererConfig:{}},
+              { key:"machineName", label:"machine name", initialValue:"", renderer:WTableCell,rendererConfig:{}},
+              { key:"title",       label:"window title", initialValue:"", renderer:WTableCell,rendererConfig:{}},
             ]}>
               <div slot="row-operations" let:record>
                 <Button  fullSize compact ripple size="sm" on:click={e => sigtermWindow(record)}>close window</Button>
@@ -234,9 +253,9 @@
             </WTable>
             <h2>Running Programs</h2>
             <WTable data={processes} config={[
-              { key:"USER",label:"USER",renderer:WTableCell,rendererConfig:{}},
-              { key:"PID",label:"PID",renderer:WTableCell,rendererConfig:{}},
-              { key:"COMMAND",label:"COMMAND",renderer:WTableCell,rendererConfig:{tfin:a=>a.substr(0,128)}},
+              { key:"USER",    label:"USER",    initialValue:"", renderer:WTableCell, rendererConfig:{}},
+              { key:"PID",     label:"PID",     initialValue:"", renderer:WTableCell, rendererConfig:{}},
+              { key:"COMMAND", label:"COMMAND", initialValue:"", renderer:WTableCell, rendererConfig:{tfin:a=>a.substr(0,128)}},
             ]}>
               <div slot="row-operations" let:record>
                 <Button  fullSize compact ripple size="sm" on:click={e => sigtermProcess(record)}>SIGTERM</Button>
