@@ -217,16 +217,10 @@ router.add("POST", "/sigterm", async function(requestEvent: HttpRequest) {
   // The native HTTP server uses the web standard `Request` and `Response`
   // objects.
   const pid = requestEvent.params.pid;
-  const notificationResult = await NOTIFIER.warning(
-    "Application shutdown",
-    `The process ${pid} will be shut down in 10 seconds`
-  );
-  await sleep(10000);
-  const pkillResult = await spawnProcess("kill", ['-SIGTERM',pid]);
+  const pkillResult = await spawnProcess("sudo", ["kill",'-SIGTERM',pid]);
   return requestEvent.respondWithJson({
     pkillResult,
     pid:pid,
-    notificationResult,
   });
 },"pid:string","{ pkillResult:Process[], configurationRecord:ConfigurationRecord,notificationResult:ProcessResult }");
 
