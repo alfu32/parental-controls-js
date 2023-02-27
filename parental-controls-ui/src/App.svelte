@@ -28,10 +28,6 @@
     import WTableEditableCell from './lib/WTable/WTableEditableCell.svelte';
     let hosts=[
       {address:"localhost",label:"local"},
-      {address:"hefaistos.local",label:"mihai"},
-      {address:"artemis.local",label:"gabriela"},
-      {address:"192.168.1.27",label:"mihai-IP"},
-      {address:"192.168.1.31",label:"gabriela-IP"},
     ]
   let counters:Counters=null;
   let config:Config=null;
@@ -84,6 +80,8 @@
       var wlist = await api.getWindowList()
       error=plist.err||wlist.err
       windows=wlist.ok
+      var hlist = await api.getHostList()
+      console.log({hlist})
     }catch(err){
       console.warn(err);
       error={message:err.message,stacktrace:err.stack.split("\n")}

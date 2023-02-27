@@ -11,6 +11,18 @@ export function mkdirp(dir:string){
         if (err.code !== 'EEXIST') throw err;
     }
 }
+
+export class Host{
+    public address="localhost";
+    public label="local";
+    static fromJson(json: {[key:string]:string}): Host {
+      const h = new Host();
+      h.address=json.address;
+      h.label=json.label;
+      return h;
+    }
+}
+
 export interface IConfigurationRecord{
     isOn:boolean;
     appid:string;
@@ -18,6 +30,7 @@ export interface IConfigurationRecord{
     allowedMinutes:number;
     usedMinutes:number;
 }
+
 export class ConfigurationRecord implements IConfigurationRecord{
 
     static ctor():string {

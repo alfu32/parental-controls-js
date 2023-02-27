@@ -44,10 +44,10 @@
   {/if}
   </table>
   <style>
-    .appcard{
+    /*.appcard{
       border:1px solid #333;
       padding:20px;
       box-sizing: content-box;
-    }
+    }*/
   </style>
   
