@@ -5,12 +5,12 @@ ADMIN_USER=$1
 arch=$2
 DS=`date +'%Y%m%d%H%M%S'`
 
-INSTALL_DIR=/home/$ADMIN_USER/parental-controls/
+INSTALL_DIR=/home/$ADMIN_USER/.parental-controls/
 
 sudo systemctl stop parentalcontrols
 sudo systemctl disable parentalcontrols
 systemctl status parentalcontrols
-mkdir parental-controls
+mkdir .parental-controls
 cp "./build/parental-controls-$arch.bin" $INSTALL_DIR
 cp "./build/notify-send-all" $INSTALL_DIR
 cp "./build/wmctrl-all" $INSTALL_DIR
