@@ -7,6 +7,7 @@ import type { CellChange, WTableColumnRenderer } from "./WTable";
 
     export let data:object[]
     export let config:WTableColumnRenderer[]
+    export let readonly:true|null=null
     let newRecord:object
     function resetNewItem(){
         newRecord=config.reduce(
@@ -81,6 +82,7 @@ import type { CellChange, WTableColumnRenderer } from "./WTable";
                     </td>
                 </tr>
             {/each}
+            {#if !readonly}
             <tr>
                 {#each config as {key,renderer,rendererConfig,initialValue}}
                     <td>
@@ -98,6 +100,7 @@ import type { CellChange, WTableColumnRenderer } from "./WTable";
                     <Button compact ripple size="sm" variant="outline" on:click={resetNewItem}>Reset</Button>
                 </td>
             </tr>
+            {/if}
         {/if}
     </tbody>
 </table>

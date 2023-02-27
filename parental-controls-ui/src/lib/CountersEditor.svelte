@@ -41,7 +41,7 @@
             <TextInput bind:value={counters.dayLimit.totalAllowed} />
         </td>
         <td>
-            {decimalMinutesToString(counters.dayLimit.total)}
+            {(counters.dayLimit.total).toFixed(2)}
         </td>
     </tr>
   {:else}

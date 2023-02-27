@@ -217,11 +217,11 @@
           </Tabs.Tab>
           <Tabs.Tab label='{host.label} Configuration'>
               <WeeklyConfigEditor config={config} on:save={saveConfig}></WeeklyConfigEditor>
-              <!--AppConfigEditor config={config} on:save={saveConfig} on:create={createAppConfig}>
+              <AppConfigEditor config={config} on:save={saveConfig} on:create={createAppConfig}>
                 <h2 slot="title">Per-Application Limits Configuration</h2>
-              </AppConfigEditor-->
+              </AppConfigEditor>
 
-            <h2>Rules</h2>
+            <!--h2>Rules</h2>
             <WTable data={config?.applications} config={[
               { key:"isOn",           label:"isOn",           initialValue:"", renderer:WTableCell, rendererConfig:{} },
               { key:"appid",          label:"appid",          initialValue:"", renderer:WTableEditableCell, rendererConfig:{} },
@@ -232,7 +232,7 @@
               <div slot="row-operations" let:record>
                 <Button  fullSize compact ripple size="sm" on:click={e => sigtermWindow(record)}>close window</Button>
               </div>
-            </WTable>
+            </WTable-->
           </Tabs.Tab>
           <Tabs.Tab label='Task Manager' color='pink'>
             <h2>Computer</h2>
@@ -246,7 +246,7 @@
               { key:"pid",         label:"process id",   initialValue:"", renderer:WTableCell,rendererConfig:{}},
               { key:"machineName", label:"machine name", initialValue:"", renderer:WTableCell,rendererConfig:{}},
               { key:"title",       label:"window title", initialValue:"", renderer:WTableCell,rendererConfig:{}},
-            ]}>
+            ]} readonly>
               <div slot="row-operations" let:record>
                 <Button  fullSize compact ripple size="sm" on:click={e => sigtermWindow(record)}>close window</Button>
               </div>
@@ -256,7 +256,7 @@
               { key:"USER",    label:"USER",    initialValue:"", renderer:WTableCell, rendererConfig:{}},
               { key:"PID",     label:"PID",     initialValue:"", renderer:WTableCell, rendererConfig:{}},
               { key:"COMMAND", label:"COMMAND", initialValue:"", renderer:WTableCell, rendererConfig:{tfin:a=>a.substr(0,128)}},
-            ]}>
+            ]} readonly>
               <div slot="row-operations" let:record>
                 <Button  fullSize compact ripple size="sm" on:click={e => sigtermProcess(record)}>SIGTERM</Button>
               </div>

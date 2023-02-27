@@ -32,7 +32,7 @@
     {#each counters.applications as appCounter}
     <tr>
     <td>{appCounter.appid}</td>
-    <td>{decimalMinutesToString(appCounter.usedMinutes)}</td>
+    <td>{(appCounter.usedMinutes).toFixed(2)}</td>
     <td><TextInput bind:value={appCounter.allowedMinutes}/></td>
     <td><Button fullSize variant="outline" color="red" compact ripple size="sm" on:click={e => deleteItem(appCounter)}>delete</Button></td>
     <td><Button fullSize variant="outline" compact ripple size="sm" on:click={e => terminateapp(appCounter)}>close</Button></td>
