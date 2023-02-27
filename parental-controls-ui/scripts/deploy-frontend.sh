@@ -1,0 +1,13 @@
+#!/bin/bash
+
+MACHINE=$1
+ADMIN_USER=$2
+SSH_CONNECTION=$ADMIN_USER@$MACHINE
+DEPLOYPATH=/home/$ADMIN_USER/.parental-controls-ui
+SSH_TARGET=$ADMIN_USER@$MACHINE:$DEPLOYPATH
+
+
+ssh $SSH_CONNECTION "mkdir '$DEPLOYPATH'"
+scp ./dist/* $SSH_TARGET
+ssh $SSH_CONNECTION "mkdir '$DEPLOYPATH/assets'"
+scp ./dist/assets/* $SSH_TARGET/assets/
