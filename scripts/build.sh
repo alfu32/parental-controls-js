@@ -38,6 +38,8 @@ cat > build/parentalcontrols.service << SERVICEDEF
 Description=Parental Controls
 
 [Service]
+Restart=on-failure
+RestartSec=5s
 ExecStart=/home/$ADMIN_USER/.parental-controls/parentalcontrols.service.run
 
 [Install]
@@ -80,6 +82,8 @@ cat > build/parentalcontrols-usermode.service << SERVICEDEF
 Description=Parental Controls
 
 [Service]
+Restart=on-failure
+RestartSec=5s
 ExecStart=/home/$ADMIN_USER/.parental-controls/parentalcontrols.service.run
 
 [Install]
