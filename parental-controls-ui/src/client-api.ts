@@ -1,5 +1,5 @@
 
-import { Config, ConfigurationRecord, Counters,Host,Process, WindowData } from "../../src/classes";
+import { Config, ConfigurationRecord, Counters,Host,Process, ReleaseInfo, WindowData } from "../../src/classes";
 export class Result<T, E>{
   constructor(public ok:T,public err:E){}
   unwrap():T{
@@ -140,7 +140,7 @@ export class ParentalControlsApi {
   }
   async sigterm(pid: string): Promise<Result<any, Error>> {
     try {
-      console.log("API.sendMessage",{url:`http://${this.host}/sigterm?pid=${pid}`})
+      console.log("API.sigterm",{url:`http://${this.host}/sigterm?pid=${pid}`})
       const response = await fetch(`http://${this.host}/sigterm?pid=${pid}`, {
         method: "POST",
         redirect: "follow",
@@ -153,7 +153,7 @@ export class ParentalControlsApi {
   }
   async killAllInstancesOf(conf: ConfigurationRecord): Promise<Result<any, Error>> {
     try {
-      console.log("API.sendMessage",{url:`http://${this.host}/pkillall`})
+      console.log("API.killAllInstancesOf",{url:`http://${this.host}/pkillall`})
       const response = await fetch(`http://${this.host}/pkillall`, {
         method: "POST",
         redirect: "follow",
@@ -167,7 +167,7 @@ export class ParentalControlsApi {
   }
   async getProcessList(): Promise<Result<Process[], Error>> {
     try {
-      console.log("API.sendMessage",{url:`http://${this.host}/processes`})
+      console.log("API.getProcessList",{url:`http://${this.host}/processes`})
       const response = await fetch(`http://${this.host}/processes`, {
         method: "GET",
         redirect: "follow",
@@ -180,7 +180,7 @@ export class ParentalControlsApi {
   }
   async getWindowList(): Promise<Result<WindowData[], Error>> {
     try {
-      console.log("API.sendMessage",{url:`http://${this.host}/windows`})
+      console.log("API.getWindowList",{url:`http://${this.host}/windows`})
       const response = await fetch(`http://${this.host}/windows`, {
         method: "GET",
         redirect: "follow",
@@ -193,13 +193,26 @@ export class ParentalControlsApi {
   }
   async getHostList(): Promise<Result<Host[], Error>> {
     try {
-      console.log("API.sendMessage",{url:`http://${this.host}/hosts`})
+      console.log("API.getHostList",{url:`http://${this.host}/hosts`})
       const response = await fetch(`http://${this.host}/hosts`, {
         method: "GET",
         redirect: "follow",
       });
       const json = await response.json();
       return new Ok<Host[]>(json.map(Host.fromJson));
+    } catch (err) {
+      return new Err<Error>(err as Error);
+    }
+  }
+  async getReleaseInfo(): Promise<Result<ReleaseInfo, Error>> {
+    try {
+      console.log("API.getReleaseInfo",{url:`http://${this.host}/release.info.json`})
+      const response = await fetch(`http://${this.host}/release.info.json`, {
+        method: "GET",
+        redirect: "follow",
+      });
+      const json = await response.json();
+      return new Ok<ReleaseInfo>(ReleaseInfo.fromJson(json));
     } catch (err) {
       return new Err<Error>(err as Error);
     }

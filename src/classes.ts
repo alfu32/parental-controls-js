@@ -22,6 +22,22 @@ export class Host{
       return h;
     }
 }
+export class ReleaseInfo{
+    public BUILD_DATE="";
+    public COMMIT_ID="";
+    public BRANCH="";
+    public TAG="";
+    public SEMVER="";
+    static fromJson(json: {[key:string]:string}): ReleaseInfo {
+      const h = new ReleaseInfo();
+      h.BUILD_DATE=json.BUILD_DATE;
+      h.COMMIT_ID=json.COMMIT_ID;
+      h.BRANCH=json.BRANCH;
+      h.TAG=json.TAG;
+      h.SEMVER=json.SEMVER;
+      return h;
+    }
+}
 
 export interface IConfigurationRecord{
     isOn:boolean;

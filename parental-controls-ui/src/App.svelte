@@ -18,7 +18,7 @@
 	import { Tabs } from '@svelteuidev/core';
 
   import {ParentalControlsApi,Result,} from './client-api';
-  import { Config, ConfigurationRecord, type Counters, type DailyLimitConfig, type Process, type WindowData } from '../../src/classes';
+  import { Config, ConfigurationRecord, ReleaseInfo, type Counters, type DailyLimitConfig, type Process, type WindowData } from '../../src/classes';
   import CountersEditor from './lib/CountersEditor.svelte';
   import AppCountersList from './lib/AppCounters.svelte';
     import AppConfigEditor from './lib/AppConfigEditor.svelte';
@@ -29,6 +29,7 @@
     let hosts=[
       {address:"localhost",label:"local"},
     ]
+    let relnfo:ReleaseInfo=new ReleaseInfo()
   let counters:Counters=null;
   let config:Config=null;
   let processes:Process[]=null;
@@ -82,6 +83,10 @@
       windows=wlist.ok
       var hlist = await api.getHostList()
       console.log({hlist})
+      hosts=hlist.ok
+      var rnfo = await api.getReleaseInfo()
+      console.log({rnfo,relnfo})
+      relnfo=rnfo.ok
     }catch(err){
       console.warn(err);
       error={message:err.message,stacktrace:err.stack.split("\n")}
@@ -192,31 +197,31 @@
 
 	<slot>
     <!--pre>{JSON.stringify(config,null," ")}</pre-->
-    <Grid>
-      <Grid.Col span={2}>
-        <h4>Managing  {host.label}</h4>
-        <hr/>
-        <strong>Select a different computer</strong>
-        {#each hosts as value,index}
-        <div class={host===value?"host host-selected":"host"} on:keypress on:click={e => selectHost(index)}>{value.label}</div>
-        {/each}
-        <hr/>
-        <strong>send a notification to {host.label}</strong>
-        <TextInput bind:value={messageText} multiline></TextInput>
-        <Button on:click={message}>send message</Button>
-      </Grid.Col>
-      <Grid.Col span={8}>
         <Tabs color='teal'>
-          <Tabs.Tab label='{host.label} Status'>
+          <Tabs.Tab label='General'>
+            <h4>Managing {host.label}</h4>
+            <hr/>
+            <strong>Select a different computer</strong>
+            {#each hosts as value,index}
+            <div class={host.address===value.address?"host host-selected":"host"} on:keypress on:click={e => selectHost(index)}>{value.label}</div>
+            {/each}
+            <hr/>
+            <strong>send a notification to {host.label}</strong>
+            <TextInput bind:value={messageText} multiline></TextInput>
+            <Button on:click={message}>send message</Button>
+            <pre>{relnfo.SEMVER}</pre>
+            <pre>{relnfo.COMMIT_ID}</pre>
+          </Tabs.Tab>
+          <Tabs.Tab label='Status'>
               <CountersEditor counters={counters} on:save={saveCounters}></CountersEditor>
               <AppCountersList counters={counters} on:save={saveCounters} on:create={createAppCounter} on:terminateapprequest={pkillall}>
-                <h2>Current Application Limits and Counters</h2>
+                <h2>Current Application Limits and Counters for {host.label}</h2>
               </AppCountersList>
           </Tabs.Tab>
-          <Tabs.Tab label='{host.label} Configuration'>
+          <Tabs.Tab label='Configuration'>
               <WeeklyConfigEditor config={config} on:save={saveConfig}></WeeklyConfigEditor>
               <AppConfigEditor config={config} on:save={saveConfig} on:create={createAppConfig}>
-                <h2 slot="title">Per-Application Limits Configuration</h2>
+                <h2 slot="title">Per-Application Limits Configuration for {host.label}</h2>
               </AppConfigEditor>
 
             <!--h2>Rules</h2>
@@ -233,24 +238,24 @@
             </WTable-->
           </Tabs.Tab>
           <Tabs.Tab label='Task Manager' color='pink'>
-            <h2>Computer</h2>
+            <h2>Computer {host.label}</h2>
             <SimpleGrid  cols={5}>
               <Button on:click={e => sendShutdown()}>shutdown computer</Button>
               <Button variant="outline" on:click={e => sendAbortShutdown()}>abort shutdown</Button>
             </SimpleGrid>
-            <h2>Opened Windows</h2>
+            <h2>Opened Windows on {host.label}</h2>
             <WTable data={windows} config={[
-              { key:"windowId",    label:"window id",    initialValue:"", renderer:WTableCell,rendererConfig:{}},
+              //{ key:"windowId",    label:"window id",    initialValue:"", renderer:WTableCell,rendererConfig:{}},
               { key:"pid",         label:"process id",   initialValue:"", renderer:WTableCell,rendererConfig:{}},
-              { key:"machineName", label:"machine name", initialValue:"", renderer:WTableCell,rendererConfig:{}},
+              //{ key:"machineName", label:"machine name", initialValue:"", renderer:WTableCell,rendererConfig:{}},
               { key:"title",       label:"window title", initialValue:"", renderer:WTableCell,rendererConfig:{}},
             ]} readonly>
               <div slot="row-operations" let:record>
                 <Button  fullSize compact ripple size="sm" on:click={e => sigtermWindow(record)}>close window</Button>
               </div>
             </WTable>
-            <h2>Running Programs</h2>
-            <WTable data={processes} config={[
+            <h2>Running Programs on {host.label}</h2>
+            <WTable data={processes?.filter(p=>(p.USER!=="root"))} config={[
               { key:"USER",    label:"USER",    initialValue:"", renderer:WTableCell, rendererConfig:{}},
               { key:"PID",     label:"PID",     initialValue:"", renderer:WTableCell, rendererConfig:{}},
               { key:"COMMAND", label:"COMMAND", initialValue:"", renderer:WTableCell, rendererConfig:{tfin:a=>a.substr(0,128)}},
@@ -260,8 +265,6 @@
               </div>
             </WTable>
           </Tabs.Tab>
-          <Tabs.Tab label='Notifications' color='pink'>
-          </Tabs.Tab>
           <!--Tabs.Tab label='Config' color='pink'>
               <pre>{JSON.stringify(config,null,"  ")}</pre>
           </Tabs.Tab>
@@ -269,8 +272,6 @@
               <pre>{JSON.stringify(counters,null,"  ")}</pre>
           </Tabs.Tab-->
         </Tabs>
-      </Grid.Col>
-  </Grid>
   </slot>
   {#if error}
     <p>error connecting to {host.label}</p>

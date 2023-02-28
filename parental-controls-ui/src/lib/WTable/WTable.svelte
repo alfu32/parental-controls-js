@@ -52,7 +52,7 @@ import type { CellChange, WTableColumnRenderer } from "./WTable";
 
 {#if config}
 <div class=wrapper>
-    <pre>{JSON.stringify(newRecord)}</pre>
+    <!--pre>{JSON.stringify(newRecord)}</pre-->
 <table>
     <thead>
         <tr>
