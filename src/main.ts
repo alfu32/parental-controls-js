@@ -151,24 +151,28 @@ function process_notifications(
       }
       const diff=counter.usedMinutes - counter.allowedMinutes
       switch(true){
-        case diff==-10:
-        case diff==-5:
+        case diff===-10:
+        case diff===-5:
           notificationsToUser.push(
             `time is running out on application ${configItem.appid}, you have ${diff} minutes left.`,
           );
           break;
-        case diff==-1:
+        case diff===-1:
           notificationsToUser.push(
             `time is running out on application ${configItem.appid}, you have 1 minute left.`,
           );
           break;
-        case diff==0:
+        case diff===0:
           notificationsToUser.push(
             `time is up on application ${configItem.appid}`,
           );
           break;
-        case diff==1:
-        case diff>0 && diff%5==0:
+        case diff===1:
+          messagesToUser.push(
+          `you have used 1 minute over the ${configItem.allowedMinutes} allowed minutes for ${configItem.appid}`,
+          );
+          break;
+        case (diff>0) && ((diff%5)===0):
           messagesToUser.push(
           `you have used all the ${configItem.allowedMinutes} allowed minutes for ${configItem.appid}`,
           );
@@ -181,24 +185,28 @@ function process_notifications(
   );
   const diffDay=counters.dayLimit.totalAllowed-counters.dayLimit.total
   switch(true){
-    case diffDay==-10:
-    case diffDay==-5:
+    case diffDay===-10:
+    case diffDay===-5:
       notificationsToUser.push(
         `Your allowed time for today is running out, you have ${diffDay} minutes left.`,
       );
       break;
-    case diffDay==-1:
+    case diffDay===-1:
       notificationsToUser.push(
         `Your allowed time for today is running out, you have 1 minute left.`,
       );
       break;
-    case diffDay==0:
+    case diffDay===0:
       notificationsToUser.push(
         `Your allowed time for today is up. Computer $HOSTNAME will shut down shortly`,
       );
       break;
-    case diffDay==1:
-    case diffDay>0 && diffDay%5==0:
+    case diffDay===1:
+      messagesToUser.push(
+        `you have used 1 minute over the ${dayLimitConfig.totalAllowed} allowed minutes on this system, shutdown in 59 seconds.`,
+      );
+      break;
+    case (diffDay>0) && ((diffDay%5)===0):
       messagesToUser.push(
         `you have used ${counters.dayLimit.total} out of the ${dayLimitConfig.totalAllowed} allowed minutes on this system, shutdown in 59 seconds.`,
       );
@@ -218,16 +226,16 @@ function process_notifications(
       );
       console.log("something");
       break;
-      case (diffToCurfew == 10):
-      case (diffToCurfew == 5):
+      case (diffToCurfew === 10):
+      case (diffToCurfew === 5):
         notificationsToUser.push(
           `It's almost time to shutdown, you have ${diffToCurfew} minutes left.`,
         );
       break;
-      case (diffToCurfew == 1):
+      case (diffToCurfew === 1):
         notificationsToUser.push(`Time to shutdown, you have 1 minute left.`);
       break;
-      case (diffToCurfew == 0):
+      case (diffToCurfew === 0):
         notificationsToUser.push(`Time to shutdown, you have 0 minutes left.`);
       break;
   }
