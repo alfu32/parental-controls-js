@@ -139,15 +139,43 @@ cd \$CDIR
 SERVICEDEF
 chmod +x build/parentalcontrols.service.run
 
+########### cat > build/notify-send-all << SERVICEDEF
+########### #!/bin/bash
+########### 
+########### HOME="/home/$TARGET_USER"
+########### PATH=/usr/bin:/bin
+########### NAME=$TARGET_USER
+########### DISPLAY=:0
+########### DBUS_ADDRESS=unix:path=/run/user/\$(id -u \$NAME)/bus
+########### sudo -u "\$NAME" HOME="\$HOME" DISPLAY="\$DISPLAY" DBUS_SESSION_BUS_ADDRESS="\$DBUS_ADDRESS" PATH="\$PATH" notify-send "\$@"
+########### SERVICEDEF
+########### chmod +x build/notify-send-all
+
+
 cat > build/notify-send-all << SERVICEDEF
 #!/bin/bash
 
-HOME="/home/$TARGET_USER"
 PATH=/usr/bin:/bin
-NAME=$TARGET_USER
-DISPLAY=:0
-DBUS_ADDRESS=unix:path=/run/user/\$(id -u \$NAME)/bus
-sudo -u "\$NAME" HOME="\$HOME" DISPLAY="\$DISPLAY" DBUS_SESSION_BUS_ADDRESS="\$DBUS_ADDRESS" PATH="\$PATH" notify-send "\$@"
+IFS='
+'
+lines=(\$(who))
+for line in \$lines;do
+    IFS=' '
+    arr=(\$line)
+    ### echo "line[0] \${arr[0]}"
+    ### echo "line[1] \${arr[1]}"
+    NAME=\${arr[0]}
+    DISPLAY=\${arr[1]}
+    HOME="/home/\$NAME"
+    DBUS_ADDRESS=unix:path=/run/user/\$(id -u \$NAME)/bus
+    ### echo "
+    ###              NAME : \$NAME
+    ###           DISPLAY : \$DISPLAY
+    ###              HOME : \$HOME
+    ###      DBUS_ADDRESS : \$DBUS_ADDRESS
+    ### "
+    sudo -u "\$NAME" HOME="\$HOME" DISPLAY="\$DISPLAY" DBUS_SESSION_BUS_ADDRESS="\$DBUS_ADDRESS" PATH="\$PATH" notify-send "\$@"
+done
 SERVICEDEF
 chmod +x build/notify-send-all
 
@@ -164,6 +192,36 @@ sudo -u "\$NAME" HOME="\$HOME" DISPLAY="\$DISPLAY" DBUS_SESSION_BUS_ADDRESS="\$D
 cd \$CDIR
 SERVICEDEF
 chmod +x build/wmctrl-all
+
+
+########### cat > build/wmctrl-all << SERVICEDEF
+########### #!/bin/bash
+########### 
+########### PATH=/usr/bin:/bin
+########### IFS='
+########### '
+########### lines=(\$(who))
+########### for line in \$lines;do
+###########     IFS=' '
+###########     arr=(\$line)
+###########     ### echo "line[0] \${arr[0]}"
+###########     ### echo "line[1] \${arr[1]}"
+###########     NAME=\${arr[0]}
+###########     DISPLAY=\${arr[1]}
+###########     HOME="/home/\$NAME"
+###########     DBUS_ADDRESS=unix:path=/run/user/\$(id -u \$NAME)/bus
+###########     ### echo "
+###########     ###              NAME : \$NAME
+###########     ###           DISPLAY : \$DISPLAY
+###########     ###              HOME : \$HOME
+###########     ###      DBUS_ADDRESS : \$DBUS_ADDRESS
+###########     ### "
+###########     ##for DISPLAY in (:0 :1 :10 :11);do
+###########         sudo -u "\$NAME" HOME="\$HOME" DISPLAY="\$DISPLAY" DBUS_SESSION_BUS_ADDRESS="\$DBUS_ADDRESS" PATH="\$PATH" wmctrl "\$@"
+###########     ##done
+########### done
+########### SERVICEDEF
+########### chmod +x build/wmctrl-all
 
 #cp scripts/notify-send-all build/ 
 #cp scripts/wmctrl-all build/ 

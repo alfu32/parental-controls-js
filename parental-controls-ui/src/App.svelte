@@ -28,6 +28,11 @@
     import WTableEditableCell from './lib/WTable/WTableEditableCell.svelte';
     let hosts=[
       {address:"localhost",label:"local"},
+      {address:"mihail-thinkpad.local",label:"mihai"},
+      {address:"gabriela-thinkpad.local",label:"gabriela"},
+      {address:"192.168.1.62",label:"alfu64-IP"},
+      {address:"192.168.1.27",label:"mihai-IP"},
+      {address:"192.168.1.31",label:"gabriela-IP"},
     ]
     let relnfo:ReleaseInfo=new ReleaseInfo()
   let counters:Counters=null;
