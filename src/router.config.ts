@@ -13,6 +13,7 @@ import { getTransientConfig } from "./getTransientConfig.ts";
 import { NotifySend, INotifier } from "./desktop-notifications.ts";
 import { Reflect } from "https://deno.land/x/reflect_metadata@v0.1.12/mod.ts";
 import process from "node:process";
+import { execSync } from "node:child_process";
 
 /// import { createRequire } from "https://deno.land/std/node/module.ts";
 /// 
@@ -225,31 +226,37 @@ router.add("POST", "/sigterm", async function(requestEvent: HttpRequest) {
   });
 },"pid:string","{ pkillResult:Process[], configurationRecord:ConfigurationRecord,notificationResult:ProcessResult }");
 
+// deno-lint-ignore require-await
 router.add("GET", "/windows", async function(requestEvent: HttpRequest) {
-  // The native HTTP server uses the web standard `Request` and `Response`
-  // objects.
 
-// String
-//notifier.notify('Message');
-
-// Object
-// notifier.notify({
-//   title: 'My notification',
-//   message: 'Hello, there!'
-// });
   try{
-    let winListResult = await spawnProcess("wmctrl-all", [`-lp`]);
+    const winListResult = execSync(`wmctrl-all -lp 2>wmctrl.lst.error | grep '0x'`)
+    .toString("utf8").split("\n").filter((l) => l !== "").join("\n");
+    // let winListResult = await spawnProcess("wmctrl-all", [`-lp`]);
     console.log("GET", "/windows",winListResult)
     return requestEvent.respondWithJson({
-      windows: WindowData.decodeWmctrlOutput(winListResult.out),
-      error: winListResult.error,
+      windows: WindowData.decodeWmctrlOutput(winListResult),
+      error: '',
     });
   }catch(err){
     return requestEvent.respondWithJson({
-      windows: WindowData.decodeWmctrlOutput(err.out),
+      windows: WindowData.decodeWmctrlOutput(err),
       error: err,
     });
   }
+  /////////// try{
+  ///////////   let winListResult = await spawnProcess("wmctrl-all", [`-lp`]);
+  ///////////   console.log("GET", "/windows",winListResult)
+  ///////////   return requestEvent.respondWithJson({
+  ///////////     windows: WindowData.decodeWmctrlOutput(winListResult.out),
+  ///////////     error: winListResult.error,
+  ///////////   });
+  /////////// }catch(err){
+  ///////////   return requestEvent.respondWithJson({
+  ///////////     windows: WindowData.decodeWmctrlOutput(err.out),
+  ///////////     error: err,
+  ///////////   });
+  /////////// }
 },"void","{ lines:WindowData[], error:Error }");
 router.add("POST", "/message", async function(requestEvent: HttpRequest) {
   // The native HTTP server uses the web standard `Request` and `Response`
