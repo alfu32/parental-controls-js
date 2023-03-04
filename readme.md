@@ -1,99 +1,71 @@
-# How to Run Shell Script as Systemd in Linux
-_By RahulOctober 28, 20223 Mins Read_
-Systemd is a software application that provides an array of system components for Linux operating systems. It is the first service to initialize the boot sequence. This always runs with PID 1. This also helps us to manage system and application services on our Linux operating system.
+# About
+**Parentalcontrols** is a application that counts :
+ - the usage/uptime minutes of specified applications.
+ - the total system uptime
+ - if the system was up outside the allowed hours
+Parental COntrols will pop up user notifications when:
+ - there is a violation of the limits configured in config.json
+ - 10, 5 and 1 minute before the allowed time for an application or for the system uptime is about to expire
 
+The parental controls ui is a SPA that basically will let you :
+ - modify config.json in visual mode
+ - visualise the current daily application usage
+ - manage processes and windows on the target machine.
 
-We can also run any custom script as systemd service. It helps the script to start on system boot. This can be helpful for you to run any script which required to run at boot time only or to run always.
+The service will never block/throttle processes nor will it shutdown the computer automatically. It provides however APIs and user interface funtions/buttons for the administrator to perform these operations manually if the need arises. 
 
-In our previous tutorial we have provides you instructions to run a Python script using Systemd. This tutorial covers running a shell script as a Systemd service.
+# Components
+## Systemd Service
 
-## Step 1 – Create a Shell Script
-First of all, create a sample shell script, which needs to run at system startup. You can also create a shell script to run always using an infinite while loop. The script will keep running until the system goes down.
+## Installation
 
-Create a shell script as per requirements. For testing purposes, I am creating a sample shell script as /usr/bin/script.sh.
-
-```bash
-sudo nano /usr/bin/script.sh 
-```
-Added the following sample shell script code.
-
-
-```bash
-#!/bin/bash
-
-while true
-do
- // Your statements go here
- sleep 10
-done
-```
-
-Press CTRL+O and hit enter to save changes. Then press CTRL + x to quit from nano editor.
-
-Now, make the script executable:
+clone this repository
 
 ```bash
-sudo chmod +x /usr/bin/script.sh 
-```
-To run a script once during system boot time doesn’t require any infinite loop. Instead of the above script, you can use your shell script to run as a Systemd service.
+git clone https://github.com/alfu32/parental-controls-js.git
 
-## Step 2 – Create a Systemd Unit File
-
-
-Next, create a service unit file for the systemd on your system. This file must have .service extension and saved under the under `/lib/systemd/system/` directory
-
-`sudo nano /lib/systemd/system/shellscript.service`
-
-Now, add the following content and update the script filename and location. You can also change the description of the service.
-
-
-```systemd.service
-[Unit]
-Description=My Shell Script
-
-[Service]
-ExecStart=/usr/bin/script.sh
-
-[Install]
-WantedBy=multi-user.target
+cd parental-controls-js
 ```
 
-Save the file and close it.
-
-## Step 3 – Enable the New Service
-
-Your system service has been added to your service. Let’s reload the systemctl daemon to read the new file. You need to reload this daemon each time after making any changes in .service file.
-
-`sudo systemctl daemon-reload `
-Now enable the service to start on system boot, also start the service using the following commands.
+switch to the next branch
 
 ```bash
-sudo systemctl enable shellscript.service 
-sudo systemctl start shellscript.service 
+git checkout next
 ```
 
-Finally verify the script is up and running as a systemd service.
+build
 
-`sudo systemctl status shellscript.service`
-
-
-The output looks like the below:
-
-```
-Running shell script as systemd service
+```bash
+./scripts/build.sh <target-username> <admin/sudo-username> <architecture-vendor-ostype>
 ```
 
-All done!
-
-## Conclusion
-
-Congratulation, You have successfully configured a shell script to run at system startup. This can be helpful to run your custom scripts that are required to start at system boot. This tutorial helped you to configure a shell script as systemd service.
-
-### notifications
-
-after a lot of fiddling
+for the last parameters you only have four choices : 
+ - `x86_64-unknown-linux-gnu` for linux
+ - `x86_64-pc-windows-msvc` for windows 
+ - `x86_64-apple-darwin` for intel-macs
+ - `aarch64-apple-darwin` for apple-silicon macs
 
 
-i'm using https://github.com/alfu32/systembus-notify.git
+deploy on the local machine
 
-wich works out of the box from a systemd service
+```bash
+
+./scripts/deploy-local.sh <target-username> <admin/sudo-username> <architecture-vendor-ostype>
+cd $HOME/.parental-controls
+
+## install the service
+./parentalcontrols.service.install
+
+```
+
+
+The `parentalcontrols.service` tracks application uptime and aggregate it into a daily report.
+### config.json
+The service configuration is stored inside the config.json file:
+The file contains the following specifiers:
+    - for each day of the week (Sunday to Saturday) the allowed hours and the number of allowed minutes
+    - a list of application to track
+
+The tracking configuration for one application specifies a number of minutes that an app is allowed to be up, an unique id of the tracker, and a regex expression to be matched against the application launch command.
+
+## User Interface
