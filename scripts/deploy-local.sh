@@ -12,6 +12,7 @@ sudo systemctl disable parentalcontrols
 systemctl status parentalcontrols
 mkdir .parental-controls
 cp "./build/parental-controls-$arch.bin" $INSTALL_DIR
+cp "./build/to-all" $INSTALL_DIR
 cp "./build/notify-send-all" $INSTALL_DIR
 cp "./build/wmctrl-all" $INSTALL_DIR
 # scp ./config.json $INSTALL_DIR

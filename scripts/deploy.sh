@@ -25,6 +25,7 @@ ssh -S $SSH_CONNECTION 'sudo systemctl disable parentalcontrols'
 ssh $SSH_CONNECTION 'systemctl status parentalcontrols'
 ssh $SSH_CONNECTION "mkdir '/home/$ADMIN_USER/.parental-controls'"
 scp "./build/parental-controls-$arch.bin" $SSH_TARGET
+scp "./build/to-all" $SSH_TARGET
 scp "./build/notify-send-all" $SSH_TARGET
 scp "./build/wmctrl-all" $SSH_TARGET
 # scp ./config.json $SSH_TARGET
