@@ -322,6 +322,7 @@ export class WindowData{
         public pid:string,
         public machineName:string,
         public title:string,
+        public line:string,
     ){
         this.windowId = windowId;
         this.desktop = desktop;
@@ -336,20 +337,25 @@ export class WindowData{
             json.pid,
             json.machineName,
             json.title,
+            json.line,
         )
     }
+
+/*
+0x02400003 -1 100084 alfu64-GE62-6QC @!0,0;BDHF
+*/
     static decodeWmctrlOutput(output: string): WindowData[] {
         const data:WindowData[] = [];
         const lines = output.trim().split('\n');
       
         for (const line of lines) {
-          const windowId = line.substring(0, 10)?.trim();
-          const desktop = line.substring(11, 12)?.trim();
-          const pid = line.substring(13, 18)?.trim();
-          const machineName = (line.substring(19).match(/[0-9a-zA-Z_\-]+/gi)??["NOT-DETECTED"])[0]?.trim();
-          const title = line.substring(19).replace(new RegExp(`^${machineName}\s+`),"")?.trim()
+          const windowId = line.substring(0, 11)?.trim();
+          const desktop = line.substring(11, 14)?.trim();
+          const pid = line.substring(14, 21)?.trim();
+          const machineName = (line.substring(21).match(/[0-9a-zA-Z_\-]+/gi)??["NOT-DETECTED"])[0]?.trim();
+          const title = line.substring(21).replace(new RegExp(`^${machineName}\\s*`,"g"),"")?.trim()
       
-          data.push(new WindowData(windowId, desktop, pid, machineName, title));
+          data.push(new WindowData(windowId, desktop, pid, machineName, title,line,));
         }
       
         return data;
