@@ -13,4 +13,4 @@
         dispatch("change", {key,value});
     }
 </script>
-<TextInput placeholder="string" label={config.label} bind:value={value} on:change={changed}/>
+<TextInput {...config} label={config.label} bind:value={value} on:change={changed}/>

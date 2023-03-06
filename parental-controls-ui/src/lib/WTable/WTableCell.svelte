@@ -7,4 +7,4 @@
     export let config:any
 </script>
 
-{value}
+<div {...config}>{value}</div>

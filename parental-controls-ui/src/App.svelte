@@ -26,6 +26,7 @@
     import WTable from './lib/WTable/WTable.svelte';
     import WTableCell from './lib/WTable/WTableCell.svelte';
     import WTableEditableCell from './lib/WTable/WTableEditableCell.svelte';
+    import WTableSemaphore from './lib/WTable/WTableSemaphore.svelte';
     let hosts=[
       {address:"localhost",label:"local"},
       {address:"mihail-thinkpad.local",label:"mihai"},
@@ -229,18 +230,18 @@
                 <h2 slot="title">Per-Application Limits Configuration for {host.label}</h2>
               </AppConfigEditor>
 
-            <!--h2>Rules</h2>
+            <h2>Rules</h2>
             <WTable data={config?.applications} config={[
-              { key:"isOn",           label:"isOn",           initialValue:"", renderer:WTableCell, rendererConfig:{} },
-              { key:"appid",          label:"appid",          initialValue:"", renderer:WTableEditableCell, rendererConfig:{} },
-              { key:"processregex",   label:"processregex",   initialValue:"", renderer:WTableEditableCell, rendererConfig:{} },
-              { key:"allowedMinutes", label:"allowedMinutes", initialValue:"", renderer:WTableEditableCell, rendererConfig:{} },
-              { key:"usedMinutes",    label:"usedMinutes",    initialValue:"", renderer:WTableCell, rendererConfig:{} },
+              { key:"isOn",           label:"isOn",           initialValue:"", renderer:WTableSemaphore, rendererConfig:{} },
+              { key:"appid",          label:"appid",          initialValue:"", renderer:WTableEditableCell, rendererConfig:{maxlength:"20",title:"appid",          } },
+              { key:"processregex",   label:"processregex",   initialValue:"", renderer:WTableEditableCell, rendererConfig:{maxlength:"20",title:"processregex",   } },
+              { key:"allowedMinutes", label:"allowedMinutes", initialValue:"", renderer:WTableEditableCell, rendererConfig:{maxlength:"4",type:"number",title:"allowedMinutes", } },
+              { key:"usedMinutes",    label:"usedMinutes",    initialValue:"", renderer:WTableCell, rendererConfig:{maxlength:"4",type:"number",title:"usedMinutes",    } },
             ]} on:change={appCfgChanged}>
               <div slot="row-operations" let:record>
                 <Button  fullSize compact ripple size="sm" on:click={e => sigtermWindow(record)}>close window</Button>
               </div>
-            </WTable-->
+            </WTable>
           </Tabs.Tab>
           <Tabs.Tab label='Task Manager' color='pink'>
             <h2>Computer {host.label}</h2>
@@ -251,9 +252,9 @@
             <h2>Opened Windows on {host.label}</h2>
             <WTable data={windows} config={[
               //{ key:"windowId",    label:"window id",    initialValue:"", renderer:WTableCell,rendererConfig:{}},
-              { key:"pid",         label:"process id",   initialValue:"", renderer:WTableCell,rendererConfig:{}},
+              //{ key:"pid",         label:"process id",   initialValue:"", renderer:WTableCell,rendererConfig:{title:"pid"}},
               //{ key:"machineName", label:"machine name", initialValue:"", renderer:WTableCell,rendererConfig:{}},
-              { key:"title",       label:"window title", initialValue:"", renderer:WTableCell,rendererConfig:{}},
+              { key:"title",       label:"window title", initialValue:"", renderer:WTableCell,rendererConfig:{title:"title",style:"max-width:380px"}},
             ]} readonly>
               <div slot="row-operations" let:record>
                 <Button  fullSize compact ripple size="sm" on:click={e => sigtermWindow(record)}>close window</Button>
@@ -261,9 +262,9 @@
             </WTable>
             <h2>Running Programs on {host.label}</h2>
             <WTable data={processes?.filter(p=>(p.USER!=="root"))} config={[
-              { key:"USER",    label:"USER",    initialValue:"", renderer:WTableCell, rendererConfig:{}},
-              { key:"PID",     label:"PID",     initialValue:"", renderer:WTableCell, rendererConfig:{}},
-              { key:"COMMAND", label:"COMMAND", initialValue:"", renderer:WTableCell, rendererConfig:{tfin:a=>a.substr(0,128)}},
+              //{ key:"USER",    label:"USER",    initialValue:"", renderer:WTableCell, rendererConfig:{title:"USER",style:"max-width:380px"}},
+              //{ key:"PID",     label:"PID",     initialValue:"", renderer:WTableCell, rendererConfig:{title:"PID",style:"max-width:380px"}},
+              { key:"COMMAND", label:"COMMAND", initialValue:"", renderer:WTableCell, rendererConfig:{title:"COMMAND",style:"max-width:380px"}},
             ]} readonly>
               <div slot="row-operations" let:record>
                 <Button  fullSize compact ripple size="sm" on:click={e => sigtermProcess(record)}>SIGTERM</Button>
