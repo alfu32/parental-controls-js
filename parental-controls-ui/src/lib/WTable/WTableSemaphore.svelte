@@ -3,14 +3,14 @@
 
 
     export let key:string
-    export let value:any
+    export let value:boolean
     export let config:any
 </script>
 
-{#if value==true}
-    <div class="circle green"></div>
-    {:else}
-    <div class="circle red"></div>
+{#if value}
+    <div class="circle green {value}"></div>
+{:else}
+    <div class="circle red {value}"></div>
 {/if}
 <style>
     div.circle{

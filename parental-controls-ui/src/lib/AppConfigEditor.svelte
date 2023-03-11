@@ -1,9 +1,15 @@
 <script lang="ts">
     import { Button,TextInput,Card,Group,Text,Image,Badge } from '@svelteuidev/core';
-    import { ConfigurationRecord,Config } from '../../../src/classes';
+    import { ConfigurationRecord,Config, Counters } from '../../../src/classes';
     export let config: Config;
+    export let counters:Counters
+    $:appsIndexed=counters?.applications?.reduce((o:{[key:string]:ConfigurationRecord},v:ConfigurationRecord) =>{
+      o[v.appid]=v
+      return o;
+    },{})
     let newAppConfig: ConfigurationRecord = new ConfigurationRecord()
     import { createEventDispatcher } from "svelte";
+    import WTableSemaphore from './WTable/WTableSemaphore.svelte';
     const dispatch = createEventDispatcher();
     function change() {
         dispatch("save", config);
@@ -27,15 +33,17 @@
   <table>
   <tr>
     <th></th>
+    <th>isOn</th>
     <th>Name</th>
     <th>Search Pattern</th>
     <!--th>Used Minutes</th-->
     <th>Allowed Minutes</th>
   </tr>
-  {#if config != null}
+  {#if config != null && appsIndexed !== null}
   {#each config.applications as appConfig,index }
     <tr>
       <td>{index + 1}</td>
+      <td><WTableSemaphore value={appsIndexed[appConfig.appid].isOn} key="" config={{}}/></td>
       <td><TextInput bind:value={appConfig.appid}/></td>
       <td><TextInput bind:value={appConfig.processregex}/></td>
       <!--td><TextInput bind:value={appConfig.usedMinutes}/></td-->
@@ -47,6 +55,7 @@
   {/each}
   <tr>
     <td>*</td>
+    <td></td>
     <td><TextInput bind:value={newAppConfig.appid}/></td>
     <td><TextInput bind:value={newAppConfig.processregex}/></td>
     <!--td>{newAppConfig.usedMinutes}</td-->

@@ -79,6 +79,9 @@
     clearTimeout(to)
     try{
       let api=new ParentalControlsApi(`${host.address}:8080`)
+      // const pcf = await api.getConfig()
+      // config = pcf.unwrap()
+      // error=null
       const ct = await api.getCounters();
       counters = ct.unwrap()
       error=null
@@ -121,26 +124,6 @@
     config=result.unwrap()
     console.log({fn:"saveConfigLimits",newConfigLimits,result})
   }
-  async function appCfgChanged(evt:CustomEvent<object[]>){
-    console.log("WTABLE::appscfg:changed",evt.detail)
-    config.applications=evt.detail.map(ConfigurationRecord.fromJson)
-    config=Config.fromJson(config)
-    console.log("WTABLE::appscfg:changed",config)
-  }
-  //// async function saveConfigLimits(newConfigLimits:CustomEvent<DailyLimitConfig[]>){
-  ////   const newConfig = config.copy()
-  ////   newConfig.dailyLimits=newConfigLimits.detail
-  ////   const result = await gapi.updateConfig(newConfig);
-  ////   config=result.unwrap()
-  ////   console.log({fn:"saveConfigLimits",newConfigLimits,result})
-  //// }
-  //// async function saveAppConfigs(newAppConfigLimits:CustomEvent<ConfigurationRecord[]>){
-  ////   const newConfig = config.copy()
-  ////   newConfig.applications=newAppConfigLimits.detail
-  ////   const result = await gapi.updateConfig(newConfig);
-  ////   config=result.unwrap()
-  ////   console.log({fn:"saveAppConfigs",config:config.copy(),result})
-  //// }
   async function createAppConfig(newAppConfig:CustomEvent<ConfigurationRecord>){
     console.log({appConfig:newAppConfig.detail})
     const newConfig = config.copy()
@@ -226,13 +209,13 @@
           </Tabs.Tab>
           <Tabs.Tab label='Configuration'>
               <WeeklyConfigEditor config={config} on:save={saveConfig}></WeeklyConfigEditor>
-              <AppConfigEditor config={config} on:save={saveConfig} on:create={createAppConfig}>
+              <AppConfigEditor config={config} counters={counters} on:save={saveConfig} on:create={createAppConfig}>
                 <h2 slot="title">Per-Application Limits Configuration for {host.label}</h2>
               </AppConfigEditor>
 
-            <h2>Rules</h2>
+            <!--h2>Rules</h2>
             <WTable data={config?.applications} config={[
-              { key:"isOn",           label:"isOn",           initialValue:"", renderer:WTableSemaphore, rendererConfig:{} },
+              { key:"isOn",           label:"isOn",           initialValue:false, renderer:WTableSemaphore, rendererConfig:{} },
               { key:"appid",          label:"appid",          initialValue:"", renderer:WTableEditableCell, rendererConfig:{maxlength:"20",title:"appid",          } },
               { key:"processregex",   label:"processregex",   initialValue:"", renderer:WTableEditableCell, rendererConfig:{maxlength:"20",title:"processregex",   } },
               { key:"allowedMinutes", label:"allowedMinutes", initialValue:"", renderer:WTableEditableCell, rendererConfig:{maxlength:"4",type:"number",title:"allowedMinutes", } },
@@ -241,7 +224,7 @@
               <div slot="row-operations" let:record>
                 <Button  fullSize compact ripple size="sm" on:click={e => sigtermWindow(record)}>close window</Button>
               </div>
-            </WTable>
+            </WTable-->
           </Tabs.Tab>
           <Tabs.Tab label='Task Manager' color='pink'>
             <h2>Computer {host.label}</h2>

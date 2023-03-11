@@ -70,10 +70,13 @@ export class ConfigurationRecord implements IConfigurationRecord{
         r.processregex=cr.processregex
         r.allowedMinutes=cr.allowedMinutes
         r.usedMinutes=cr.usedMinutes
+        console.log({from:"fromJson",cr,r})
         return r;
     }
     static from(cr:IConfigurationRecord):ConfigurationRecord{
-        return ConfigurationRecord.fromJson(cr);
+        const r = ConfigurationRecord.fromJson(cr);
+        console.log({from:"from",cr,r})
+        return r
     }
     copy():ConfigurationRecord{
         return ConfigurationRecord.from(this)

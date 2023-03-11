@@ -5,6 +5,7 @@
     import { createEventDispatcher, onMount } from "svelte";
     import AppStatusCard from './AppStatusCard.svelte';
     import { decimalMinutesToString } from './functions';
+    import WTableSemaphore from './WTable/WTableSemaphore.svelte';
     const dispatch = createEventDispatcher();
     function change() {
         dispatch("save", counters);
@@ -23,6 +24,7 @@
   <slot name="title"><h2>Per-Application Counters</h2></slot>
   <table>
   <tr>
+    <th>isOn</th>
     <th>Application</th>
     <th>Used Minutes</th>
     <th>Allowed Minutes</th>
@@ -31,12 +33,13 @@
   {#if counters != null}
     {#each counters.applications as appCounter}
     <tr>
-    <td>{appCounter.appid}</td>
-    <td>{(appCounter.usedMinutes).toFixed(2)}</td>
-    <td><TextInput bind:value={appCounter.allowedMinutes}/></td>
-    <td><Button fullSize variant="outline" color="red" compact ripple size="sm" on:click={e => deleteItem(appCounter)}>delete</Button></td>
-    <td><Button fullSize variant="outline" compact ripple size="sm" on:click={e => terminateapp(appCounter)}>close</Button></td>
-    <td><Button fullSize variant="outline" compact ripple size="sm" on:click={e => change()}>save</Button></td>
+      <td><WTableSemaphore value={appCounter.isOn} key="" config={{}}/></td>
+      <td>{appCounter.appid}</td>
+      <td>{(appCounter.usedMinutes).toFixed(2)}</td>
+      <td><TextInput bind:value={appCounter.allowedMinutes}/></td>
+      <td><Button fullSize variant="outline" color="red" compact ripple size="sm" on:click={e => deleteItem(appCounter)}>delete</Button></td>
+      <td><Button fullSize variant="outline" compact ripple size="sm" on:click={e => terminateapp(appCounter)}>close</Button></td>
+      <td><Button fullSize variant="outline" compact ripple size="sm" on:click={e => change()}>save</Button></td>
     </tr>
     {/each}
   {:else}
