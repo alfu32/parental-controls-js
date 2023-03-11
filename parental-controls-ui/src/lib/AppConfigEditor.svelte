@@ -10,6 +10,7 @@
     let newAppConfig: ConfigurationRecord = new ConfigurationRecord()
     import { createEventDispatcher } from "svelte";
     import WTableSemaphore from './WTable/WTableSemaphore.svelte';
+    import WTableRange from './WTable/WTableRange.svelte';
     const dispatch = createEventDispatcher();
     function change() {
         dispatch("save", config);
@@ -39,15 +40,16 @@
     <!--th>Used Minutes</th-->
     <th>Allowed Minutes</th>
   </tr>
-  {#if config != null && appsIndexed !== null}
+  {#if config != null && appsIndexed}
   {#each config.applications as appConfig,index }
     <tr>
       <td>{index + 1}</td>
-      <td><WTableSemaphore value={appsIndexed[appConfig.appid].isOn} key="" config={{}}/></td>
+      <td><WTableSemaphore value={appsIndexed[appConfig.appid]?.isOn??false} key="" config={{}}/></td>
       <td><TextInput bind:value={appConfig.appid}/></td>
       <td><TextInput bind:value={appConfig.processregex}/></td>
       <!--td><TextInput bind:value={appConfig.usedMinutes}/></td-->
-      <td><TextInput bind:value={appConfig.allowedMinutes}/></td>
+      <!--td><TextInput bind:value={appConfig.allowedMinutes}/></td-->
+      <td><WTableRange bind:value={appConfig.allowedMinutes} key="" config={{min:0,max:720,step:15}}/></td>
       <td><Button fullSize variant="outline" color="red" compact ripple size="sm" on:click={e => deleteItem(appConfig)}>delete</Button></td>
       <td><Button fullSize variant="outline" compact ripple size="sm" on:click={e => resetItemAtIndex(index)}>reset</Button></td>
       <td><Button fullSize compact ripple size="sm" on:click={e => change()}>save</Button></td>
